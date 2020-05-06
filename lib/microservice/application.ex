@@ -6,7 +6,7 @@ defmodule Microservice.Application do
   use Application
 
   def start(_type, _args) do
-    # Dynamic configuration
+    # Dynamic configuration section ============================================
     Application.put_env(:microservice, :credential_path, System.get_env("CREDENTIAL_PATH"),
       persistent: true
     )
