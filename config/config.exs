@@ -14,6 +14,8 @@ config :microservice, MicroserviceWeb.Endpoint,
   render_errors: [view: MicroserviceWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: Microservice.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :microservice, node_js_env: to_string(Mix.env())
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -7,29 +7,31 @@ defmodule ShellWorker do
   number of seconds.
   """
   def execute(data) when is_map(data) do
-    Logger.debug("ShellWorker.execute/1 called with #{inspect(data)}")
+    # Logger.debug("ShellWorker.execute/1 called with #{inspect(data)}")
 
-    Application.get_env(:microservice, :max_run_duration, "60")
-    |> String.to_integer()
-    |> :timer.seconds()
-    |> :timer.kill_after()
+    # Application.get_env(:microservice, :max_run_duration, "60")
+    # |> String.to_integer()
+    # |> :timer.seconds()
+    # |> :timer.kill_after()
 
     config =
-      Application.get_env(:microservice, :credentials, "{}")
+      Application.get_env(:microservice, :credential_path, "{}")
+      |> IO.inspect()
+      |> File.read!()
       |> Jason.decode!()
 
     state =
       %{configuration: config, data: data}
-      |> IO.inspect(label: "state object")
+      |> IO.inspect(label: "'state' map")
 
     {:ok, state_path} = Temp.path(%{prefix: "state", suffix: ".json"})
 
     File.write!(state_path, Jason.encode!(state))
-    |> IO.inspect(label: "wrote state file")
+    |> IO.inspect(label: "wrote state file as json")
 
-    expression_path = Application.get_env(:microservice, :job, nil)
-    adaptor_path = Application.get_env(:microservice, :adaptor, nil)
-    final_state_path = Application.get_env(:microservice, :adaptor, nil)
+    expression_path = Application.get_env(:microservice, :expression_path, nil)
+    adaptor_path = Application.get_env(:microservice, :adaptor_path, nil)
+    final_state_path = Application.get_env(:microservice, :final_state_path, nil)
 
     arguments = [
       "core",
@@ -45,8 +47,8 @@ defmodule ShellWorker do
 
     env = [
       {"NODE_PATH", "./assets/node_modules"},
-      {"NODE_ENV", Application.get_env(:open_fn, :node_js_env)},
-      {"PATH", Application.get_env(:open_fn, :node_js_sys_path)}
+      {"NODE_ENV", Application.get_env(:microservice, :node_js_env)},
+      {"PATH", Application.get_env(:microservice, :node_js_sys_path)}
     ]
 
     Logger.debug([

@@ -6,6 +6,25 @@ defmodule Microservice.Application do
   use Application
 
   def start(_type, _args) do
+    # Dynamic configuration
+    Application.put_env(:microservice, :credential_path, System.get_env("CREDENTIAL_PATH"),
+      persistent: true
+    )
+
+    Application.put_env(:microservice, :expression_path, System.get_env("EXPRESSION_PATH"),
+      persistent: true
+    )
+
+    Application.put_env(:microservice, :adaptor_path, System.get_env("ADAPTOR_PATH"),
+      persistent: true
+    )
+
+    Application.put_env(
+      :microservice,
+      :node_js_sys_path,
+      System.get_env("NODE_JS_PATH") <> ":" <> System.get_env("PATH")
+    )
+
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts

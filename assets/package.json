@@ -6,7 +6,9 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "phoenix": "file:../deps/phoenix"
+    "phoenix": "file:../deps/phoenix",
+    "core": "github:openfn/core#v1.3.1",
+    "language-http": "github:openfn/language-http"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
