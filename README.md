@@ -67,18 +67,20 @@ cron_expression='*/15 * * * *' # (only provided for a timer job)
 
 ## Wishlist
 
-- Timer jobs can keep state
+- Make fully `InstantHIE` compliant
 - Click a button on OpenFn to prepare a `microservice.zip` which is this repo
   with a new Dockerfile, based on the current job's configuration at OpenFn.org
-- Visual interface for application (Phx LiveView?)
-- Better Logging
-- Message persistence plugin (enables retries)
 - Notifications module
-- more?
+- Better Logging
+- Visual interface for application (Phx LiveView?)
+- ~~Message persistence plugin (enables retries)~~
 
 ## Roadmap for this application
 
 - [x] `mix phx.server` receives receipts and sends 200
+- [ ] Chain jobs together
+- [ ] Timer jobs can keep state
+- [ ] `tmp` files are deleted after job is run
 - [ ] bring `core` out of package.json
 - [ ] endpoint gets `URL` and `PORT` from `.env`
 - [x] `ShellWorker` picks up config from `.env`
