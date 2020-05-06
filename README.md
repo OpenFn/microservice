@@ -5,6 +5,7 @@ To start your Phoenix server:
 - Install dependencies with `mix deps.get`
 - Install Node.js dependencies with `cd assets && npm install`
 - Create a `.env` file with `cp .env.example .env`
+- Run tests with `env $(cat .env | grep -v "#" | xargs ) mix test`
 - Start Phoenix interactively with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
