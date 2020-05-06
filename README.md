@@ -1,14 +1,14 @@
 # Microservice
 
-To start your Phoenix server:
+To start your OpenFn Microservice:
 
 - Install dependencies with `mix deps.get`
-- Install Node.js dependencies with `cd assets && npm install`
+- Install Node.js dependencies with `npm install --prefix ./assets`
 - Create a `.env` file with `cp .env.example .env`
 - Run tests with `env $(cat .env | grep -v "#" | xargs ) mix test`
 - Start Phoenix interactively with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now you make HTTP `post` requests to [`localhost:4000/inbox`](http://localhost:4000/inbox) and they will be processed by the job runner.
 
 ## MVP
 
