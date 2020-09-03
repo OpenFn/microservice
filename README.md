@@ -33,6 +33,7 @@ by the job runner.
 - [ ] endpoint gets `URL` and `PORT` from `.env`
 - [x] `ShellWorker` picks up config from `.env`
 - [x] `ShellWorker` executes it, given preloaded job, cred, adaptor, and core.
+- [ ] `ShellWorker` can pipe to stdout.
 - [ ] Write tests for everything.
 
 ### Dynamic Configuration required for MVP
@@ -101,10 +102,7 @@ NODE_JS_PATH='./assets/node_modules/.bin'
 ##### Jobs Library
 
 1. All jobs that "opt-in" on OpenFn.org are exposed with an open API, which
-   **expects** `{adaptor, version, ...helperFunction}` and **returns** `[ {
-   expression: 'createTEI({})', active: true, runsLast90: 32178,
-   successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source:
-   'openfn/docs' }, ... ]` — which includes both the jobs in the OpenFn.org
+   **expects** `{adaptor, version, ...helperFunction}` and **returns** `[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]` — which includes both the jobs in the OpenFn.org
    database _and_ the jobs in
    [OpenFn/Docs/jobs](https://www.github.com/openfn/docs/jobs)
 2. That API is consumed by the docs site (open source) _AND_ by openfn.org so
