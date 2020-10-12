@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.23.0">
+    <meta name="project" content="MyApp v0.1.1">
+    <title>Microservice — MyApp v0.1.1</title>
+    <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
+    <script src="dist/sidebar_items-7a4683fe54.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://www.openfn.org" class="sidebar-projectName">
+MyApp      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.1
+      </strong>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>Microservice</h1><p>To start your OpenFn Microservice:</p><ul><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Run tests with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) mix test</code></li><li>Start server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>Now you make HTTP <code class="inline">post</code> requests to
+<a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> and they will be processed
+by the job runner.</p><h2 id="mvp" class="section-heading">
+  <a href="#mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  MVP
+</h2>
+<ol><li>An open source server application (this application, <code class="inline">microservice</code>.)</li><li>The open source <code class="inline">inbox</code> application, which will be used by both <code class="inline">platform</code>
+and <code class="inline">microservice</code> to handle HTTP requests</li><li>The open source <code class="inline">dispatcher</code> application which will be used by both
+<code class="inline">platform</code> and <code class="inline">microservice</code> to execute jobs using <code class="inline">OpenFn/core</code>.</li><li>A Dockerfile that, given a <code class="inline">job</code>, an <code class="inline">adaptor</code>, and a <code class="inline">credential</code>, is able
+to automatically generate a container that runs the microservice for that
+job.</li></ol><h2 id="roadmap-for-this-application" class="section-heading">
+  <a href="#roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Roadmap for this application
+</h2>
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.4.17/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> can pipe to stdout.</li><li>[ ] Write tests for everything.</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
+  <a href="#dynamic-configuration-required-for-mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Dynamic Configuration required for MVP
+</h3>
+<h4>Container Config (Dockerfile)</h4><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
+FROM alpine-elixir-phoenix:latest AS app_builder
+RUN Please build the phoenix application...
+
+# ---- Application Stage ----
+FROM node:12-alpine AS app
+COPY --from=app_builder /app/_build .
+
+# Pull in user credential and job expression...
+COPY credential.json to ./credential.json
+COPY expression.js to ./expression.js
+
+# Install core and the chosen language package
+RUN su - app -c &quot;npm install github:openfn/core#v1.3.1 --prefix ./assets&quot;
+RUN su - app -c &quot;npm install github:openfn/language-dhis2#v1.1.1 --prefix ./assets&quot;
+
+USER app
+CMD './bin/lib/microservice/start'
+ARG 'foreground</code></pre><h4>Application Config</h4><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># basic application config
+webserver=true # not necessary if we're not saving final state
+url='some.thing.nice'
+port='4000'
+
+# service configuration
+EXPRESSION_PATH='./job/expression.js'
+CREDENTIAL_PATH='./job/credential.json'
+CRON_EXPRESSION= # (only provided for a timer job)
+
+FINAL_STATE_PATH= # if we're saving final state.
+
+ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
+NODE_JS_PATH='./assets/node_modules/.bin'</code></pre><h4>How to make it shelf ready?</h4><ol><li>Build and relaese a fully featured documentation site like
+<a href="https://openfn.github.io/docs/">OpenFn/docs</a></li><li>Make fully <code class="inline">InstantHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
+<code class="inline">microservice</code> based one the current configuration of jobs and credentials in
+<code class="inline">devtools</code>.</li><li>Click a button on OpenFn to prepare a <code class="inline">microservice.zip</code> which is this repo
+with a new Dockerfile, based on the current job's configuration at OpenFn.org
+(we're not just &quot;shelf ready&quot;, we're <em>providing the shelf</em> with a &quot;free
+forever&quot; project on our website.)</li><li>An open-source jobs library.</li></ol><h5>Jobs Library</h5><ol><li>All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which
+<strong>expects</strong> <code class="inline">{adaptor, version, ...helperFunction}</code> and <strong>returns</strong> <code class="inline">[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]</code> — which includes both the jobs in the OpenFn.org
+database <em>and</em> the jobs in
+<a href="https://www.github.com/openfn/docs/jobs">OpenFn/Docs/jobs</a></li><li>That API is consumed by the docs site (open source) <em>AND</em> by openfn.org so
+that it can use used to generate jobs with our free-forever projects.</li><li>In the IDE on OpenFn.org, a user clicks DHIS2, then <code class="inline">createTEI</code> and it
+suggests that you look at the top 10 most <code class="inline">successful/active</code>
+dhis2:your-version expressions, searchable and copy/pastable.</li><li>New jobs are automatically added to the library from OpenFn.org, and
+open-source users can submit pull requests to post their jobs to the
+<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol><h4>Future nice to haves</h4><ul><li>Notifications module</li><li>Better Logging</li><li>Visual interface for application (Phx LiveView?)</li><li><del>Message persistence plugin (enables retries)</del></li></ul>      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.23.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>
