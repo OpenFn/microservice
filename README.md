@@ -5,7 +5,7 @@
 ## Intent
 
 OpenFn is used by numerous health and humanitarian organizations around the
-world to scale their progrms through real-time interoperability, systems
+world to scale their programs through real-time interoperability, systems
 integration, and workflow automation. **OpenFn/microservice** makes use of
 OpenFn's open-core technology—namely **OpenFn/core** and the various OpenFn
 **adaptors**—to create standalone microservices which can be deployed on any
@@ -123,9 +123,26 @@ NODE_JS_PATH='./assets/node_modules/.bin'
 ### Jobs Library
 
 1. All jobs that "opt-in" on OpenFn.org are exposed with an open API, which
-   **expects** `{adaptor, version, ...helperFunction}` and **returns** `[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]` — which includes both the jobs in the OpenFn.org
-   database _and_ the jobs in
-   [OpenFn/Docs/jobs](https://www.github.com/openfn/docs/jobs)
+   **expects** `{adaptor, version, ...helperFunction}` and **returns** the
+   following—which includes both the jobs in the OpenFn.org database _and_ the
+   jobs in [OpenFn/Docs/jobs](https://www.github.com/openfn/docs/jobs):
+
+```json
+[
+  {
+    "expression": "createTEI({})",
+    "active": true,
+    "runsLast90": 32178,
+    "successRateLast90": 0.973,
+    "source": "openfn.org"
+  },
+  {
+    ...job,
+    "source": "openfn/docs"
+  }
+]
+```
+
 2. That API is consumed by the docs site (open source) _AND_ by openfn.org so
    that it can use used to generate jobs with our free-forever projects.
 3. In the IDE on OpenFn.org, a user clicks DHIS2, then `createTEI` and it
