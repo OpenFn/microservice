@@ -1,18 +1,39 @@
 # OpenFn/microservice
 
-To start your OpenFn Microservice:
+![openfn](assets/static/images/logo_100.png)
 
+## Intent
+
+OpenFn is used by numerous health and humanitarian organizations around the
+world to scale their progrms through real-time interoperability, systems
+integration, and workflow automation. **OpenFn/microservice** makes use of
+OpenFn's open-core technology—namely **OpenFn/core** and the various OpenFn
+**adaptors**—to create standalone microservices which can be deployed on any
+hardware.
+
+This microservice approach helps to ensure that governments and NGOs are never
+locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
+and credentials from [OpenFn.org](www.openfn.org) to their own infrastructure
+easily.
+
+## Up and running:
+
+- Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
+- Enter the directory with `cd microservice`
 - Install dependencies with `mix deps.get`
 - Install Node.js dependencies with `npm install --prefix ./assets`
 - Create a `.env` file with `cp .env.example .env`
-- Run tests with `env $(cat .env | grep -v "#" | xargs ) mix test`
-- Start server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
+- Run the tests with `mix test`
+- Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
-Now you make HTTP `post` requests to
-[`localhost:4000/inbox`](http://localhost:4000/inbox) and they will be processed
-by the job runner.
+HTTP `post` requests made to
+[`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
+job runner, accoridng to the `credential`, `expression`, and `adaptor` defined
+in your `.env` file.
 
-## MVP
+## Development
+
+### MVP, supported by the DIAL OSC
 
 1. An open source server application (this application, `microservice`.)
 2. The open source `inbox` application, which will be used by both `platform`
@@ -23,7 +44,7 @@ by the job runner.
    to automatically generate a container that runs the microservice for that
    job.
 
-## Roadmap for this application
+### Roadmap for this application
 
 - [x] `mix phx.server` receives receipts and sends 200
 - [ ] Chain jobs together
@@ -36,9 +57,9 @@ by the job runner.
 - [ ] `ShellWorker` can pipe to stdout.
 - [ ] Write tests for everything.
 
-### Dynamic Configuration required for MVP
+#### Dynamic Configuration required for MVP
 
-#### Container Config (Dockerfile)
+##### Container Config (Dockerfile)
 
 See [Dockerfile](./Dockerfile). Must dynamically build:
 
@@ -64,7 +85,7 @@ CMD './bin/lib/microservice/start'
 ARG 'foreground
 ```
 
-#### Application Config
+##### Application Config
 
 See [.env.example](./.env.example) for a possible config.
 
@@ -85,7 +106,7 @@ ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
 NODE_JS_PATH='./assets/node_modules/.bin'
 ```
 
-#### How to make it shelf ready?
+### How to make it shelf ready?
 
 1. Build and relaese a fully featured documentation site like
    [OpenFn/docs](https://openfn.github.io/docs/)
@@ -99,7 +120,7 @@ NODE_JS_PATH='./assets/node_modules/.bin'
    forever" project on our website.)
 5. An open-source jobs library.
 
-##### Jobs Library
+### Jobs Library
 
 1. All jobs that "opt-in" on OpenFn.org are exposed with an open API, which
    **expects** `{adaptor, version, ...helperFunction}` and **returns** `[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]` — which includes both the jobs in the OpenFn.org
@@ -114,7 +135,7 @@ NODE_JS_PATH='./assets/node_modules/.bin'
    open-source users can submit pull requests to post their jobs to the
    `OpenFn/docs/` repo. (OpenFn/docs is open source also, btw.)
 
-#### Future nice to haves
+### Future nice to haves
 
 - Notifications module
 - Better Logging

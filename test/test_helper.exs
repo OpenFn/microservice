@@ -1,7 +1,7 @@
 ExUnit.start()
 
-Application.put_env(:microservice, :expression_path, "./test/config/expression.js")
-Application.put_env(:microservice, :credential_path, "./test/config/credential.json")
+Application.put_env(:microservice, :expression_path, "./test/fixtures/expression.js")
+Application.put_env(:microservice, :credential_path, "./test/fixtures/credential.json")
 Application.put_env(:microservice, :final_state_path, nil)
 
 Application.put_env(

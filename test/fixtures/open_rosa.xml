@@ -1,0 +1,22 @@
+<?xml version='1.0' ?>
+<event_cars_boats id="Events_Boats_Cars" 
+  xmlns:h="http://www.w3.org/1999/xhtml" 
+  xmlns:jr="http://openrosa.org/javarosa" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:ev="http://www.w3.org/2001/xml-events" 
+  xmlns:orx="http://openrosa.org/xforms/">
+  <event_name>Test</event_name>
+  <start_date>2019-10-24</start_date>
+  <boats>
+    <boat_name>Ferari</boat_name>
+  </boats>
+  <boats>
+    <boat_name>Johnny</boat_name>
+  </boats>
+  <cars>
+    <car_name>Big Boss</car_name>
+  </cars>
+  <meta>
+    <instanceID>uuid:b400c1e3-d6d7-428d-8b19-f7227bda8445</instanceID>
+  </meta>
+</event_cars_boats>

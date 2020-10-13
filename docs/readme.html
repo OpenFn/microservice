@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.1.1">
-    <title>OpenFn/microservice — microservice v0.1.1</title>
+    <meta name="project" content="microservice v0.1.2">
+    <title>OpenFn/microservice — microservice v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-acb35bcc97.js"></script>
+    <script src="dist/sidebar_items-f1d7102583.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -43,9 +43,12 @@
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
 microservice      </a>
       <strong class="sidebar-projectVersion">
-        v0.1.1
+        v0.1.2
       </strong>
     </div>
+      <a href="https://openfn.github.io/microservice/readme.html">
+        <img src="assets/logo.png" alt="microservice" class="sidebar-projectImage">
+      </a>
   </div>
 
   <ul class="sidebar-listNav">
@@ -62,25 +65,42 @@ microservice      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>OpenFn/microservice</h1><p>To start your OpenFn Microservice:</p><ul><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Run tests with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) mix test</code></li><li>Start server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>Now you make HTTP <code class="inline">post</code> requests to
-<a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> and they will be processed
-by the job runner.</p><h2 id="mvp" class="section-heading">
-  <a href="#mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  MVP
+<h1>OpenFn/microservice</h1><p><img src="assets/static/images/logo_100.png" alt="openfn"></img></p><h2 id="intent" class="section-heading">
+  <a href="#intent" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Intent
 </h2>
+<p>OpenFn is used by numerous health and humanitarian organizations around the
+world to scale their progrms through real-time interoperability, systems
+integration, and workflow automation. <strong>OpenFn/microservice</strong> makes use of
+OpenFn's open-core technology—namely <strong>OpenFn/core</strong> and the various OpenFn
+<strong>adaptors</strong>—to create standalone microservices which can be deployed on any
+hardware.</p><p>This microservice approach helps to ensure that governments and NGOs are never
+locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
+and credentials from <a href="www.openfn.org">OpenFn.org</a> to their own infrastructure
+easily.</p><h2 id="up-and-running" class="section-heading">
+  <a href="#up-and-running" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Up and running:
+</h2>
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
+<a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
+job runner, accoridng to the <code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined
+in your <code class="inline">.env</code> file.</p><h2 id="development" class="section-heading">
+  <a href="#development" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Development
+</h2>
+<h3 id="mvp-supported-by-the-dial-osc" class="section-heading">
+  <a href="#mvp-supported-by-the-dial-osc" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  MVP, supported by the DIAL OSC
+</h3>
 <ol><li>An open source server application (this application, <code class="inline">microservice</code>.)</li><li>The open source <code class="inline">inbox</code> application, which will be used by both <code class="inline">platform</code>
 and <code class="inline">microservice</code> to handle HTTP requests</li><li>The open source <code class="inline">dispatcher</code> application which will be used by both
 <code class="inline">platform</code> and <code class="inline">microservice</code> to execute jobs using <code class="inline">OpenFn/core</code>.</li><li>A Dockerfile that, given a <code class="inline">job</code>, an <code class="inline">adaptor</code>, and a <code class="inline">credential</code>, is able
 to automatically generate a container that runs the microservice for that
-job.</li></ol><h2 id="roadmap-for-this-application" class="section-heading">
+job.</li></ol><h3 id="roadmap-for-this-application" class="section-heading">
   <a href="#roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Roadmap for this application
-</h2>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.4.17/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> can pipe to stdout.</li><li>[ ] Write tests for everything.</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
-  <a href="#dynamic-configuration-required-for-mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Dynamic Configuration required for MVP
 </h3>
-<h4>Container Config (Dockerfile)</h4><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.4.17/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> can pipe to stdout.</li><li>[ ] Write tests for everything.</li></ul><h4>Dynamic Configuration required for MVP</h4><h5>Container Config (Dockerfile)</h5><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
 FROM alpine-elixir-phoenix:latest AS app_builder
 RUN Please build the phoenix application...
 
@@ -98,7 +118,7 @@ RUN su - app -c &quot;npm install github:openfn/language-dhis2#v1.1.1 --prefix .
 
 USER app
 CMD './bin/lib/microservice/start'
-ARG 'foreground</code></pre><h4>Application Config</h4><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># basic application config
+ARG 'foreground</code></pre><h5>Application Config</h5><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># basic application config
 webserver=true # not necessary if we're not saving final state
 url='some.thing.nice'
 port='4000'
@@ -111,13 +131,21 @@ CRON_EXPRESSION= # (only provided for a timer job)
 FINAL_STATE_PATH= # if we're saving final state.
 
 ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
-NODE_JS_PATH='./assets/node_modules/.bin'</code></pre><h4>How to make it shelf ready?</h4><ol><li>Build and relaese a fully featured documentation site like
+NODE_JS_PATH='./assets/node_modules/.bin'</code></pre><h3 id="how-to-make-it-shelf-ready" class="section-heading">
+  <a href="#how-to-make-it-shelf-ready" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  How to make it shelf ready?
+</h3>
+<ol><li>Build and relaese a fully featured documentation site like
 <a href="https://openfn.github.io/docs/">OpenFn/docs</a></li><li>Make fully <code class="inline">InstantHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
 <code class="inline">microservice</code> based one the current configuration of jobs and credentials in
 <code class="inline">devtools</code>.</li><li>Click a button on OpenFn to prepare a <code class="inline">microservice.zip</code> which is this repo
 with a new Dockerfile, based on the current job's configuration at OpenFn.org
 (we're not just &quot;shelf ready&quot;, we're <em>providing the shelf</em> with a &quot;free
-forever&quot; project on our website.)</li><li>An open-source jobs library.</li></ol><h5>Jobs Library</h5><ol><li>All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which
+forever&quot; project on our website.)</li><li>An open-source jobs library.</li></ol><h3 id="jobs-library" class="section-heading">
+  <a href="#jobs-library" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Jobs Library
+</h3>
+<ol><li>All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which
 <strong>expects</strong> <code class="inline">{adaptor, version, ...helperFunction}</code> and <strong>returns</strong> <code class="inline">[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]</code> — which includes both the jobs in the OpenFn.org
 database <em>and</em> the jobs in
 <a href="https://www.github.com/openfn/docs/jobs">OpenFn/Docs/jobs</a></li><li>That API is consumed by the docs site (open source) <em>AND</em> by openfn.org so
@@ -125,7 +153,11 @@ that it can use used to generate jobs with our free-forever projects.</li><li>In
 suggests that you look at the top 10 most <code class="inline">successful/active</code>
 dhis2:your-version expressions, searchable and copy/pastable.</li><li>New jobs are automatically added to the library from OpenFn.org, and
 open-source users can submit pull requests to post their jobs to the
-<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol><h4>Future nice to haves</h4><ul><li>Notifications module</li><li>Better Logging</li><li>Visual interface for application (Phx LiveView?)</li><li><del>Message persistence plugin (enables retries)</del></li></ul>      <footer class="footer">
+<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol><h3 id="future-nice-to-haves" class="section-heading">
+  <a href="#future-nice-to-haves" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Future nice to haves
+</h3>
+<ul><li>Notifications module</li><li>Better Logging</li><li>Visual interface for application (Phx LiveView?)</li><li><del>Message persistence plugin (enables retries)</del></li></ul>      <footer class="footer">
         <p>
           <span class="line">
             Built using

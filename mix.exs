@@ -4,7 +4,7 @@ defmodule Microservice.MixProject do
   def project do
     [
       app: :microservice,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
@@ -17,7 +17,7 @@ defmodule Microservice.MixProject do
       docs: [
         # The main page in the docs
         main: "readme",
-        # logo: "path/to/logo.png",
+        logo: "assets/static/images/logo_800.png",
         extras: ["README.md"],
         output: "docs"
       ]
@@ -45,6 +45,7 @@ defmodule Microservice.MixProject do
     [
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:jason, "~> 1.0"},
+      {:mix_test_watch, "~> 1.0", only: :dev},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix, "~> 1.4.12"},
       {:plug_cowboy, "~> 2.4"},
