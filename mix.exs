@@ -18,7 +18,8 @@ defmodule Microservice.MixProject do
         # The main page in the docs
         main: "Microservice",
         # logo: "path/to/logo.png",
-        extras: ["README.md"]
+        extras: ["README.md"],
+        output: "docs"
       ]
     ]
   end
