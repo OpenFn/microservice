@@ -1,4 +1,4 @@
-# OpenFn/microservice
+# OpenFn/microservice ![Build Status](https://travis-ci.org/OpenFn/microservice.svg?branch=master)
 
 ![openfn](assets/logo.png)
 
