@@ -1,6 +1,6 @@
 # OpenFn/microservice
 
-![openfn](assets/static/images/logo_100.png)
+![openfn](assets/logo.png)
 
 ## Intent
 

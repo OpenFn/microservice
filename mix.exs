@@ -17,7 +17,7 @@ defmodule Microservice.MixProject do
       docs: [
         # The main page in the docs
         main: "readme",
-        logo: "assets/static/images/logo_800.png",
+        logo: "assets/logo.png",
         extras: ["README.md"],
         output: "docs"
       ]
