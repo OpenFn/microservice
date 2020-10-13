@@ -1,9 +1,10 @@
-defmodule MicroserviceWeb.OpenFnInbox do
+defmodule MicroserviceWeb.Receiver do
   use MicroserviceWeb, :controller
   require Logger
 
+  @spec receive(Plug.Conn.t(), any) :: Plug.Conn.t()
   def receive(conn, _other) do
-    Logger.debug("OpenFnInbox.receive/2 called")
+    Logger.debug("Receiver.receive/2 called")
 
     # TODO: Add persist option with multi-inbox option.
     # persist? = Application.get_env(:openfn_inbox, :persist, false)

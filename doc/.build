@@ -3,7 +3,7 @@ Microservice.html
 MicroserviceWeb.Endpoint.html
 MicroserviceWeb.ErrorHelpers.html
 MicroserviceWeb.ErrorView.html
-MicroserviceWeb.OpenFnInbox.html
+MicroserviceWeb.Receiver.html
 MicroserviceWeb.Router.Helpers.html
 MicroserviceWeb.Router.html
 MicroserviceWeb.UserSocket.html
@@ -16,8 +16,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-2d75a2cae1.js
-dist/sidebar_items-7a4683fe54.js
+dist/search_items-05b889df83.js
+dist/sidebar_items-59b3ceb181.js
 index.html
 readme.html
 search.html

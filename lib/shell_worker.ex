@@ -6,8 +6,9 @@ defmodule ShellWorker do
   state, expression, and final_state, killing that NodeVM after a specified
   number of seconds.
   """
+  @spec execute(map) :: :ok
   def execute(data) when is_map(data) do
-    # Logger.debug("ShellWorker.execute/1 called with #{inspect(data)}")
+    Logger.debug("ShellWorker.execute/1 called with #{inspect(data)}")
 
     # Application.get_env(:microservice, :max_run_duration, "60")
     # |> String.to_integer()
