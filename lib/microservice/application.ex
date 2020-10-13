@@ -22,7 +22,7 @@ defmodule Microservice.Application do
     Application.put_env(
       :microservice,
       :node_js_sys_path,
-      System.get_env("NODE_JS_PATH") <> ":" <> System.get_env("PATH")
+      System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
     )
 
     # List all child processes to be supervised

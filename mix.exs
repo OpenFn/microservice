@@ -11,9 +11,9 @@ defmodule Microservice.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       # Docs
-      name: "MyApp",
+      name: "microservice",
       source_url: "https://github.com/openfn/microservice",
-      homepage_url: "https://www.openfn.org",
+      homepage_url: "https://openfn.github.io/microservice/readme.html",
       docs: [
         # The main page in the docs
         main: "readme",
