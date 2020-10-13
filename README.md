@@ -1,4 +1,4 @@
-# Microservice
+# OpenFn/microservice
 
 To start your OpenFn Microservice:
 
