@@ -8,7 +8,7 @@
     <meta name="project" content="microservice v0.1.2">
     <title>OpenFn/microservice — microservice v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-f1d7102583.js"></script>
+    <script src="dist/sidebar_items-033f610990.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -65,21 +65,21 @@ microservice      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>OpenFn/microservice <img src="https://travis-ci.org/OpenFn/microservice.svg?branch=master" alt="Build Status"></img></h1><p><img src="assets/logo.png" alt="openfn"></img></p><h2 id="intent" class="section-heading">
+<h1>OpenFn/microservice <a href="https://travis-ci.org/github/OpenFn/microservice"><img src="https://travis-ci.org/OpenFn/microservice.svg?branch=master" alt="Build Status"></img></a></h1><p><a href="https://www.openfn.org"><img src="assets/logo.png" alt="openfn"></img></a></p><h2 id="intent" class="section-heading">
   <a href="#intent" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Intent
 </h2>
 <p>OpenFn is used by numerous health and humanitarian organizations around the
-world to scale their progrms through real-time interoperability, systems
+world to scale their programs through real-time interoperability, systems
 integration, and workflow automation. <strong>OpenFn/microservice</strong> makes use of
 OpenFn's open-core technology—namely <strong>OpenFn/core</strong> and the various OpenFn
 <strong>adaptors</strong>—to create standalone microservices which can be deployed on any
 hardware.</p><p>This microservice approach helps to ensure that governments and NGOs are never
 locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
 and credentials from <a href="www.openfn.org">OpenFn.org</a> to their own infrastructure
-easily.</p><h2 id="up-and-running" class="section-heading">
-  <a href="#up-and-running" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Up and running:
+easily.</p><h2 id="up-and-running-guide" class="section-heading">
+  <a href="#up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Up and running guide
 </h2>
 <ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
@@ -146,9 +146,21 @@ forever&quot; project on our website.)</li><li>An open-source jobs library.</li>
   Jobs Library
 </h3>
 <ol><li>All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which
-<strong>expects</strong> <code class="inline">{adaptor, version, ...helperFunction}</code> and <strong>returns</strong> <code class="inline">[ { expression: 'createTEI({})', active: true, runsLast90: 32178, successRateLast90: 0.973 , source: 'openfn.org' }, { ...job, source: 'openfn/docs' }, ... ]</code> — which includes both the jobs in the OpenFn.org
-database <em>and</em> the jobs in
-<a href="https://www.github.com/openfn/docs/jobs">OpenFn/Docs/jobs</a></li><li>That API is consumed by the docs site (open source) <em>AND</em> by openfn.org so
+<strong>expects</strong> <code class="inline">{adaptor, version, ...helperFunction}</code> and <strong>returns</strong> the
+following—which includes both the jobs in the OpenFn.org database <em>and</em> the
+jobs in <a href="https://www.github.com/openfn/docs/jobs">OpenFn/Docs/jobs</a>:</li></ol><pre><code class="json">[
+  {
+    &quot;expression&quot;: &quot;createTEI({})&quot;,
+    &quot;active&quot;: true,
+    &quot;runsLast90&quot;: 32178,
+    &quot;successRateLast90&quot;: 0.973,
+    &quot;source&quot;: &quot;openfn.org&quot;
+  },
+  {
+    ...job,
+    &quot;source&quot;: &quot;openfn/docs&quot;
+  }
+]</code></pre><ol start="2"><li>That API is consumed by the docs site (open source) <em>AND</em> by openfn.org so
 that it can use used to generate jobs with our free-forever projects.</li><li>In the IDE on OpenFn.org, a user clicks DHIS2, then <code class="inline">createTEI</code> and it
 suggests that you look at the top 10 most <code class="inline">successful/active</code>
 dhis2:your-version expressions, searchable and copy/pastable.</li><li>New jobs are automatically added to the library from OpenFn.org, and
