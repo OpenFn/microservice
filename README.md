@@ -1,6 +1,6 @@
-# OpenFn/microservice ![Build Status](https://travis-ci.org/OpenFn/microservice.svg?branch=master)
+# OpenFn/microservice [![Build Status](https://travis-ci.org/OpenFn/microservice.svg?branch=master)](https://travis-ci.org/github/OpenFn/microservice)
 
-![openfn](assets/logo.png)
+[![openfn](assets/logo.png)](https://www.openfn.org)
 
 ## Intent
 
@@ -16,7 +16,7 @@ locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
 and credentials from [OpenFn.org](www.openfn.org) to their own infrastructure
 easily.
 
-## Up and running:
+## Up and running guide
 
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
 - Enter the directory with `cd microservice`
