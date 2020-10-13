@@ -16,7 +16,7 @@ defmodule Microservice.MixProject do
       homepage_url: "https://www.openfn.org",
       docs: [
         # The main page in the docs
-        main: "Microservice",
+        main: "readme",
         # logo: "path/to/logo.png",
         extras: ["README.md"],
         output: "docs"
