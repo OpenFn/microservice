@@ -22,8 +22,9 @@ easily.
 - Enter the directory with `cd microservice`
 - Install dependencies with `mix deps.get`
 - Install Node.js dependencies with `npm install --prefix ./assets`
+- Create a `.env.test` file with `cp .env.test.example .env.test`
+- Run the tests with `env $(cat .env.test | grep -v "#" | xargs ) mix test`
 - Create a `.env` file with `cp .env.example .env`
-- Run the tests with `mix test`
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
 HTTP `post` requests made to
