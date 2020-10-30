@@ -81,7 +81,7 @@ easily.</p><h2 id="up-and-running-guide" class="section-heading">
   <a href="#up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Create a <code class="inline">.env.test</code> file with <code class="inline">cp .env.test.example .env.test</code></li><li>Run the tests with <code class="inline">env $(cat .env.test | grep -v &quot;#&quot; | xargs ) mix test</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
 job runner, accoridng to the <code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined
 in your <code class="inline">.env</code> file.</p><h2 id="development" class="section-heading">
@@ -110,22 +110,25 @@ RUN su - app -c &quot;npm install github:openfn/language-dhis2#v1.1.1 --prefix .
 
 USER app
 CMD './bin/lib/microservice/start'
-ARG 'foreground</code></pre><h5>Application Config</h5><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># basic application config
-webserver=true # not necessary if we're not saving final state
-url='some.thing.nice'
-port='4000'
+ARG 'foreground</code></pre><h5>Application Config</h5><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># Webserver configuration ======================================================
+WEBSERVER=true
+URL='your.local.url'
+PORT='4000'
+# ENDPOINT_STYLE=sync
+ENDPOINT_STYLE=async
 
-# service configuration
-EXPRESSION_PATH='./job/expression.js'
-CREDENTIAL_PATH='./job/credential.json'
-CRON_EXPRESSION= # (only provided for a timer job)
+# Service configuration ========================================================
+# CRON_EXPRESSION=
+EXPRESSION_PATH='./test/fixtures/expression.js'
+CREDENTIAL_PATH='./test/fixtures/credential.json'
+# INITIAL_STATE_PATH='./tmp'
+FINAL_STATE_PATH='./tmp'
 
-FINAL_STATE_PATH= # if we're saving final state.
-
+# Core &amp; adaptor configuration =================================================
 ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
 NODE_JS_PATH='./assets/node_modules/.bin'</code></pre><h3 id="how-to-make-it-shelf-ready" class="section-heading">
   <a href="#how-to-make-it-shelf-ready" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  How to make it shelf ready?
+  How to make it shelf ready
 </h3>
 <ol><li>Build and relaese a fully featured documentation site like
 <a href="https://openfn.github.io/docs/">OpenFn/docs</a></li><li>Make fully <code class="inline">InstantHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
