@@ -8,3 +8,11 @@ otp_release:
 
 script:
   - mix test
+
+env:
+  - ENDPOINT_STYLE='sync'
+  - EXPRESSION_PATH='./test/fixtures/expression.js'
+  - CREDENTIAL_PATH='./test/fixtures/credential.json'
+  - FINAL_STATE_PATH='./'
+  - ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
+  - NODE_JS_PATH='./assets/node_modules/.bin'
