@@ -80,23 +80,26 @@ ARG 'foreground
 See [.env.example](./.env.example) for a possible config.
 
 ```sh
-# basic application config
-webserver=true # not necessary if we're not saving final state
-url='some.thing.nice'
-port='4000'
+# Webserver configuration ======================================================
+WEBSERVER=true
+URL='your.local.url'
+PORT='4000'
+# ENDPOINT_STYLE=sync
+ENDPOINT_STYLE=async
 
-# service configuration
-EXPRESSION_PATH='./job/expression.js'
-CREDENTIAL_PATH='./job/credential.json'
-CRON_EXPRESSION= # (only provided for a timer job)
+# Service configuration ========================================================
+# CRON_EXPRESSION=
+EXPRESSION_PATH='./test/fixtures/expression.js'
+CREDENTIAL_PATH='./test/fixtures/credential.json'
+# INITIAL_STATE_PATH='./tmp'
+FINAL_STATE_PATH='./tmp'
 
-FINAL_STATE_PATH= # if we're saving final state.
-
+# Core & adaptor configuration =================================================
 ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
 NODE_JS_PATH='./assets/node_modules/.bin'
 ```
 
-### How to make it shelf ready?
+### How to make it shelf ready
 
 1. Build and relaese a fully featured documentation site like
    [OpenFn/docs](https://openfn.github.io/docs/)
