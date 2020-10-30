@@ -1,4 +1,5 @@
 404.html
+Dispatcher.html
 Microservice.html
 MicroserviceWeb.Endpoint.html
 MicroserviceWeb.ErrorHelpers.html
@@ -8,7 +9,6 @@ MicroserviceWeb.Router.Helpers.html
 MicroserviceWeb.Router.html
 MicroserviceWeb.UserSocket.html
 MicroserviceWeb.html
-ShellWorker.html
 api-reference.html
 assets/logo.png
 dist/app-60a0c9f10e9e52eae31f.js
@@ -17,8 +17,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-ffc1282a64.js
-dist/sidebar_items-033f610990.js
+dist/search_items-f35f54de02.js
+dist/sidebar_items-44a7d9ce0a.js
 index.html
 readme.html
 search.html

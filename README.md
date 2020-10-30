@@ -33,25 +33,14 @@ in your `.env` file.
 
 ## Development
 
-### MVP, supported by the DIAL OSC
-
-1. An open source server application (this application, `microservice`.)
-2. The open source `inbox` application, which will be used by both `platform`
-   and `microservice` to handle HTTP requests
-3. The open source `dispatcher` application which will be used by both
-   `platform` and `microservice` to execute jobs using `OpenFn/core`.
-4. A Dockerfile that, given a `job`, an `adaptor`, and a `credential`, is able
-   to automatically generate a container that runs the microservice for that
-   job.
-
 ### Roadmap for this application
 
 - [x] `mix phx.server` receives receipts and sends 200
 - [ ] Chain jobs together
 - [ ] Timer jobs can keep state
-- [ ] `tmp` files are deleted after job is run
+- [ ] ~`tmp` files are deleted after job is run~
 - [ ] bring `core` out of package.json
-- [ ] endpoint gets `URL` and `PORT` from `.env`
+- [x] endpoint gets `URL` and `PORT` from `.env`
 - [x] `ShellWorker` picks up config from `.env`
 - [x] `ShellWorker` executes it, given preloaded job, cred, adaptor, and core.
 - [ ] `ShellWorker` can pipe to stdout.

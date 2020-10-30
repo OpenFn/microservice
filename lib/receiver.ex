@@ -22,10 +22,29 @@ defmodule MicroserviceWeb.Receiver do
       |> Jason.encode!()
       |> Jason.decode!()
 
-    Task.async(ShellWorker, :execute, [data])
+    result =
+      case Application.get_env(:microservice, :endpoint_style) do
+        "sync" -> Dispatcher.execute(data)
+        "async" -> Task.async(Dispatcher, :execute, [data])
+      end
+
+    {status, msg, data, errors} =
+      case result do
+        {:ok, %{log: log, exit_code: 0}} ->
+          {:created, "Job suceeded.", log, []}
+
+        {:ok, %{log: log, exit_code: 1}} ->
+          {:im_a_teapot, "Job failed.", log, [log]}
+
+        {:ok, %{log: log, exit_code: _big}} ->
+          {:internal_server_error, "Job crashed", log, []}
+
+        %Task{} ->
+          {:accepted, "Data accepted and processing has begun.", nil, []}
+      end
 
     conn
-    |> put_status(:ok)
-    |> json(%{message: "Payload received. Thanks."})
+    |> put_status(status)
+    |> json(%{msg: msg, data: data, errors: errors})
   end
 end

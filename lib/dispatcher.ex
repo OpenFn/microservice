@@ -1,4 +1,4 @@
-defmodule ShellWorker do
+defmodule Dispatcher do
   require Logger
 
   @doc """
@@ -8,27 +8,23 @@ defmodule ShellWorker do
   """
   @spec execute(map) :: :ok
   def execute(data) when is_map(data) do
-    Logger.debug("ShellWorker.execute/1 called with #{inspect(data)}")
+    Logger.debug("Dispatcher.execute/1 called with #{inspect(data)}")
 
-    # Application.get_env(:microservice, :max_run_duration, "60")
-    # |> String.to_integer()
-    # |> :timer.seconds()
-    # |> :timer.kill_after()
+    Application.get_env(:microservice, :max_run_duration, "60")
+    |> String.to_integer()
+    |> :timer.seconds()
+    |> :timer.kill_after()
 
     config =
       Application.get_env(:microservice, :credential_path, "{}")
-      |> IO.inspect()
       |> File.read!()
       |> Jason.decode!()
 
-    state =
-      %{configuration: config, data: data}
-      |> IO.inspect(label: "'state' map")
+    state = %{configuration: config, data: data}
 
     {:ok, state_path} = Temp.path(%{prefix: "state", suffix: ".json"})
 
     File.write!(state_path, Jason.encode!(state))
-    |> IO.inspect(label: "wrote state file as json")
 
     expression_path = Application.get_env(:microservice, :expression_path, nil)
     adaptor_path = Application.get_env(:microservice, :adaptor_path, nil)
@@ -43,7 +39,7 @@ defmodule ShellWorker do
       adaptor_path,
       "-s",
       state_path
-      | if(final_state_path, do: ["-o", final_state_path], else: [])
+      | if(final_state_path, do: ["-o", final_state_path <> "/output.json"], else: [])
     ]
 
     env = [
@@ -65,18 +61,21 @@ defmodule ShellWorker do
   end
 
   defp handle_result(result) do
-    Logger.info("Shell worker finished.")
-
+    Logger.info("Dispatcher finished.")
     handler = Application.get_env(:microservice, :result_handler, nil)
 
+    # TODO: Use a macro to make this work with 'handler(result)'
     case handler do
-      nil ->
-        Logger.debug(inspect(result))
+      nil -> :ok
+      _function -> Logger.warn("Handlers not yet supported.")
+    end
 
-      _function ->
-        # TODO: Use a macro to make this work.
-        # handler(result)
-        Logger.warn("Handlers not yet supported. Output: #{inspect(result)}")
+    case result do
+      {stdout, 0} ->
+        {:ok, %{log: String.split(stdout, ~r{\n}), success: true, exit_code: 0}}
+
+      {stdout, exit_code} ->
+        {:ok, %{log: String.split(stdout, ~r{\n}), success: false, exit_code: exit_code}}
     end
   end
 end

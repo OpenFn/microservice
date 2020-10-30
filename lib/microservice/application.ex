@@ -19,6 +19,14 @@ defmodule Microservice.Application do
       persistent: true
     )
 
+    Application.put_env(:microservice, :final_state_path, System.get_env("FINAL_STATE_PATH"),
+      persistent: true
+    )
+
+    Application.put_env(:microservice, :endpoint_style, System.get_env("ENDPOINT_STYLE"),
+      persistent: true
+    )
+
     Application.put_env(
       :microservice,
       :node_js_sys_path,

@@ -3,31 +3,30 @@ defmodule Microservice.ReceiverTest do
   use MicroserviceWeb.ConnCase
 
   import Microservice.TestUtil
-  alias Microservice.Receiver
 
   setup do
-    json = fixture(:short_post_body)
-    bad_json = fixture(:bad_post_body)
-
-    # upload = %Plug.Upload{path: "test/fixtures/open_rosa.xml", filename: "open_rosa.xml"}
+    json = fixture(:valid_post_body)
+    bad_json = fixture(:invalid_post_body)
 
     conn =
       build_conn()
       |> put_req_header("accept", "application/json")
       |> put_req_header("content-type", "application/json")
 
-    {
-      :ok,
-      # upload: upload
-      bad_json: bad_json, json: json, conn: conn
-    }
+    {:ok, bad_json: bad_json, json: json, conn: conn}
   end
 
-  test "posting valid JSON to /inbox returns a 202", %{conn: conn, json: json} do
+  test "posting valid JSON to /inbox returns a 201 in sync mode", %{conn: conn, json: json} do
+    Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
     response = post(conn, "/inbox/", json)
 
-    assert response.status == 200
-    assert response.resp_body == "{\"message\":\"Payload received. Thanks.\"}"
+    assert response.status == 201
+
+    assert Jason.decode!(response.resp_body) == %{
+             "data" => ["Something in the logs.", "Finished.", ""],
+             "errors" => '',
+             "msg" => "Job suceeded."
+           }
 
     assert response.params ==
              %{
@@ -38,31 +37,34 @@ defmodule Microservice.ReceiverTest do
                "object" => %{"a" => 1},
                "string" => "here"
              }
+  end
 
-    payload = %{
-      "body" => %{
-        "__query_params" => %{},
-        "array" => [1, 2, 3],
-        "boolean" => true,
-        "null" => nil,
-        "number" => 2,
-        "object" => %{"a" => 1},
-        "string" => "here"
-      },
-      "method" => "POST",
-      "headers" => %{
-        "accept" => "application/json",
-        "content-type" => "application/json",
-        "__internal_request_id" => Map.new(response.resp_headers)["x-request-id"]
-      }
-    }
+  test "posting valid JSON to /inbox returns a 202 in async mode", %{conn: conn, json: json} do
+    Application.put_env(:microservice, :endpoint_style, "async", persistent: false)
+    response = post(conn, "/inbox/", json)
 
-    # assert_enqueued(worker: ReceiptService, args: payload)
+    assert response.status == 202
+
+    assert Jason.decode!(response.resp_body) == %{
+             "data" => nil,
+             "errors" => [],
+             "msg" => "Data accepted and processing has begun."
+           }
+
+    assert response.params ==
+             %{
+               "array" => [1, 2, 3],
+               "boolean" => true,
+               "null" => nil,
+               "number" => 2,
+               "object" => %{"a" => 1},
+               "string" => "here"
+             }
   end
 
   @tag :skip
-  test "post to valid inbox with INVALID json sends 400", %{conn: conn, bad_json: bad_json} do
-    url = "http://localhost:4001/inbox/"
+  test "post to valid inbox with INVALID json sends 404", %{conn: conn, bad_json: bad_json} do
+    _url = "http://localhost:4000/inbox/"
 
     response = post(conn, "/inbox/", bad_json)
 

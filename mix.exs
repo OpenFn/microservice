@@ -45,7 +45,7 @@ defmodule Microservice.MixProject do
     [
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:jason, "~> 1.0"},
-      {:mix_test_watch, "~> 1.0", only: :dev},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix, "~> 1.4.12"},
       {:plug_cowboy, "~> 2.4"},

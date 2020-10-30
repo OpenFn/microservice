@@ -8,7 +8,7 @@
     <meta name="project" content="microservice v0.1.2">
     <title>OpenFn/microservice — microservice v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-033f610990.js"></script>
+    <script src="dist/sidebar_items-44a7d9ce0a.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -88,19 +88,11 @@ in your <code class="inline">.env</code> file.</p><h2 id="development" class="se
   <a href="#development" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development
 </h2>
-<h3 id="mvp-supported-by-the-dial-osc" class="section-heading">
-  <a href="#mvp-supported-by-the-dial-osc" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  MVP, supported by the DIAL OSC
-</h3>
-<ol><li>An open source server application (this application, <code class="inline">microservice</code>.)</li><li>The open source <code class="inline">inbox</code> application, which will be used by both <code class="inline">platform</code>
-and <code class="inline">microservice</code> to handle HTTP requests</li><li>The open source <code class="inline">dispatcher</code> application which will be used by both
-<code class="inline">platform</code> and <code class="inline">microservice</code> to execute jobs using <code class="inline">OpenFn/core</code>.</li><li>A Dockerfile that, given a <code class="inline">job</code>, an <code class="inline">adaptor</code>, and a <code class="inline">credential</code>, is able
-to automatically generate a container that runs the microservice for that
-job.</li></ol><h3 id="roadmap-for-this-application" class="section-heading">
+<h3 id="roadmap-for-this-application" class="section-heading">
   <a href="#roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Roadmap for this application
 </h3>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.4.17/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <a href="ShellWorker.html"><code class="inline">ShellWorker</code></a> can pipe to stdout.</li><li>[ ] Write tests for everything.</li></ul><h4>Dynamic Configuration required for MVP</h4><h5>Container Config (Dockerfile)</h5><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.4.17/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] ~<code class="inline">tmp</code> files are deleted after job is run~</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> picks up config from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <code class="inline">ShellWorker</code> can pipe to stdout.</li><li>[ ] Write tests for everything.</li></ul><h4>Dynamic Configuration required for MVP</h4><h5>Container Config (Dockerfile)</h5><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
 FROM alpine-elixir-phoenix:latest AS app_builder
 RUN Please build the phoenix application...
 

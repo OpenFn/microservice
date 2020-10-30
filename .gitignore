@@ -36,3 +36,6 @@ npm-debug.log
 .env
 
 .elixir_ls
+
+# A directory to store initial and final state, if required
+tmp
