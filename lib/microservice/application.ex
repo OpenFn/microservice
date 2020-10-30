@@ -7,25 +7,11 @@ defmodule Microservice.Application do
 
   def start(_type, _args) do
     # Dynamic configuration section ============================================
-    Application.put_env(:microservice, :credential_path, System.get_env("CREDENTIAL_PATH"),
-      persistent: true
-    )
-
-    Application.put_env(:microservice, :expression_path, System.get_env("EXPRESSION_PATH"),
-      persistent: true
-    )
-
-    Application.put_env(:microservice, :adaptor_path, System.get_env("ADAPTOR_PATH"),
-      persistent: true
-    )
-
-    Application.put_env(:microservice, :final_state_path, System.get_env("FINAL_STATE_PATH"),
-      persistent: true
-    )
-
-    Application.put_env(:microservice, :endpoint_style, System.get_env("ENDPOINT_STYLE"),
-      persistent: true
-    )
+    from_system(:credential_path, "CREDENTIAL_PATH")
+    from_system(:expression_path, "EXPRESSION_PATH")
+    from_system(:adaptor_path, "ADAPTOR_PATH")
+    from_system(:final_state_path, "FINAL_STATE_PATH")
+    from_system(:endpoint_style, "ENDPOINT_STYLE")
 
     Application.put_env(
       :microservice,
@@ -53,4 +39,11 @@ defmodule Microservice.Application do
     MicroserviceWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  @spec from_system(atom, binary, nil | binary) :: :ok
+  def from_system(key, env, default),
+    do: Application.put_env(:microservice, key, System.get_env(env, default), persistent: true)
+
+  @spec from_system(atom, binary) :: :ok
+  def from_system(key, env), do: from_system(key, env, nil)
 end
