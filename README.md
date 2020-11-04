@@ -1,4 +1,4 @@
-# OpenFn/microservice [![Build Status](https://travis-ci.org/OpenFn/microservice.svg?branch=master)](https://travis-ci.org/github/OpenFn/microservice)
+# OpenFn/microservice [![CircleCI](https://circleci.com/gh/OpenFn/microservice.svg?style=svg)](https://circleci.com/gh/OpenFn/microservice)
 
 [![openfn](assets/logo.png)](https://www.openfn.org)
 

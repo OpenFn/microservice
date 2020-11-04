@@ -1,0 +1,22 @@
+# Elixir CircleCI 2.0 configuration file
+# Check https://circleci.com/docs/2.0/language-elixir/ for more details
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    docker:
+      - image: circleci/elixir:1.10.3-node
+        environment:
+          MIX_ENV: test
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - run: mkdir ./tmp
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+      - run: mix do deps.get, deps.compile, compile
+      - run: npm install --prefix ./assets/
+      # TODO: figure out why npm install must be re-run AFTER the first mix test
+      - run: mix test || npm install --prefix ./assets/ && mix test
