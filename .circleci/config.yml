@@ -18,5 +18,4 @@ jobs:
       - run: mix local.rebar --force
       - run: mix do deps.get, deps.compile, compile
       - run: npm install --prefix ./assets/
-      # TODO: figure out why npm install must be re-run AFTER the first mix test
-      - run: mix test || npm install --prefix ./assets/ && mix test
+      - run: mix test
