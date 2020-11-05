@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.1.2">
-    <title>MicroserviceWeb.Endpoint — microservice v0.1.2</title>
+    <meta name="project" content="microservice v0.1.3">
+    <title>MicroserviceWeb.Endpoint — microservice v0.1.3</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-44a7d9ce0a.js"></script>
+    <script src="dist/sidebar_items-f258f2e533.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -43,7 +43,7 @@
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
 microservice      </a>
       <strong class="sidebar-projectVersion">
-        v0.1.2
+        v0.1.3
       </strong>
     </div>
       <a href="https://openfn.github.io/microservice/readme.html">
@@ -66,7 +66,7 @@ microservice      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        MicroserviceWeb.Endpoint <small class="app-vsn">(microservice v0.1.2)</small>
+        MicroserviceWeb.Endpoint <small class="app-vsn">(microservice v0.1.3)</small>
           <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
@@ -91,31 +91,31 @@ microservice      </a>
   <div class="summary-signature">
     <a href="#broadcast/3">broadcast(topic, event, msg)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast/3"><code class="inline">Phoenix.Endpoint.broadcast/3</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast/3"><code class="inline">Phoenix.Endpoint.broadcast/3</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#broadcast!/3">broadcast!(topic, event, msg)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast!/3"><code class="inline">Phoenix.Endpoint.broadcast!/3</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast!/3"><code class="inline">Phoenix.Endpoint.broadcast!/3</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#broadcast_from/4">broadcast_from(from, topic, event, msg)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast_from/4"><code class="inline">Phoenix.Endpoint.broadcast_from/4</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast_from/4"><code class="inline">Phoenix.Endpoint.broadcast_from/4</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#broadcast_from!/4">broadcast_from!(from, topic, event, msg)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast_from!/4"><code class="inline">Phoenix.Endpoint.broadcast_from!/4</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast_from!/4"><code class="inline">Phoenix.Endpoint.broadcast_from!/4</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#call/2">call(conn, opts)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/plug/1.10.4/Plug.html#c:call/2"><code class="inline">Plug.call/2</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/plug/1.11.0/Plug.html#c:call/2"><code class="inline">Plug.call/2</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -146,13 +146,19 @@ under a supervision tree.</p></div>
   <div class="summary-signature">
     <a href="#init/1">init(opts)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/plug/1.10.4/Plug.html#c:init/1"><code class="inline">Plug.init/1</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/plug/1.11.0/Plug.html#c:init/1"><code class="inline">Plug.init/1</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#instrument/3">instrument(event, runtime \\ Macro.escape(%{}), fun)</a>
+    <a href="#local_broadcast/3">local_broadcast(topic, event, msg)</a>
   </div>
-    <div class="summary-synopsis"><p>Instruments the given function.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:local_broadcast/3"><code class="inline">Phoenix.Endpoint.local_broadcast/3</code></a>.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#local_broadcast_from/4">local_broadcast_from(from, topic, event, msg)</a>
+  </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:local_broadcast_from/4"><code class="inline">Phoenix.Endpoint.local_broadcast_from/4</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -206,19 +212,13 @@ and the second item being the <code class="inline">static_integrity</code>.</p><
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#subscribe/1">subscribe(topic)</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#subscribe/3">subscribe(pid, topic, opts)</a>
+    <a href="#subscribe/2">subscribe(topic, opts \\ [])</a>
   </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#unsubscribe/1">unsubscribe(topic)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:unsubscribe/1"><code class="inline">Phoenix.Endpoint.unsubscribe/1</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -252,7 +252,7 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast/3"><code class="inline">Phoenix.Endpoint.broadcast/3</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast/3"><code class="inline">Phoenix.Endpoint.broadcast/3</code></a>.</p>  </section>
 </section>
 <section class="detail" id="broadcast!/3">
   <div class="detail-header">
@@ -269,7 +269,7 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast!/3"><code class="inline">Phoenix.Endpoint.broadcast!/3</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast!/3"><code class="inline">Phoenix.Endpoint.broadcast!/3</code></a>.</p>  </section>
 </section>
 <section class="detail" id="broadcast_from/4">
   <div class="detail-header">
@@ -286,7 +286,7 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast_from/4"><code class="inline">Phoenix.Endpoint.broadcast_from/4</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast_from/4"><code class="inline">Phoenix.Endpoint.broadcast_from/4</code></a>.</p>  </section>
 </section>
 <section class="detail" id="broadcast_from!/4">
   <div class="detail-header">
@@ -303,7 +303,7 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:broadcast_from!/4"><code class="inline">Phoenix.Endpoint.broadcast_from!/4</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:broadcast_from!/4"><code class="inline">Phoenix.Endpoint.broadcast_from!/4</code></a>.</p>  </section>
 </section>
 <section class="detail" id="call/2">
   <div class="detail-header">
@@ -320,7 +320,7 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/plug/1.10.4/Plug.html#c:call/2"><code class="inline">Plug.call/2</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/plug/1.11.0/Plug.html#c:call/2"><code class="inline">Plug.call/2</code></a>.</p>  </section>
 </section>
 <section class="detail" id="child_spec/1">
   <div class="detail-header">
@@ -407,35 +407,41 @@ under a supervision tree.</p>  </section>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/plug/1.10.4/Plug.html#c:init/1"><code class="inline">Plug.init/1</code></a>.</p>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/plug/1.11.0/Plug.html#c:init/1"><code class="inline">Plug.init/1</code></a>.</p>  </section>
 </section>
-<section class="detail" id="instrument/3">
-    <span id="instrument/2"></span>
+<section class="detail" id="local_broadcast/3">
   <div class="detail-header">
-    <a href="#instrument/3" class="detail-link" title="Link to this macro">
+    <a href="#local_broadcast/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">instrument(event, runtime \\ Macro.escape(%{}), fun)</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L1" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">local_broadcast(topic, event, msg)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
-      <span class="note">(macro)</span>
   </div>
 
   <section class="docstring">
 
-<p>Instruments the given function.</p><p><code class="inline">event</code> is the event identifier (usually an atom) that specifies which
-instrumenting function to call in the instrumenter modules. <code class="inline">runtime</code> is
-metadata to be associated with the event at runtime (e.g., the query being
-issued if the event to instrument is a DB query).</p><h2 id="instrument/3-examples" class="section-heading">
-  <a href="#instrument/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<pre><code class="nohighlight makeup elixir"><span class="n">instrument</span><span class="w"> </span><span class="ss">:render_view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9798973054-1">%{</span><span class="ss">view</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;index.html&quot;</span><span class="p" data-group-id="9798973054-1">}</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="9798973054-2">fn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-  </span><span class="n">render</span><span class="p" data-group-id="9798973054-3">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;index.html&quot;</span><span class="p" data-group-id="9798973054-3">)</span><span class="w">
-</span><span class="k" data-group-id="9798973054-2">end</span></code></pre>  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:local_broadcast/3"><code class="inline">Phoenix.Endpoint.local_broadcast/3</code></a>.</p>  </section>
+</section>
+<section class="detail" id="local_broadcast_from/4">
+  <div class="detail-header">
+    <a href="#local_broadcast_from/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">local_broadcast_from(from, topic, event, msg)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.5.6/Phoenix.Endpoint.html#c:local_broadcast_from/4"><code class="inline">Phoenix.Endpoint.local_broadcast_from/4</code></a>.</p>  </section>
 </section>
 <section class="detail" id="path/1">
   <div class="detail-header">
@@ -579,30 +585,14 @@ such. It falls back to <code class="inline">:url</code> if <code class="inline">
 Useful for manipulating the URL data and passing it to
 URL helpers.</p>  </section>
 </section>
-<section class="detail" id="subscribe/1">
+<section class="detail" id="subscribe/2">
+    <span id="subscribe/1"></span>
   <div class="detail-header">
-    <a href="#subscribe/1" class="detail-link" title="Link to this function">
+    <a href="#subscribe/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">subscribe(topic)</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L2" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-
-  </section>
-</section>
-<section class="detail" id="subscribe/3">
-  <div class="detail-header">
-    <a href="#subscribe/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">subscribe(pid, topic, opts)</h1>
+    <h1 class="signature">subscribe(topic, opts \\ [])</h1>
       <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/endpoint.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
@@ -628,7 +618,7 @@ URL helpers.</p>  </section>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix/1.4.17/Phoenix.Endpoint.html#c:unsubscribe/1"><code class="inline">Phoenix.Endpoint.unsubscribe/1</code></a>.</p>  </section>
+  </section>
 </section>
 <section class="detail" id="url/0">
   <div class="detail-header">

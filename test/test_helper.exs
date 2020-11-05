@@ -15,3 +15,5 @@ Application.put_env(
   :adaptor_path,
   "./assets/node_modules/language-http/lib/Adaptor"
 )
+
+# Ecto.Adapters.SQL.Sandbox.mode(Microservice.Repo, :manual)

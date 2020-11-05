@@ -44,7 +44,7 @@ in your `.env` file.
 - [x] `ShellWorker` picks up config from `.env`
 - [x] `ShellWorker` executes it, given preloaded job, cred, adaptor, and core.
 - [ ] `ShellWorker` can pipe to stdout.
-- [ ] Write tests for everything.
+- [X] Write tests for everything.
 
 #### Dynamic Configuration required for MVP
 

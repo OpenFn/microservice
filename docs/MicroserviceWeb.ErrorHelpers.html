@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.1.2">
-    <title>MicroserviceWeb.ErrorHelpers — microservice v0.1.2</title>
+    <meta name="project" content="microservice v0.1.3">
+    <title>MicroserviceWeb.ErrorHelpers — microservice v0.1.3</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-44a7d9ce0a.js"></script>
+    <script src="dist/sidebar_items-f258f2e533.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -43,7 +43,7 @@
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
 microservice      </a>
       <strong class="sidebar-projectVersion">
-        v0.1.2
+        v0.1.3
       </strong>
     </div>
       <a href="https://openfn.github.io/microservice/readme.html">
@@ -66,7 +66,7 @@ microservice      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        MicroserviceWeb.ErrorHelpers <small class="app-vsn">(microservice v0.1.2)</small>
+        MicroserviceWeb.ErrorHelpers <small class="app-vsn">(microservice v0.1.3)</small>
           <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/views/error_helpers.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
@@ -91,9 +91,15 @@ microservice      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#error_tag/2">error_tag(form, field)</a>
+  </div>
+    <div class="summary-synopsis"><p>Generates tag for inlined form input errors.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#translate_error/1">translate_error(arg)</a>
   </div>
-    <div class="summary-synopsis"><p>Translates an error message.</p></div>
+    <div class="summary-synopsis"><p>Translates an error message using gettext.</p></div>
 </div>
   </div>
         </section>
@@ -106,14 +112,14 @@ microservice      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="translate_error/1">
+<section class="detail" id="error_tag/2">
   <div class="detail-header">
-    <a href="#translate_error/1" class="detail-link" title="Link to this function">
+    <a href="#error_tag/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">translate_error(arg)</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/views/error_helpers.ex#L9" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">error_tag(form, field)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/views/error_helpers.ex#L11" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -121,7 +127,24 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Translates an error message.</p>  </section>
+<p>Generates tag for inlined form input errors.</p>  </section>
+</section>
+<section class="detail" id="translate_error/1">
+  <div class="detail-header">
+    <a href="#translate_error/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">translate_error(arg)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/views/error_helpers.ex#L23" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>Translates an error message using gettext.</p>  </section>
 </section>
           </div>
         </section>

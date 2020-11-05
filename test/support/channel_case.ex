@@ -20,14 +20,21 @@ defmodule MicroserviceWeb.ChannelCase do
   using do
     quote do
       # Import conveniences for testing with channels
-      use Phoenix.ChannelTest
+      import Phoenix.ChannelTest
+      import MicroserviceWeb.ChannelCase
 
       # The default endpoint for testing
       @endpoint MicroserviceWeb.Endpoint
     end
   end
 
-  setup _tags do
+  setup tags do
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(Microservice.Repo)
+
+    # unless tags[:async] do
+    #   Ecto.Adapters.SQL.Sandbox.mode(Microservice.Repo, {:shared, self()})
+    # end
+
     :ok
   end
 end

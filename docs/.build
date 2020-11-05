@@ -4,9 +4,13 @@ Microservice.html
 MicroserviceWeb.Endpoint.html
 MicroserviceWeb.ErrorHelpers.html
 MicroserviceWeb.ErrorView.html
+MicroserviceWeb.Gettext.html
+MicroserviceWeb.LayoutView.html
+MicroserviceWeb.PageLive.html
 MicroserviceWeb.Receiver.html
 MicroserviceWeb.Router.Helpers.html
 MicroserviceWeb.Router.html
+MicroserviceWeb.Telemetry.html
 MicroserviceWeb.UserSocket.html
 MicroserviceWeb.html
 api-reference.html
@@ -17,8 +21,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-6935063a73.js
-dist/sidebar_items-44a7d9ce0a.js
+dist/search_items-314ebfa090.js
+dist/sidebar_items-f258f2e533.js
 index.html
 readme.html
 search.html

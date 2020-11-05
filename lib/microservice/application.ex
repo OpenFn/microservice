@@ -19,12 +19,17 @@ defmodule Microservice.Application do
       System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
     )
 
-    # List all child processes to be supervised
     children = [
-      # Start the endpoint when the application starts
+      # Start the Ecto repository
+      # Microservice.Repo,
+      # Start the Telemetry supervisor
+      # MicroserviceWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Microservice.PubSub},
+      # Start the Endpoint (http/https)
       MicroserviceWeb.Endpoint
-      # Starts a worker by calling: Microservice.Worker.start_link(arg)
-      # {Microservice.Worker, arg},
+      # Start a worker by calling: Microservice.Worker.start_link(arg)
+      # {Microservice.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

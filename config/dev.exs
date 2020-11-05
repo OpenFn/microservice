@@ -1,5 +1,14 @@
 use Mix.Config
 
+# Configure your database
+# config :microservice, Microservice.Repo,
+#   username: "postgres",
+#   password: "postgres",
+#   database: "microservice_dev",
+#   hostname: "localhost",
+#   show_sensitive_data_on_connection_error: true,
+#   pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -9,7 +18,16 @@ use Mix.Config
 config :microservice, MicroserviceWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
-  check_origin: false
+  check_origin: false,
+  watchers: [
+    node: [
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch-stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # ## SSL Support
 #
@@ -34,6 +52,17 @@ config :microservice, MicroserviceWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
+
+# Watch static and templates for browser reloading.
+config :microservice, MicroserviceWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/microservice_web/(live|views)/.*(ex)$",
+      ~r"lib/microservice_web/templates/.*(eex)$"
+    ]
+  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

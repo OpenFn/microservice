@@ -7,15 +7,17 @@
 # General application configuration
 use Mix.Config
 
+# config :microservice,
+#   ecto_repos: [Microservice.Repo]
+
 # Configures the endpoint
 config :microservice, MicroserviceWeb.Endpoint,
   url: [host: "localhost"],
   http: [port: System.get_env("PORT")],
-  secret_key_base: "CV8d7Ebr9XWP7OQSMjkeMttROYTQAoHz2/F18lIahicpdJ3Py/bTvmNG7M2u8JCi",
-  render_errors: [view: MicroserviceWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Microservice.PubSub, adapter: Phoenix.PubSub.PG2]
-
-config :microservice, node_js_env: to_string(Mix.env())
+  secret_key_base: "UcbUPAfkiZ6YaM3PHiy5Cyco99cp+YPp4FFjygQ05/yfybjrh5OaeQAABfHNLqWa",
+  render_errors: [view: MicroserviceWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Microservice.PubSub,
+  live_view: [signing_salt: "jDLFTx8L"]
 
 # Configures Elixir's Logger
 config :logger, :console,
