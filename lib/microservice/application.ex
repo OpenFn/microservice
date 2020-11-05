@@ -11,12 +11,12 @@ defmodule Microservice.Application do
     from_system(:expression_path, "EXPRESSION_PATH")
     from_system(:adaptor_path, "ADAPTOR_PATH")
     from_system(:final_state_path, "FINAL_STATE_PATH")
-    from_system(:endpoint_style, "ENDPOINT_STYLE")
+    from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
 
     Application.put_env(
       :microservice,
       :node_js_sys_path,
-      System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
+      System.get_env("NODE_JS_PATH") <> ":" <> System.get_env("PATH")
     )
 
     children = [

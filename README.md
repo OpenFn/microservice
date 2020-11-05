@@ -80,7 +80,6 @@ See [.env.example](./.env.example) for a possible config.
 
 ```sh
 # Webserver configuration ======================================================
-WEBSERVER=true
 URL='your.local.url'
 PORT='4000'
 # ENDPOINT_STYLE=sync

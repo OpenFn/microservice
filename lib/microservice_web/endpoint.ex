@@ -10,6 +10,15 @@ defmodule MicroserviceWeb.Endpoint do
     signing_salt: "bh8gEctq"
   ]
 
+  def init(_type, config) do
+    config =
+      config
+      |> Kernel.put_in([:http, :port], System.get_env("PORT", "4000"))
+      # |> Kernel.put_in([:url, :host], System.get_env("HOST_URL", "localhost"))
+
+    {:ok, config}
+  end
+
   socket "/socket", MicroserviceWeb.UserSocket,
     websocket: true,
     longpoll: false
