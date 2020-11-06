@@ -44,58 +44,17 @@ in your `.env` file.
 - [x] `ShellWorker` picks up config from `.env`
 - [x] `ShellWorker` executes it, given preloaded job, cred, adaptor, and core.
 - [ ] `ShellWorker` can pipe to stdout.
-- [X] Write tests for everything.
+- [x] Write tests for everything.
 
 #### Dynamic Configuration required for MVP
 
 ##### Container Config (Dockerfile)
 
-See [Dockerfile](./Dockerfile). Must dynamically build:
-
-```dockerfile
-# ---- Build Stage ----
-FROM alpine-elixir-phoenix:latest AS app_builder
-RUN Please build the phoenix application...
-
-# ---- Application Stage ----
-FROM node:12-alpine AS app
-COPY --from=app_builder /app/_build .
-
-# Pull in user credential and job expression...
-COPY credential.json to ./credential.json
-COPY expression.js to ./expression.js
-
-# Install core and the chosen language package
-RUN su - app -c "npm install github:openfn/core#v1.3.1 --prefix ./assets"
-RUN su - app -c "npm install github:openfn/language-dhis2#v1.1.1 --prefix ./assets"
-
-USER app
-CMD './bin/lib/microservice/start'
-ARG 'foreground
-```
+See [Dockerfile](./Dockerfile).
 
 ##### Application Config
 
 See [.env.example](./.env.example) for a possible config.
-
-```sh
-# Webserver configuration ======================================================
-URL='your.local.url'
-PORT='4000'
-# ENDPOINT_STYLE=sync
-ENDPOINT_STYLE=async
-
-# Service configuration ========================================================
-# CRON_EXPRESSION=
-EXPRESSION_PATH='./test/fixtures/expression.js'
-CREDENTIAL_PATH='./test/fixtures/credential.json'
-# INITIAL_STATE_PATH='./tmp'
-FINAL_STATE_PATH='./tmp'
-
-# Core & adaptor configuration =================================================
-ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
-NODE_JS_PATH='./assets/node_modules/.bin'
-```
 
 ### How to make it shelf ready
 

@@ -9,19 +9,23 @@ ADD mix.exs mix.lock ./
 RUN mix do deps.get, deps.compile
 
 # Same with npm deps
-ADD assets/package.json assets/
+ADD assets/ assets/
 RUN cd assets && \
     npm install
 
-# Run frontend build, compile, and digest assets
-# RUN cd assets/ && \
-#     npm run deploy && \
-#     cd - && \
-#     mix do compile, phx.digest
+ADD config ./config
+ADD lib ./lib
 
-RUN mix do compile, phx.digest
+# Run frontend build, compile, and digest assets
+RUN cd assets/ && \
+    npm run deploy && \
+    cd - && \
+    mix do compile, phx.digest
 
 USER default
+
+COPY project ./project
+RUN mkdir tmp
 
 # CMD ["env", "$(cat .env | grep -v \"#\" | xargs )", "mix", "phx.server"]
 CMD ["mix", "phx.server"]
