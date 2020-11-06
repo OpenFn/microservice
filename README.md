@@ -1,8 +1,8 @@
 # OpenFn/microservice [![CircleCI](https://circleci.com/gh/OpenFn/microservice.svg?style=svg)](https://circleci.com/gh/OpenFn/microservice)
 
-[![openfn](assets/logo.png)](https://www.openfn.org)&nbsp;&nbsp;&nbsp;&nbsp;
-[![unicef](assets/unicef.png)](https://digitalimpactalliance.org)&nbsp;
-[![openfn](assets/dial.png)](https://www.unicef.org)
+[![openfn](assets/logo.png)](https://www.openfn.org)
+[![unicef](https://raw.githubusercontent.com/OpenFn/microservice/master/assets/unicef.png)](https://digitalimpactalliance.org)
+[![dial](https://raw.githubusercontent.com/OpenFn/microservice/master/assets/dial.png)](https://www.unicef.org)
 
 ## Intent
 
