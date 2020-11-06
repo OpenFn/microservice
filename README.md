@@ -21,9 +21,9 @@ easily.
 ## Docker usage
 
 - `git clone git@github.com:OpenFn/microservice.git && cd microservice` to clone
-- `docker build -t openfn/microservice:v0.1.4 .` to build
+- `docker build -t openfn/microservice:v0.2.1 .` to build
 - `cp .env.example .env` to configure
-- `docker run --network host --env-file ./.env openfn/microservice:v0.1.4` to run
+- `docker run --network host --env-file ./.env openfn/microservice:v0.2.1` to run
 
 ## Development up and running guide
 
@@ -37,29 +37,39 @@ easily.
 
 HTTP `post` requests made to
 [`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
-job runner, accoridng to the `credential`, `expression`, and `adaptor` defined
-in your `.env` file.
+`Receiver |> Dispatcher`, according to the `credential`, `expression`, and
+`adaptor` defined in your `.env` file.
+
+Time-based jobs will be run by `Repeater |> Dispatcher` according to the
+`credential`, `expression`, and `adaptor` defined in your `.env` file.
 
 ## Development
+
+This is a rough draft. Note that we're using the BEAM here because we see this
+growing significantly and want to leverage inter-node communication on large
+deployments, among other things. We may also fork and go another direction,
+using nothing but a small Express server (dropping Elixir/Erlang entirely) to
+call OpenFn/core (with a directly Javascript interface, rather than the CLI).
+Ideas, suggestions, questions welcome.
 
 ### Potential roadmap for this application
 
 - [x] `mix phx.server` receives receipts and sends 201/202
-- [x] Timer jobs can keep state (via `Repeater` and a simple `GenServer`)
+- [x] timer jobs can keep state (via `Repeater` and a simple `GenServer`)
 - [x] endpoint gets `URL` and `PORT` from `.env`
 - [x] `Dispatcher` picks up config from `.env`
 - [x] `Dispatcher` executes it, given preloaded job, cred, adaptor, and core
-- [x] Write tests for everything
-- [x] Phoenix dashboard for visual performance monitoring.
-- [ ] Pass project artifacts during `docker run`
+- [x] write tests for everything
+- [x] dashboard for visual performance monitoring
+- [ ] pass project artifacts during `docker run`
 - [ ] `tmp` files are deleted after job is run
-- [ ] Chain jobs together (repliacte OpenFn.org "flow")
+- [ ] chain jobs together (replicate OpenFn.org "flow")
 - [ ] bring `core` out of package.json
-- [ ] `Dispatcher` can pipe to stdout.
-- [ ] Notifications module
-- [ ] Better Logging
-- [ ] Visual interface for application (Phx LiveView?)
-- [ ] Message persistence plugin (enables retries)
+- [ ] `Dispatcher` can pipe to stdout
+- [ ] notifications module
+- [ ] better Logging
+- [ ] visual interface for application (Phx LiveView?)
+- [ ] message persistence plugin (enables retries)
 
 ### Dynamic Configuration required for MVP
 
@@ -74,9 +84,9 @@ in your `.env` file.
 
 ### How to make it shelf ready
 
-1. Build and relaese a fully featured documentation site like
-   [OpenFn/docs](https://openfn.github.io/docs/)
-2. Make fully `InstantHIE` compliant (including `kubernetes.yaml`)
+1. Build a fully featured documentation site like
+   [OpenFn/docs](https://docs.openfn.org)
+2. Make fully `Instant OpenHIE` compliant (including `kubernetes.yaml`)
 3. Build out `openfn-devtools` to include a script that pulls and configures
    `microservice` based one the current configuration of jobs and credentials in
    `devtools`.

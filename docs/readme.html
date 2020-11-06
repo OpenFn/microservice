@@ -5,8 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.2.0">
-    <title>OpenFn/microservice — microservice v0.2.0</title>
+    <meta name="project" content="microservice v0.2.1">
+    <title>OpenFn/microservice — microservice v0.2.1</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-630824520f.js"></script>
       <script src="docs_config.js"></script>
@@ -43,7 +43,7 @@
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
 microservice      </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.2.1
       </strong>
     </div>
       <a href="https://openfn.github.io/microservice/readme.html">
@@ -83,22 +83,28 @@ easily.</p><h2 id="docker-usage" class="section-heading">
   <a href="#docker-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Docker usage
 </h2>
-<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">docker build -t openfn/microservice:v0.1.4 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.1.4</code> to run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
+<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">docker build -t openfn/microservice:v0.2.1 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.2.1</code> to run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
 <ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
-job runner, accoridng to the <code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined
-in your <code class="inline">.env</code> file.</p><h2 id="development" class="section-heading">
+<code class="inline">Receiver |&gt; Dispatcher</code>, according to the <code class="inline">credential</code>, <code class="inline">expression</code>, and
+<code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><p>Time-based jobs will be run by <code class="inline">Repeater |&gt; Dispatcher</code> according to the
+<code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><h2 id="development" class="section-heading">
   <a href="#development" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development
 </h2>
-<h3 id="potential-roadmap-for-this-application" class="section-heading">
+<p>This is a rough draft. Note that we're using the BEAM here because we see this
+growing significantly and want to leverage inter-node communication on large
+deployments, among other things. We may also fork and go another direction,
+using nothing but a small Express server (dropping Elixir/Erlang entirely) to
+call OpenFn/core (with a directly Javascript interface, rather than the CLI).
+Ideas, suggestions, questions welcome.</p><h3 id="potential-roadmap-for-this-application" class="section-heading">
   <a href="#potential-roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Potential roadmap for this application
 </h3>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 201/202</li><li>[x] Timer jobs can keep state (via <code class="inline">Repeater</code> and a simple <a href="https://hexdocs.pm/elixir/GenServer.html"><code class="inline">GenServer</code></a>)</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> executes it, given preloaded job, cred, adaptor, and core</li><li>[x] Write tests for everything</li><li>[x] Phoenix dashboard for visual performance monitoring.</li><li>[ ] Pass project artifacts during <code class="inline">docker run</code></li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] Chain jobs together (repliacte OpenFn.org &quot;flow&quot;)</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> can pipe to stdout.</li><li>[ ] Notifications module</li><li>[ ] Better Logging</li><li>[ ] Visual interface for application (Phx LiveView?)</li><li>[ ] Message persistence plugin (enables retries)</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 201/202</li><li>[x] timer jobs can keep state (via <code class="inline">Repeater</code> and a simple <a href="https://hexdocs.pm/elixir/GenServer.html"><code class="inline">GenServer</code></a>)</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> executes it, given preloaded job, cred, adaptor, and core</li><li>[x] write tests for everything</li><li>[x] dashboard for visual performance monitoring</li><li>[ ] pass project artifacts during <code class="inline">docker run</code></li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] chain jobs together (replicate OpenFn.org &quot;flow&quot;)</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> can pipe to stdout</li><li>[ ] notifications module</li><li>[ ] better Logging</li><li>[ ] visual interface for application (Phx LiveView?)</li><li>[ ] message persistence plugin (enables retries)</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
   <a href="#dynamic-configuration-required-for-mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Dynamic Configuration required for MVP
 </h3>
@@ -111,8 +117,8 @@ build a microservice</li></ul><h3 id="how-to-make-it-shelf-ready" class="section
   <a href="#how-to-make-it-shelf-ready" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   How to make it shelf ready
 </h3>
-<ol><li>Build and relaese a fully featured documentation site like
-<a href="https://openfn.github.io/docs/">OpenFn/docs</a></li><li>Make fully <code class="inline">InstantHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
+<ol><li>Build a fully featured documentation site like
+<a href="https://docs.openfn.org">OpenFn/docs</a></li><li>Make fully <code class="inline">Instant OpenHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
 <code class="inline">microservice</code> based one the current configuration of jobs and credentials in
 <code class="inline">devtools</code>.</li><li>Click a button on OpenFn to prepare a <code class="inline">microservice.zip</code> which is this repo
 with a new Dockerfile, based on the current job's configuration at OpenFn.org
