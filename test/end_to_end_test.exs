@@ -15,13 +15,14 @@ defmodule Microservice.EndToEndTest do
     {:ok, json: json, conn: conn}
   end
 
-  test "posting data to /inbox runs a job and returns a 202", %{conn: conn, json: json} do
+  test "posting data to a sync endpoint runs a job and returns a 201", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
 
     response = post(conn, "/inbox/", json)
 
     {:ok, final_state_file} = File.read("./tmp/output.json")
     final_state = Jason.decode!(final_state_file)
+
     assert [1, 2, 3, 4] = final_state["data"]["array"]
     assert true = final_state["newKey"]
     File.rm("./tmp/output.json")

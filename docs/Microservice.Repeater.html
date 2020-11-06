@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
     <meta name="project" content="microservice v0.2.0">
-    <title>MicroserviceWeb — microservice v0.2.0</title>
+    <title>Microservice.Repeater — microservice v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-2c44457108.js"></script>
       <script src="docs_config.js"></script>
@@ -66,22 +66,14 @@ microservice      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        MicroserviceWeb <small class="app-vsn">(microservice v0.2.0)</small>
-          <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L1" title="View Source" class="view-source" rel="help">
+        Microservice.Repeater <small class="app-vsn">(microservice v0.2.0)</small>
+          <a href="https://github.com/openfn/microservice/blob/master/lib/repeater.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
       </h1>
 
 
-        <section id="moduledoc">
-<p>The entrypoint for defining your web interface, such
-as controllers, views, channels and so on.</p><p>This can be used in your application as:</p><pre><code class="nohighlight makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">MicroserviceWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:controller</span><span class="w">
-</span><span class="kn">use</span><span class="w"> </span><span class="nc">MicroserviceWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:view</span></code></pre><p>The definitions below will be executed for every view,
-controller, etc, so keep them short and clean, focused
-on imports, uses and aliases.</p><p>Do NOT define functions inside the quoted expressions
-below. Instead, define any helper function in modules
-and import those modules here.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -97,38 +89,24 @@ and import those modules here.</p>        </section>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#__using__/1">__using__(which)</a>
+    <a href="#child_spec/1">child_spec(init_arg)</a>
   </div>
-    <div class="summary-synopsis"><p>When used, dispatch to the appropriate controller/view/etc.</p></div>
+    <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#channel/0">channel()</a>
+    <a href="#init/1">init(state)</a>
   </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/elixir/GenServer.html#c:init/1"><code class="inline">GenServer.init/1</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#controller/0">controller()</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#live_component/0">live_component()</a>
+    <a href="#start_link/0">start_link()</a>
   </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#live_view/0">live_view()</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#router/0">router()</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#view/0">view()</a>
+    <a href="#start_link/1">start_link(state)</a>
   </div>
 </div>
   </div>
@@ -142,32 +120,14 @@ and import those modules here.</p>        </section>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="__using__/1">
+<section class="detail" id="child_spec/1">
   <div class="detail-header">
-    <a href="#__using__/1" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature">__using__(which)</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L99" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-      <span class="note">(macro)</span>
-  </div>
-
-  <section class="docstring">
-
-<p>When used, dispatch to the appropriate controller/view/etc.</p>  </section>
-</section>
-<section class="detail" id="channel/0">
-  <div class="detail-header">
-    <a href="#channel/0" class="detail-link" title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">channel()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L72" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">child_spec(init_arg)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/repeater.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -175,16 +135,16 @@ Functions          </h1>
 
   <section class="docstring">
 
-  </section>
+<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>  </section>
 </section>
-<section class="detail" id="controller/0">
+<section class="detail" id="init/1">
   <div class="detail-header">
-    <a href="#controller/0" class="detail-link" title="Link to this function">
+    <a href="#init/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">controller()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L20" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">init(state)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/repeater.ex#L9" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -192,16 +152,16 @@ Functions          </h1>
 
   <section class="docstring">
 
-  </section>
+<p>Callback implementation for <a href="https://hexdocs.pm/elixir/GenServer.html#c:init/1"><code class="inline">GenServer.init/1</code></a>.</p>  </section>
 </section>
-<section class="detail" id="live_component/0">
+<section class="detail" id="start_link/0">
   <div class="detail-header">
-    <a href="#live_component/0" class="detail-link" title="Link to this function">
+    <a href="#start_link/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">live_component()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L54" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">start_link()</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/repeater.ex#L6" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -211,48 +171,14 @@ Functions          </h1>
 
   </section>
 </section>
-<section class="detail" id="live_view/0">
+<section class="detail" id="start_link/1">
   <div class="detail-header">
-    <a href="#live_view/0" class="detail-link" title="Link to this function">
+    <a href="#start_link/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">live_view()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L45" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-
-  </section>
-</section>
-<section class="detail" id="router/0">
-  <div class="detail-header">
-    <a href="#router/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">router()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L62" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-
-  </section>
-</section>
-<section class="detail" id="view/0">
-  <div class="detail-header">
-    <a href="#view/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">view()</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web.ex#L30" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">start_link(state)</h1>
+      <a href="https://github.com/openfn/microservice/blob/master/lib/repeater.ex#L7" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>

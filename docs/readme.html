@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.1.3">
-    <title>OpenFn/microservice — microservice v0.1.3</title>
+    <meta name="project" content="microservice v0.2.0">
+    <title>OpenFn/microservice — microservice v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-f258f2e533.js"></script>
+    <script src="dist/sidebar_items-2c44457108.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
   </head>
@@ -43,7 +43,7 @@
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
 microservice      </a>
       <strong class="sidebar-projectVersion">
-        v0.1.3
+        v0.2.0
       </strong>
     </div>
       <a href="https://openfn.github.io/microservice/readme.html">
@@ -65,7 +65,9 @@ microservice      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>OpenFn/microservice <a href="https://circleci.com/gh/OpenFn/microservice"><img src="https://circleci.com/gh/OpenFn/microservice.svg?style=svg" alt="CircleCI"></img></a></h1><p><a href="https://www.openfn.org"><img src="assets/logo.png" alt="openfn"></img></a></p><h2 id="intent" class="section-heading">
+<h1>OpenFn/microservice <a href="https://circleci.com/gh/OpenFn/microservice"><img src="https://circleci.com/gh/OpenFn/microservice.svg?style=svg" alt="CircleCI"></img></a></h1><p><a href="https://www.openfn.org"><img src="assets/logo.png" alt="openfn"></img></a>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+<a href="https://digitalimpactalliance.org"><img src="assets/unicef.png" alt="unicef"></img></a>&amp;nbsp;
+<a href="https://www.unicef.org"><img src="assets/dial.png" alt="openfn"></img></a></p><h2 id="intent" class="section-heading">
   <a href="#intent" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Intent
 </h2>
@@ -92,41 +94,7 @@ in your <code class="inline">.env</code> file.</p><h2 id="development" class="se
   <a href="#roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Roadmap for this application
 </h3>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] ~<code class="inline">tmp</code> files are deleted after job is run~</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> picks up config from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <code class="inline">ShellWorker</code> can pipe to stdout.</li><li>[X] Write tests for everything.</li></ul><h4>Dynamic Configuration required for MVP</h4><h5>Container Config (Dockerfile)</h5><p>See <a href="./Dockerfile">Dockerfile</a>. Must dynamically build:</p><pre><code class="dockerfile"># ---- Build Stage ----
-FROM alpine-elixir-phoenix:latest AS app_builder
-RUN Please build the phoenix application...
-
-# ---- Application Stage ----
-FROM node:12-alpine AS app
-COPY --from=app_builder /app/_build .
-
-# Pull in user credential and job expression...
-COPY credential.json to ./credential.json
-COPY expression.js to ./expression.js
-
-# Install core and the chosen language package
-RUN su - app -c &quot;npm install github:openfn/core#v1.3.1 --prefix ./assets&quot;
-RUN su - app -c &quot;npm install github:openfn/language-dhis2#v1.1.1 --prefix ./assets&quot;
-
-USER app
-CMD './bin/lib/microservice/start'
-ARG 'foreground</code></pre><h5>Application Config</h5><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><pre><code class="sh"># Webserver configuration ======================================================
-WEBSERVER=true
-URL='your.local.url'
-PORT='4000'
-# ENDPOINT_STYLE=sync
-ENDPOINT_STYLE=async
-
-# Service configuration ========================================================
-# CRON_EXPRESSION=
-EXPRESSION_PATH='./test/fixtures/expression.js'
-CREDENTIAL_PATH='./test/fixtures/credential.json'
-# INITIAL_STATE_PATH='./tmp'
-FINAL_STATE_PATH='./tmp'
-
-# Core &amp; adaptor configuration =================================================
-ADAPTOR_PATH='./assets/node_modules/language-http/lib/Adaptor'
-NODE_JS_PATH='./assets/node_modules/.bin'</code></pre><h3 id="how-to-make-it-shelf-ready" class="section-heading">
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 200</li><li>[ ] Chain jobs together</li><li>[ ] Timer jobs can keep state</li><li>[ ] ~<code class="inline">tmp</code> files are deleted after job is run~</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> picks up config from <code class="inline">.env</code></li><li>[x] <code class="inline">ShellWorker</code> executes it, given preloaded job, cred, adaptor, and core.</li><li>[ ] <code class="inline">ShellWorker</code> can pipe to stdout.</li><li>[x] Write tests for everything.</li></ul><h4>Dynamic Configuration required for MVP</h4><h5>Container Config (Dockerfile)</h5><p>See <a href="./Dockerfile">Dockerfile</a>.</p><h5>Application Config</h5><p>See <a href="./.env.example">.env.example</a> for a possible config.</p><h3 id="how-to-make-it-shelf-ready" class="section-heading">
   <a href="#how-to-make-it-shelf-ready" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   How to make it shelf ready
 </h3>

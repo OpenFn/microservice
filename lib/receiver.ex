@@ -16,27 +16,29 @@ defmodule MicroserviceWeb.Receiver do
     #   Application.get_env(:openfn_inbox, :inbox_definitions).define
     # end
 
-    data =
+    body =
       conn
       |> Map.fetch!(:body_params)
       |> Jason.encode!()
       |> Jason.decode!()
 
+    state = %{data: body}
+
     result =
       case Application.get_env(:microservice, :endpoint_style) do
-        "sync" -> Dispatcher.execute(data)
-        "async" -> Task.async(Dispatcher, :execute, [data])
+        "sync" -> Dispatcher.execute(state)
+        "async" -> Task.async(Dispatcher, :execute, [state])
       end
 
     {status, msg, data, errors} =
       case result do
-        {:ok, %{log: log, exit_code: 0}} ->
+        %{exit_code: 0, log: log} ->
           {:created, "Job suceeded.", log, []}
 
-        {:ok, %{log: log, exit_code: 1}} ->
+        %{log: log, exit_code: 1} ->
           {:im_a_teapot, "Job failed.", log, [log]}
 
-        {:ok, %{log: log, exit_code: _big}} ->
+        %{exit_code: _big, log: log} ->
           {:internal_server_error, "Job crashed", log, []}
 
         %Task{} ->

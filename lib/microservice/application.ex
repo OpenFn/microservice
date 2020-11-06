@@ -7,35 +7,41 @@ defmodule Microservice.Application do
 
   def start(_type, _args) do
     # Dynamic configuration section ============================================
-    from_system(:credential_path, "CREDENTIAL_PATH")
-    from_system(:expression_path, "EXPRESSION_PATH")
-    from_system(:adaptor_path, "ADAPTOR_PATH")
-    from_system(:final_state_path, "FINAL_STATE_PATH")
-    from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
-
     Application.put_env(
       :microservice,
       :node_js_sys_path,
       System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
     )
 
+    from_system(:credential_path, "CREDENTIAL_PATH")
+    from_system(:expression_path, "EXPRESSION_PATH")
+    from_system(:adaptor_path, "ADAPTOR_PATH")
+    from_system(:final_state_path, "FINAL_STATE_PATH")
+    from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
+
     children = [
-      # Start the Ecto repository
       # Microservice.Repo,
-      # Start the Telemetry supervisor
-      # MicroserviceWeb.Telemetry,
-      # Start the PubSub system
+      MicroserviceWeb.Telemetry,
       {Phoenix.PubSub, name: Microservice.PubSub},
-      # Start the Endpoint (http/https)
       MicroserviceWeb.Endpoint
-      # Start a worker by calling: Microservice.Worker.start_link(arg)
-      # {Microservice.Worker, arg}
     ]
+
+    # Configure the timer job runner ===========================================
+    repeater =
+      if System.get_env("FREQUENCY") |> is_nil(),
+        do: [],
+        else: [
+          {Microservice.Repeater,
+           case System.get_env("INITIAL_STATE_PATH") do
+             nil -> %{}
+             path -> File.read!(path) |> Jason.decode!()
+           end}
+        ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Microservice.Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(children ++ repeater, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration

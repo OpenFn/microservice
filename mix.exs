@@ -4,7 +4,7 @@ defmodule Microservice.MixProject do
   def project do
     [
       app: :microservice,
-      version: "0.1.3",
+      version: "0.2.0",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -48,17 +48,17 @@ defmodule Microservice.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
-      # {:phoenix_ecto, "~> 4.1"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_dashboard, "~> 0.3 or ~> 0.2.9"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.14.6"},
       {:phoenix, "~> 1.5.6"},
       {:plug_cowboy, "~> 2.0"},
-      # {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:temp, "~> 0.4.7"}
+      # {:phoenix_ecto, "~> 4.1"},
+      # {:postgrex, ">= 0.0.0"},
     ]
   end
 

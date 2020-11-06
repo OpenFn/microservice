@@ -1,5 +1,6 @@
 404.html
 Dispatcher.html
+Microservice.Repeater.html
 Microservice.html
 MicroserviceWeb.Endpoint.html
 MicroserviceWeb.ErrorHelpers.html
@@ -21,8 +22,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-314ebfa090.js
-dist/sidebar_items-f258f2e533.js
+dist/search_items-fcf84e7fbd.js
+dist/sidebar_items-2c44457108.js
 index.html
 readme.html
 search.html
