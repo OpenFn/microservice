@@ -18,7 +18,14 @@ locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
 and credentials from [OpenFn.org](www.openfn.org) to their own infrastructure
 easily.
 
-## Up and running guide
+## Docker usage
+
+- `git clone git@github.com:OpenFn/microservice.git && cd microservice` to clone
+- `docker build -t openfn/microservice:v0.1.4 .` to build
+- `cp .env.example .env` to configure
+- `docker run --network host --env-file ./.env openfn/microservice:v0.1.4` to run
+
+## Development up and running guide
 
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
 - Enter the directory with `cd microservice`
@@ -35,28 +42,35 @@ in your `.env` file.
 
 ## Development
 
-### Roadmap for this application
+### Potential roadmap for this application
 
-- [x] `mix phx.server` receives receipts and sends 200
-- [ ] Chain jobs together
-- [ ] Timer jobs can keep state
-- [ ] ~`tmp` files are deleted after job is run~
-- [ ] bring `core` out of package.json
+- [x] `mix phx.server` receives receipts and sends 201/202
+- [x] Timer jobs can keep state (via `Repeater` and a simple `GenServer`)
 - [x] endpoint gets `URL` and `PORT` from `.env`
-- [x] `ShellWorker` picks up config from `.env`
-- [x] `ShellWorker` executes it, given preloaded job, cred, adaptor, and core.
-- [ ] `ShellWorker` can pipe to stdout.
-- [x] Write tests for everything.
+- [x] `Dispatcher` picks up config from `.env`
+- [x] `Dispatcher` executes it, given preloaded job, cred, adaptor, and core
+- [x] Write tests for everything
+- [x] Phoenix dashboard for visual performance monitoring.
+- [ ] Pass project artifacts during `docker run`
+- [ ] `tmp` files are deleted after job is run
+- [ ] Chain jobs together (repliacte OpenFn.org "flow")
+- [ ] bring `core` out of package.json
+- [ ] `Dispatcher` can pipe to stdout.
+- [ ] Notifications module
+- [ ] Better Logging
+- [ ] Visual interface for application (Phx LiveView?)
+- [ ] Message persistence plugin (enables retries)
 
-#### Dynamic Configuration required for MVP
+### Dynamic Configuration required for MVP
 
-##### Container Config (Dockerfile)
-
-See [Dockerfile](./Dockerfile).
-
-##### Application Config
-
-See [.env.example](./.env.example) for a possible config.
+- See [/project](https://github.com/OpenFn/microservice/blob/master/project) for
+  project artifacts
+- See
+  [.env.example](https://github.com/OpenFn/microservice/blob/master/.env.example)
+  for a possible configuration
+- See
+  [Dockerfile](https://github.com/OpenFn/microservice/blob/master/Dockerfile) to
+  build a microservice
 
 ### How to make it shelf ready
 
@@ -103,10 +117,3 @@ See [.env.example](./.env.example) for a possible config.
 4. New jobs are automatically added to the library from OpenFn.org, and
    open-source users can submit pull requests to post their jobs to the
    `OpenFn/docs/` repo. (OpenFn/docs is open source also, btw.)
-
-### Future nice to haves
-
-- Notifications module
-- Better Logging
-- Visual interface for application (Phx LiveView?)
-- ~~Message persistence plugin (enables retries)~~
