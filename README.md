@@ -18,7 +18,9 @@ locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
 and credentials from [OpenFn.org](www.openfn.org) to their own infrastructure
 easily.
 
-Learn more about the open-source OpenFn/devtools: https://openfn.github.io/devtools/
+## Prerequisites
+
+- Familiarity with OpenFn's open-source integration tools. (See [OpenFn/docs](https://docs.openfn.org), [OpenFn/devtools](https://openfn.github.io/devtools/), and [OpenFn/core](https://github.com/openFn/core)
 
 ## Docker usage
 
