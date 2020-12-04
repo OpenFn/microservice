@@ -18,6 +18,8 @@ locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
 and credentials from [OpenFn.org](www.openfn.org) to their own infrastructure
 easily.
 
+Learn more about the open-source OpenFn/devtools: https://openfn.github.io/devtools/
+
 ## Docker usage
 
 - `git clone git@github.com:OpenFn/microservice.git && cd microservice` to clone
