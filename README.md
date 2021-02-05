@@ -34,7 +34,12 @@ easily.
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
 - Enter the directory with `cd microservice`
 - Install dependencies with `mix deps.get`
-- Install Node.js dependencies with `npm install --prefix ./assets`
+- Install Node.js dependencies  
+  `npm install --prefix ./assets`
+- Install the OpenFn runtime  
+  `mix openfn.install.runtime`
+- Create a new project configuration file  
+  `cp project/config.yaml.example project/config.yaml`
 - Run the tests with `mix test`
 - Create a `.env` file with `cp .env.example .env`
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`

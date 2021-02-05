@@ -1,6 +1,7 @@
 defmodule MicroserviceWeb.Receiver do
   use MicroserviceWeb, :controller
   require Logger
+  alias OpenFn.{Message, Job, Config}
 
   @spec receive(Plug.Conn.t(), any) :: Plug.Conn.t()
   def receive(conn, _other) do
@@ -22,31 +23,66 @@ defmodule MicroserviceWeb.Receiver do
       |> Jason.encode!()
       |> Jason.decode!()
 
-    state = %{data: body}
+    project_config = Config.parse!(Application.get_env(:microservice, :project_config))
 
-    result =
+    {status, data} =
       case Application.get_env(:microservice, :endpoint_style) do
-        "sync" -> Dispatcher.execute(state)
-        "async" -> Task.async(Dispatcher, :execute, [state])
-      end
+        "sync" ->
+          handle_sync(project_config, %Message{body: body})
 
-    {status, msg, data, errors} =
-      case result do
-        %{exit_code: 0, log: log} ->
-          {:created, "Job suceeded.", log, []}
+        "async" ->
+          Task.async(OpenFn.Engine, :handle_message, [
+            project_config,
+            %Message{body: body}
+          ])
 
-        %{log: log, exit_code: 1} ->
-          {:im_a_teapot, "Job failed.", log, [log]}
-
-        %{exit_code: _big, log: log} ->
-          {:internal_server_error, "Job crashed", log, []}
-
-        %Task{} ->
-          {:accepted, "Data accepted and processing has begun.", nil, []}
+          {:accepted, %{"msg" => "Data accepted and processing has begun."}}
       end
 
     conn
     |> put_status(status)
-    |> json(%{msg: msg, data: data, errors: errors})
+    |> json(data)
+  end
+
+  def handle_sync(project_config, message) do
+    results = OpenFn.Engine.handle_message(project_config, message)
+
+    # All jobs pass
+    # No jobs pass
+    # No jobs match
+    [success_count, fail_count] =
+      Enum.reduce(
+        results,
+        [0, 0],
+        fn {ret, _result}, [ok, fail] ->
+          case ret do
+            :ok ->
+              [ok + 1, fail]
+
+            :error ->
+              [ok, fail + 1]
+          end
+        end
+      )
+
+    match_count = success_count + fail_count
+
+    report = %{
+      jobs:
+        Enum.map(results, fn {_ret, %{log: log, exit_code: exit_code}} ->
+          %{"log" => log, "exit_code" => exit_code}
+        end),
+      success: fail_count == 0,
+      match_count: match_count
+    }
+
+    status =
+      cond do
+        match_count == 0 -> :ok
+        fail_count > 0 -> :partial_content
+        true -> :created
+      end
+
+    {status, report}
   end
 end

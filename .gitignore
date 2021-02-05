@@ -37,3 +37,6 @@ npm-debug.log
 tmp
 .env
 .elixir_ls
+
+/project/config.yaml
+/priv/openfn

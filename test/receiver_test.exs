@@ -18,36 +18,47 @@ defmodule Microservice.ReceiverTest do
 
   test "posting valid JSON to /inbox returns a 201 in sync mode", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
+
+    Application.put_env(:microservice, :project_config, fixture(:project_config, :yaml),
+      persistent: false
+    )
+
     response = post(conn, "/inbox/", json)
 
     assert response.status == 201
 
-    assert Jason.decode!(response.resp_body) == %{
-             "data" => ["Something in the logs.", "Finished.", ""],
-             "errors" => '',
-             "msg" => "Job suceeded."
-           }
+    body = Jason.decode!(response.resp_body)
 
-    assert response.params ==
-             %{
-               "array" => [1, 2, 3],
-               "boolean" => true,
-               "null" => nil,
-               "number" => 2,
-               "object" => %{"a" => 1},
-               "string" => "here"
-             }
+    assert %{
+             "jobs" => [%{"exit_code" => 0, "log" => log}],
+             "match_count" => 1,
+             "success" => true
+           } = body
+
+    assert Regex.match?(~r/Hi there!/, log)
+
+    assert response.params == %{
+             "array" => [1, 2, 3],
+             "boolean" => true,
+             "null" => nil,
+             "number" => 2,
+             "object" => %{"a" => 1},
+             "string" => "here"
+           }
   end
 
   test "posting valid JSON to /inbox returns a 202 in async mode", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "async", persistent: false)
+
+    Application.put_env(:microservice, :project_config, fixture(:project_config, :yaml),
+      persistent: false
+    )
+
     response = post(conn, "/inbox/", json)
 
     assert response.status == 202
 
     assert Jason.decode!(response.resp_body) == %{
-             "data" => nil,
-             "errors" => [],
              "msg" => "Data accepted and processing has begun."
            }
 
