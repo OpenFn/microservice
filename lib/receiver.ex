@@ -23,16 +23,13 @@ defmodule MicroserviceWeb.Receiver do
       |> Jason.encode!()
       |> Jason.decode!()
 
-    project_config = Config.parse!(Application.get_env(:microservice, :project_config))
-
     {status, data} =
       case Application.get_env(:microservice, :endpoint_style) do
         "sync" ->
-          handle_sync(project_config, %Message{body: body})
+          handle_sync(%Message{body: body})
 
         "async" ->
-          Task.async(OpenFn.Engine, :handle_message, [
-            project_config,
+          Task.async(Microservice.Engine, :handle_message, [
             %Message{body: body}
           ])
 
@@ -44,8 +41,8 @@ defmodule MicroserviceWeb.Receiver do
     |> json(data)
   end
 
-  def handle_sync(project_config, message) do
-    results = OpenFn.Engine.handle_message(project_config, message)
+  def handle_sync(message) do
+    results = Microservice.Engine.handle_message(message)
 
     # All jobs pass
     # No jobs pass
