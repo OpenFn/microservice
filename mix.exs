@@ -46,6 +46,8 @@ defmodule Microservice.MixProject do
       {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
       {:floki, ">= 0.27.0", only: :test},
       {:gettext, "~> 0.11"},
+      {:openfn_engine, git: "https://github.com/OpenFn/engine.git", branch: "application_start"},
+      # {:openfn_engine, path: "../openfn_engine"},
       {:jason, "~> 1.0"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:phoenix_html, "~> 2.11"},
@@ -56,7 +58,6 @@ defmodule Microservice.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:temp, "~> 0.4.7"}
       # {:phoenix_ecto, "~> 4.1"},
       # {:postgrex, ">= 0.0.0"},
     ]
@@ -70,7 +71,7 @@ defmodule Microservice.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "cmd npm install --prefix assets"]
+      setup: ["deps.get", "openfn.install.runtime", "cmd npm install --prefix assets"]
       # setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       # "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       # "ecto.reset": ["ecto.drop", "ecto.setup"],

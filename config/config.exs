@@ -27,6 +27,9 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :microservice, Microservice.Engine,
+  project_config: "file://project/config.yaml"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
+IO.inspect(Mix.env())
 import_config "#{Mix.env()}.exs"

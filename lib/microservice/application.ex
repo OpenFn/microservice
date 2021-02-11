@@ -22,6 +22,7 @@ defmodule Microservice.Application do
     children = [
       # Microservice.Repo,
       MicroserviceWeb.Telemetry,
+      Microservice.Engine,
       {Phoenix.PubSub, name: Microservice.PubSub},
       MicroserviceWeb.Endpoint
     ]
