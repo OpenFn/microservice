@@ -16,6 +16,7 @@ defmodule Microservice.ReceiverTest do
     {:ok, bad_json: bad_json, json: json, conn: conn}
   end
 
+  @tag skip: true
   test "posting valid JSON to /inbox returns a 201 in sync mode", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
 

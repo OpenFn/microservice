@@ -15,9 +15,19 @@ jobs:
     expression: none
     language_pack: '@openfn/language-common'
     trigger: trigger-3
+  job-cron:
+    expression: >
+      alterState(({counter=0}) => {
+        console.log("Hi there!")
+        return {counter: counter+1}; 
+      })
+    language_pack: '@openfn/language-common'
+    trigger: every-minute
 
 triggers:
   trigger-2:
     criteria: '{"number":2}'
   trigger-3:
     criteria: '{"b":2}'
+  every-minute:
+    cron: '* * * * *'
