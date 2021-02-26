@@ -67,7 +67,7 @@ curl -X POST -H "Content-Type: application/json" \
 
 Posting a message not matching any of the triggers (e.g. `“number”:3`) equally prompts an acknowledgement but doesn’t trigger any jobs.
 
-For example:
+Example message post for this non-match scenario:
 ```
 curl -X POST -H "Content-Type: application/json" \
  -d '{
