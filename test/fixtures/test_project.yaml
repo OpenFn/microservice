@@ -2,7 +2,7 @@ jobs:
   job-1:
     expression: >
       alterState(state => {
-        state.calculated = state.number * 2
+        state.data.number = state.data.number * 2
         return state;
       })
     language_pack: '@openfn/language-common'
@@ -11,13 +11,46 @@ jobs:
     expression: none
     language_pack: '@openfn/language-common'
     trigger: trigger-3
-  job-3:
-    expression: none
+  cron-style-job:
+    expression: >
+      alterState((state) => {
+        console.log("Hi there!")
+        return state;
+      })
     language_pack: '@openfn/language-common'
-    trigger: trigger-3
+    trigger: trigger-4
+  flow-job:
+    expression: >
+      alterState(state => {
+        state.data.b = state.data.b * 3
+        return state;
+      })
+    language_pack: '@openfn/language-common'
+    trigger: after-job-2
+  bad-job:
+    expression: >
+      alterState(state => throw "oops")
+    language_pack: '@openfn/language-common'
+    trigger: trigger-x
+  catch-job:
+    expression: >
+      alterState(state => {
+        state.message = "handled it."
+        return state;
+      })
+    language_pack: '@openfn/language-common'
+    trigger: after-failure
 
 triggers:
   trigger-2:
     criteria: '{"number":2}'
   trigger-3:
     criteria: '{"b":2}'
+  trigger-4:
+    cron: '* * * * *'
+  after-job-2:
+    success: job-2
+  trigger-x:
+    criteria: '{"premonition": "failure"}'
+  after-failure:
+    failure: bad-job

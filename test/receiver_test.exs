@@ -16,7 +16,7 @@ defmodule Microservice.ReceiverTest do
     {:ok, bad_json: bad_json, json: json, conn: conn}
   end
 
-  @tag skip: true
+  @tag :skip
   test "posting valid JSON to /inbox returns a 201 in sync mode", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
 
@@ -59,9 +59,12 @@ defmodule Microservice.ReceiverTest do
 
     assert response.status == 202
 
-    assert Jason.decode!(response.resp_body) == %{
-             "msg" => "Data accepted and processing has begun."
-           }
+    assert Jason.decode!(response.resp_body) ==
+             %{
+               "data" => ["job-1"],
+               "errors" => [],
+               "meta" => %{"message" => "Data accepted and processing has begun."}
+             }
 
     assert response.params ==
              %{
