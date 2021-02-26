@@ -38,5 +38,5 @@ tmp
 .env
 .elixir_ls
 
-/project/config.yaml
+project.yaml
 /priv/openfn

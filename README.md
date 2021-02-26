@@ -20,22 +20,22 @@ easily.
 
 ## Prerequisites
 
-- Familiarity with OpenFn's open-source integration tools. (See [OpenFn/docs](https://docs.openfn.org), [OpenFn/devtools](https://openfn.github.io/devtools/), and [OpenFn/core](https://github.com/openFn/core)
+- Familiarity with OpenFn's open-source integration tools. (See [OpenFn/docs](https://docs.openfn.org), [OpenFn/engine](https://github.com/openFn/engine), [OpenFn/devtools](https://openfn.github.io/devtools/), and [OpenFn/core](https://github.com/openFn/core)
 
 ## Docker usage
 
 - `git clone git@github.com:OpenFn/microservice.git && cd microservice` to clone
-- `docker build -t openfn/microservice:v0.2.1 .` to build
+- `cp project.yaml.example project.yaml` to set up a basic project
+- `docker build -t openfn/microservice:v0.3.0 .` to build
 - `cp .env.example .env` to configure
-- `docker run --network host --env-file ./.env openfn/microservice:v0.2.1` to run
+- `docker run --network host --env-file ./.env openfn/microservice:v0.3.0` to run
 
 ## Development up and running guide
 
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
 - Enter the directory with `cd microservice`
 - Install dependencies with `mix setup`
-- Create a new project configuration file  
-  `cp project/config.yaml.example project/config.yaml`
+- Create a new project configuration file `cp project.yaml.example project.yaml`
 - Run the tests with `mix test`
 - Create a `.env` file with `cp .env.example .env`
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
@@ -68,9 +68,9 @@ Ideas, suggestions, questions welcome.
 - [x] dashboard for visual performance monitoring
 - [ ] pass project artifacts during `docker run`
 - [ ] `tmp` files are deleted after job is run
-- [ ] chain jobs together (replicate OpenFn.org "flow")
+- [x] chain jobs together (replicate OpenFn.org "flow")
 - [ ] bring `core` out of package.json
-- [ ] `Dispatcher` can pipe to stdout
+- [ ] `Engine` can pipe to stdout
 - [ ] notifications module
 - [ ] better Logging
 - [ ] visual interface for application (Phx LiveView?)
