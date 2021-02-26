@@ -18,3 +18,6 @@ jobs:
       - run: mix local.rebar --force
       - run: mix do setup, deps.compile, compile
       - run: mix test
+
+      - store_test_results:
+          path: test-reports/
