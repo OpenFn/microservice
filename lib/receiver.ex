@@ -29,11 +29,18 @@ defmodule MicroserviceWeb.Receiver do
           handle_sync(%Message{body: body})
 
         "async" ->
-          Task.async(Microservice.Engine, :handle_message, [
-            %Message{body: body}
-          ])
+          # Task.async(Microservice.Engine, :handle_message, [
+          #   %Message{body: body}
+          # ])
 
-          {:accepted, %{"msg" => "Data accepted and processing has begun."}}
+          runs = Microservice.Engine.handle_message(%Message{body: body})
+
+          {:accepted,
+           %{
+             "meta" => %{"message" => "Data accepted and processing has begun."},
+             "data" => Enum.map(runs, fn run -> run.job.name end),
+             "errors" => []
+           }}
       end
 
     conn

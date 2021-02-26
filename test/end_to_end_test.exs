@@ -5,60 +5,88 @@ defmodule Microservice.EndToEndTest do
   import Microservice.TestUtil
 
   setup do
-    json = fixture(:valid_post_body)
+    match = fixture(:valid_post_body)
+    no_match = fixture(:unmatched_post_body)
+    flow_match = fixture(:flow_post_body)
+    fail_match = fixture(:fail_post_body)
 
     conn =
       build_conn()
       |> put_req_header("accept", "application/json")
       |> put_req_header("content-type", "application/json")
 
-    {:ok, json: json, conn: conn}
+    {:ok,
+     match: match, no_match: no_match, conn: conn, flow_match: flow_match, fail_match: fail_match}
   end
 
-  @tag :skip
-  test "posting data to /inbox will return a 202", %{conn: conn, json: json} do
-    response = post(conn, "/inbox/", json)
+  test "posting data that matches a trigger runs the relevant job", %{conn: conn, match: match} do
+    File.rm_rf!("/tmp/microservice-test")
+    initial_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-1"})
+    assert is_nil(initial_state)
+
+    response = post(conn, "/inbox/", match)
     assert response.status == 202
-    assert response.resp_body == "{\"msg\":\"Data accepted and processing has begun.\"}"
+    assert %{"data" => ["job-1"]} = response.resp_body |> Jason.decode!()
+
+    :timer.sleep(2000)
+
+    final_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-1"})
+    assert final_state["data"]["number"] == 4
   end
 
-  @tag :skip
-  test "posting data that matches a trigger runs the relevant job", %{conn: conn, json: json} do
-    # TODO: check to see if something has run
-    # :timer.sleep(1000)
-    # Microservice.Engine.get_job_state(OpenFn.JobStateRepo)
-    # OpenFn.JobStateRepo.get_last_persisted_state_path(repo, job) |> File.stat!()
-  end
-
-  @tag :skip
   test "posting data that doesn't match any triggers doesn't run any jobs", %{
     conn: conn,
-    json: json
+    no_match: no_match
   } do
-    # :timer.sleep(1000)
-    # TODO: check to make sure nothing has been run
+    File.rm_rf!("/tmp/microservice-test")
+
+    response = post(conn, "/inbox/", no_match)
+    assert response.status == 202
+    assert %{"data" => []} = response.resp_body |> Jason.decode!()
   end
 
-  @tag :skip
-  test "a cron job configured to run every second runs 3 times in 3 seconds", %{
-    conn: conn,
-    json: json
-  } do
-    # :timer.sleep(3000)
-    # :ok
+  test "a minutely cron job will be run by quantum every minute", %{} do
+    import Crontab.CronExpression
+
+    assert Enum.count(OpenFn.Engine.Scheduler.jobs()) == 1
+    assert OpenFn.Engine.Scheduler.find_job(:"trigger-4").state == :active
+    assert OpenFn.Engine.Scheduler.find_job(:"trigger-4").schedule == ~e[* * * * * *]
   end
 
-  @tag :skip
-  test "flow success: when a run succeeds, a subsequent run may be triggered", %{
+  test "when a run succeeds, subsequent runs may be triggered", %{
     conn: conn,
-    json: json
+    flow_match: flow_match
   } do
+    File.rm_rf!("/tmp/microservice-test")
+    assert Microservice.Engine.get_job_state(%OpenFn.Job{name: "flow-job"}) |> is_nil
+
+    response = post(conn, "/inbox/", flow_match)
+    assert response.status == 202
+    assert %{"data" => ["job-2"]} = response.resp_body |> Jason.decode!()
+
+    # First "job-2" is run.
+    :timer.sleep(2000)
+    # Then "flow-job" is run.
+
+    after_success_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "flow-job"})
+    assert after_success_state["data"]["b"] == 6
   end
 
-  @tag :skip
-  test "flow failure: when a run fails, a subsequent run may be triggered", %{
+  test "when a run fails, subsequent runs may be triggered", %{
     conn: conn,
-    json: json
+    fail_match: fail_match
   } do
+    File.rm_rf!("/tmp/microservice-test")
+    assert Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"}) |> is_nil
+    response = post(conn, "/inbox/", fail_match)
+    assert response.status == 202
+    assert %{"data" => ["bad-job"]} = response.resp_body |> Jason.decode!()
+
+    # First "bad-job" is run.
+    :timer.sleep(2000)
+    # Then "catch-job" is run.
+
+    catch_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"})
+    assert catch_state["message"] == "handled it."
   end
 end

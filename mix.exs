@@ -56,6 +56,7 @@ defmodule Microservice.MixProject do
       {:phoenix_live_view, "~> 0.14.6"},
       {:phoenix, "~> 1.5.6"},
       {:plug_cowboy, "~> 2.0"},
+      {:temp, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       # {:phoenix_ecto, "~> 4.1"},

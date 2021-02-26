@@ -3,6 +3,6 @@
   "tabWidth": 2,
   "singleQuote": true,
   "printWidth": 80,
-  "prose-wrap": "awlays",
+  "prose-wrap": "always",
   "arrowParens": "avoid"
 }
