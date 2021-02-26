@@ -41,9 +41,9 @@ easily.
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
 By default microservice is configured with 4 sample jobs:
-(1) job-1 shows a run log and it is triggered when a matching message arrives to the inbox (trigger-2).
-(2) job-cron is a timed job scheduled to run every minute and is linked to the ‘every-minute’ cron trigger.
-(3) job-2 and job-3 are not set up with any job expression but are linked to trigger-3.
+1. job-1 shows a run log and it is triggered when a matching message arrives to the inbox (trigger-2).
+2. job-cron is a timed job scheduled to run every minute and is linked to the ‘every-minute’ cron trigger.
+3. job-2 and job-3 are not set up with any job expression but are linked to trigger-3.
 
 All of the jobs are configured with the language pack 'openfn/language-common'.
 
