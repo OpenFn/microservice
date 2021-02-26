@@ -52,7 +52,7 @@ By default microservice is configured with 4 sample jobs:
 
 All of the jobs are configured with the language pack `openfn/language-common`.
 
-In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt and will launch `job-1`.
+In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt and will trigger `job-1` to run.
 
 You can try this out with the following snippet:
 
@@ -65,7 +65,7 @@ curl -X POST -H "Content-Type: application/json" \
  http://localhost:4000/inbox
 ```
 
-Posting a message not matching any of the triggers (e.g. “number”:3) equally prompts an acknowledgement but doesn’t trigger any jobs.
+Posting a message not matching any of the triggers (e.g. `“number”:3`) equally prompts an acknowledgement but doesn’t trigger any jobs.
 
 For example:
 ```
