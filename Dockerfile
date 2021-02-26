@@ -6,12 +6,9 @@ ENV PORT=4000 MIX_ENV=dev
 
 # Cache elixir deps
 ADD mix.exs mix.lock ./
-RUN mix do deps.get, deps.compile
-
-# Same with npm deps
 ADD assets/ assets/
-RUN cd assets && \
-    npm install
+
+RUN mix do setup, deps.compile
 
 ADD config ./config
 ADD lib ./lib
@@ -24,7 +21,7 @@ RUN cd assets/ && \
 
 USER default
 
-COPY project ./project
+COPY project.yaml ./project.yaml
 RUN mkdir tmp
 
 # CMD ["env", "$(cat .env | grep -v \"#\" | xargs )", "mix", "phx.server"]

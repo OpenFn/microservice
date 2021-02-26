@@ -6,17 +6,6 @@ defmodule Microservice.Application do
   use Application
 
   def start(_type, _args) do
-    # Dynamic configuration section ============================================
-    Application.put_env(
-      :microservice,
-      :node_js_sys_path,
-      System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
-    )
-
-    from_system(:credential_path, "CREDENTIAL_PATH")
-    from_system(:expression_path, "EXPRESSION_PATH")
-    from_system(:adaptor_path, "ADAPTOR_PATH")
-    from_system(:final_state_path, "FINAL_STATE_PATH")
     from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
 
     children = [
@@ -27,22 +16,10 @@ defmodule Microservice.Application do
       MicroserviceWeb.Endpoint
     ]
 
-    # Configure the timer job runner ===========================================
-    repeater =
-      if System.get_env("FREQUENCY") |> is_nil(),
-        do: [],
-        else: [
-          {Microservice.Repeater,
-           case System.get_env("INITIAL_STATE_PATH") do
-             nil -> %{}
-             path -> File.read!(path) |> Jason.decode!()
-           end}
-        ]
-
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Microservice.Supervisor]
-    Supervisor.start_link(children ++ repeater, opts)
+    Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
