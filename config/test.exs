@@ -24,3 +24,9 @@ config :microservice, Microservice.Engine,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :junit_formatter,
+  report_file: "report_file_test.xml",
+  report_dir: "./test-reports",
+  print_report_file: true,
+  prepend_project_name?: true

@@ -66,7 +66,8 @@ defmodule Microservice.MixProject do
       {:temp, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:excoveralls, "~> 0.11.2", only: [:test]}
+      {:excoveralls, "~> 0.11.2", only: [:test]},
+      {:junit_formatter, "~> 3.0", only: [:test]}
       # {:phoenix_ecto, "~> 4.1"},
       # {:postgrex, ">= 0.0.0"},
     ]
