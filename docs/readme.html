@@ -5,15 +5,22 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.2.1">
-    <title>OpenFn/microservice — microservice v0.2.1</title>
+    <meta name="project" content="microservice v0.3.0">
+
+    <title>OpenFn/microservice — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-72b054952a.js"></script>
+
+    <script src="dist/sidebar_items-c2bf20032d.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
+
+
   </head>
   <body data-type="extras">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -41,20 +48,24 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
-microservice      </a>
+microservice
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.2.1
+        v0.3.0
       </strong>
     </div>
+
       <a href="https://openfn.github.io/microservice/readme.html">
         <img src="assets/logo.png" alt="microservice" class="sidebar-projectImage">
       </a>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -83,15 +94,15 @@ easily.</p><h2 id="prerequisites" class="section-heading">
   <a href="#prerequisites" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Prerequisites
 </h2>
-<ul><li>Familiarity with OpenFn's open-source integration tools. (See <a href="https://docs.openfn.org">OpenFn/docs</a>, <a href="https://openfn.github.io/devtools/">OpenFn/devtools</a>, and <a href="https://github.com/openFn/core">OpenFn/core</a></li></ul><h2 id="docker-usage" class="section-heading">
+<ul><li>Familiarity with OpenFn's open-source integration tools. (See <a href="https://docs.openfn.org">OpenFn/docs</a>, <a href="https://github.com/openFn/engine">OpenFn/engine</a>, <a href="https://openfn.github.io/devtools/">OpenFn/devtools</a>, and <a href="https://github.com/openFn/core">OpenFn/core</a></li></ul><h2 id="docker-usage" class="section-heading">
   <a href="#docker-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Docker usage
 </h2>
-<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">docker build -t openfn/microservice:v0.2.1 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.2.1</code> to run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
+<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">cp project.yaml.example project.yaml</code> to set up a basic project</li><li><code class="inline">docker build -t openfn/microservice:v0.3.0 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.3.0</code> to run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a></li><li>Install Node.js dependencies with <code class="inline">npm install --prefix ./assets</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
 <code class="inline">Receiver |&gt; Dispatcher</code>, according to the <code class="inline">credential</code>, <code class="inline">expression</code>, and
 <code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><p>Time-based jobs will be run by <code class="inline">Repeater |&gt; Dispatcher</code> according to the
@@ -108,7 +119,7 @@ Ideas, suggestions, questions welcome.</p><h3 id="potential-roadmap-for-this-app
   <a href="#potential-roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Potential roadmap for this application
 </h3>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 201/202</li><li>[x] timer jobs can keep state (via <code class="inline">Repeater</code> and a simple <a href="https://hexdocs.pm/elixir/GenServer.html"><code class="inline">GenServer</code></a>)</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> picks up config from <code class="inline">.env</code></li><li>[x] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> executes it, given preloaded job, cred, adaptor, and core</li><li>[x] write tests for everything</li><li>[x] dashboard for visual performance monitoring</li><li>[ ] pass project artifacts during <code class="inline">docker run</code></li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[ ] chain jobs together (replicate OpenFn.org &quot;flow&quot;)</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] <a href="Dispatcher.html"><code class="inline">Dispatcher</code></a> can pipe to stdout</li><li>[ ] notifications module</li><li>[ ] better Logging</li><li>[ ] visual interface for application (Phx LiveView?)</li><li>[ ] message persistence plugin (enables retries)</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
+<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 201/202</li><li>[x] timer jobs can keep state (via <code class="inline">Repeater</code> and a simple <a href="https://hexdocs.pm/elixir/GenServer.html"><code class="inline">GenServer</code></a>)</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <code class="inline">Dispatcher</code> picks up config from <code class="inline">.env</code></li><li>[x] <code class="inline">Dispatcher</code> executes it, given preloaded job, cred, adaptor, and core</li><li>[x] write tests for everything</li><li>[x] dashboard for visual performance monitoring</li><li>[ ] pass project artifacts during <code class="inline">docker run</code></li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[x] chain jobs together (replicate OpenFn.org &quot;flow&quot;)</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] <code class="inline">Engine</code> can pipe to stdout</li><li>[ ] notifications module</li><li>[ ] better Logging</li><li>[ ] visual interface for application (Phx LiveView?)</li><li>[ ] message persistence plugin (enables retries)</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
   <a href="#dynamic-configuration-required-for-mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Dynamic Configuration required for MVP
 </h3>
@@ -151,7 +162,8 @@ that it can use used to generate jobs with our free-forever projects.</li><li>In
 suggests that you look at the top 10 most <code class="inline">successful/active</code>
 dhis2:your-version expressions, searchable and copy/pastable.</li><li>New jobs are automatically added to the library from OpenFn.org, and
 open-source users can submit pull requests to post their jobs to the
-<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol>      <footer class="footer">
+<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol>
+      <footer class="footer">
         <p>
           <span class="line">
             Built using
@@ -164,7 +176,9 @@ open-source users can submit pull requests to post their jobs to the
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -184,5 +198,7 @@ open-source users can submit pull requests to post their jobs to the
   </div>
 </section>
 </div>
+
+
   </body>
 </html>

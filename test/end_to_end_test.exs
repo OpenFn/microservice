@@ -15,27 +15,33 @@ defmodule Microservice.EndToEndTest do
     {:ok, json: json, conn: conn}
   end
 
-  # TODO: we don't really have access to the final state, or any information
-  # about it.
-  # test "posting data to a sync endpoint runs a job and returns a 201", %{conn: conn, json: json} do
-  #   Application.put_env(:microservice, :endpoint_style, "sync", persistent: false)
-  #   Application.put_env(:microservice, :project_config, fixture(:project_config, :yaml), persistent: false)
+  test "posting data to /inbox will return a 202", %{conn: conn, json: json} do
+    response = post(conn, "/inbox/", json)
+    assert response.status == 202
+    assert response.resp_body == "{\"msg\":\"Data accepted and processing has begun.\"}"
+  end
 
-  #   response = post(conn, "/inbox/", json)
+  test "posting data that matches a trigger runs the relevant job", %{conn: conn, json: json} do
+    # :timer.sleep(1000)
+    # TODO: check to see if something has run
+  end
 
-  #   {:ok, final_state_file} = File.read("./tmp/output.json")
-  #   final_state = Jason.decode!(final_state_file)
+  test "posting data that doesn't match any triggers doesn't run any jobs", %{
+    conn: conn,
+    json: json
+  } do
+    # :timer.sleep(1000)
+    # TODO: check to make sure nothing has been run
+  end
 
-  #   assert [1, 2, 3, 4] = final_state["data"]["array"]
-  #   assert true = final_state["newKey"]
-  #   File.rm("./tmp/output.json")
+  test "a cron job configured to run every second runs 3 times in 3 seconds", %{conn: conn, json: json} do
+    # :timer.sleep(3000)
+    # :ok
+  end
 
-  #   assert response.status == 201
+  test "flow success: when a run succeeds, a subsequent run may be triggered", %{conn: conn, json: json} do
+  end
 
-  #   assert %{
-  #            "data" => ["Something in the logs.", "Finished.", ""],
-  #            "errors" => [],
-  #            "msg" => "Job suceeded."
-  #          } = Jason.decode!(response.resp_body)
-  # end
+  test "flow failure: when a run fails, a subsequent run may be triggered", %{conn: conn, json: json} do
+  end
 end

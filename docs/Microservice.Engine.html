@@ -5,15 +5,22 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.2.1">
-    <title>Dispatcher — microservice v0.2.1</title>
+    <meta name="project" content="microservice v0.3.0">
+
+    <title>Microservice.Engine — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-72b054952a.js"></script>
+
+    <script src="dist/sidebar_items-c2bf20032d.js"></script>
+
       <script src="docs_config.js"></script>
+
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
+
+
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
@@ -41,20 +48,24 @@
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
       <a href="https://openfn.github.io/microservice/readme.html" class="sidebar-projectName">
-microservice      </a>
+microservice
+      </a>
       <strong class="sidebar-projectVersion">
-        v0.2.1
+        v0.3.0
       </strong>
     </div>
+
       <a href="https://openfn.github.io/microservice/readme.html">
         <img src="assets/logo.png" alt="microservice" class="sidebar-projectImage">
       </a>
+
   </div>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
 
       <li><a id="modules-list" href="#full-list">Modules</a></li>
+
 
   </ul>
   <div class="gradient"></div>
@@ -66,11 +77,13 @@ microservice      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Dispatcher <small class="app-vsn">(microservice v0.2.1)</small>
-          <a href="https://github.com/openfn/microservice/blob/master/lib/dispatcher.ex#L1" title="View Source" class="view-source" rel="help">
+Microservice.Engine <small class="app-vsn">(microservice v0.3.0)</small>
+
+          <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
+
       </h1>
 
 
@@ -83,20 +96,44 @@ microservice      </a>
             </a>
             Summary
           </h1>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#execute/1">execute(state)</a>
+    <a href="#child_spec/1">child_spec(opts)</a>
+
   </div>
-    <div class="summary-synopsis"><p>Run a job with the OpenFn/Core cli in an isolated NodeVM, given paths for
-state, expression, and final_state, killing that NodeVM after a specified
-number of seconds.</p></div>
+
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#config/1">config(key)</a>
+
   </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_message/1">handle_message(message)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start_link/1">start_link(opts \\ [])</a>
+
+  </div>
+
+</div>
+
+  </div>
+
         </section>
+
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -104,38 +141,103 @@ number of seconds.</p></div>
               <span class="icon-link" aria-hidden="true"></span>
               <span class="sr-only">Link to this section</span>
             </a>
-Functions          </h1>
+Functions
+          </h1>
           <div class="functions-list">
-<section class="detail" id="execute/1">
+<section class="detail" id="child_spec/1">
+
   <div class="detail-header">
-    <a href="#execute/1" class="detail-link" title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">execute(state)</h1>
-      <a href="https://github.com/openfn/microservice/blob/master/lib/dispatcher.ex#L15" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">child_spec(opts)</h1>
+
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
+
+
   </div>
 
   <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>execute(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: %{
-  exit_code: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>(),
-  final_state: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(),
-  log: [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()],
-  success: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-}</pre>
-      </div>
 
-<p>Run a job with the OpenFn/Core cli in an isolated NodeVM, given paths for
-state, expression, and final_state, killing that NodeVM after a specified
-number of seconds.</p>  </section>
+
+  </section>
 </section>
+<section class="detail" id="config/1">
+
+  <div class="detail-header">
+    <a href="#config/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">config(key)</h1>
+
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="handle_message/1">
+
+  <div class="detail-header">
+    <a href="#handle_message/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">handle_message(message)</h1>
+
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="start_link/1">
+
+    <span id="start_link/0"></span>
+
+  <div class="detail-header">
+    <a href="#start_link/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">start_link(opts \\ [])</h1>
+
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+
           </div>
         </section>
+
       <footer class="footer">
         <p>
           <span class="line">
@@ -149,7 +251,9 @@ number of seconds.</p>  </section>
           </span>
         </p>
         <p>
+
             <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
@@ -169,5 +273,7 @@ number of seconds.</p>  </section>
   </div>
 </section>
 </div>
+
+
   </body>
 </html>
