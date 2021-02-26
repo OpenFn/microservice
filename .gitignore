@@ -34,11 +34,9 @@ npm-debug.log
 /priv/static/
 
 # Additional ignores
-tmp
+/tmp/
 .env
 .elixir_ls
 
 project.yaml
 /priv/openfn
-
-/test-reports/*

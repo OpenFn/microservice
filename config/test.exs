@@ -27,6 +27,6 @@ config :logger, level: :warn
 
 config :junit_formatter,
   report_file: "report_file_test.xml",
-  report_dir: "./test-reports",
+  report_dir: "./tmp",
   print_report_file: true,
   prepend_project_name?: true
