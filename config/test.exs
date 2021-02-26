@@ -19,7 +19,7 @@ config :microservice, MicroserviceWeb.Endpoint,
   server: false
 
 config :microservice, Microservice.Engine,
-  project_config: "file://test/fixtures/project_config.yaml"
+  project_config: "file://test/fixtures/test_project.yaml"
 
 # Print only warnings and errors during test
 config :logger, level: :warn

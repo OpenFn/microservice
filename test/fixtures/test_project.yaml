@@ -1,8 +1,8 @@
 jobs:
   job-1:
     expression: >
-      alterState((state) => {
-        console.log("Hi there!")
+      alterState(state => {
+        state.calculated = state.number * 2
         return state;
       })
     language_pack: '@openfn/language-common'
