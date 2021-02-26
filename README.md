@@ -40,6 +40,38 @@ easily.
 - Create a `.env` file with `cp .env.example .env`
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
+By default microservice is configured with 4 sample jobs:
+(1) job-1 shows a run log and it is triggered when a matching message arrives to the inbox (trigger-2).
+(2) job-cron is a timed job scheduled to run every minute and is linked to the ‘every-minute’ cron trigger.
+(3) job-2 and job-3 are not set up with any job expression but are linked to trigger-3.
+
+All of the jobs are configured with the language pack 'openfn/language-common'.
+
+In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt and will launch job-1.
+
+You can try this out with the following snippet:
+
+```
+curl -X POST -H "Content-Type: application/json" \
+ -d '{
+  "number":2,
+  "surveyId": 37479
+}' \
+ http://localhost:4000/inbox
+```
+
+Posting a message not matching any of the triggers (e.g. “number”:3) equally prompts an acknowledgement but doesn’t trigger any jobs.
+
+For example:
+```
+curl -X POST -H "Content-Type: application/json" \
+ -d '{
+  "number":3,
+  "surveyId": 37479
+}' \
+ http://localhost:4000/inbox
+```
+
 HTTP `post` requests made to
 [`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
 `Receiver |> Dispatcher`, according to the `credential`, `expression`, and
@@ -47,6 +79,7 @@ HTTP `post` requests made to
 
 Time-based jobs will be run by `Repeater |> Dispatcher` according to the
 `credential`, `expression`, and `adaptor` defined in your `.env` file.
+
 
 ## Development
 
