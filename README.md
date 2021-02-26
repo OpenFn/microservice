@@ -52,7 +52,7 @@ By default microservice is configured with 4 sample jobs:
 
 All of the jobs are configured with the language pack `openfn/language-common`.
 
-In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt and will trigger `job-1` to run.
+In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt (`HTTP 202` `Data accepted and processing has begun`) and will trigger `job-1` to run.
 
 You can try this out with the following snippet:
 
