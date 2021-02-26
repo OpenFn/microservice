@@ -41,11 +41,7 @@ defmodule Microservice.EndToEndTest do
     File.rm_rf!("/tmp/microservice-test")
 
     response = post(conn, "/inbox/", no_match)
-
-    :timer.sleep(2000)
-
     assert response.status == 202
-
     assert %{"data" => []} = response.resp_body |> Jason.decode!()
   end
 
@@ -68,7 +64,9 @@ defmodule Microservice.EndToEndTest do
     assert response.status == 202
     assert %{"data" => ["job-2"]} = response.resp_body |> Jason.decode!()
 
+    # First "job-2" is run.
     :timer.sleep(2000)
+    # Then "flow-job" is run.
 
     after_success_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "flow-job"})
     assert after_success_state["data"]["b"] == 6
@@ -82,15 +80,13 @@ defmodule Microservice.EndToEndTest do
     assert Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"}) |> is_nil
     response = post(conn, "/inbox/", fail_match)
     assert response.status == 202
-
     assert %{"data" => ["bad-job"]} = response.resp_body |> Jason.decode!()
 
-    :timer.sleep(6000)
+    # First "bad-job" is run.
+    :timer.sleep(2000)
+    # Then "catch-job" is run.
 
-    catch_state =
-      Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"})
-      |> IO.inspect()
-
+    catch_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"})
     assert catch_state["message"] == "handled it."
   end
 end
