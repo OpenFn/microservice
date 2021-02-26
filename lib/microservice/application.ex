@@ -6,13 +6,6 @@ defmodule Microservice.Application do
   use Application
 
   def start(_type, _args) do
-    # Dynamic configuration section ============================================
-    Application.put_env(
-      :microservice,
-      :node_js_sys_path,
-      System.get_env("NODE_JS_PATH", "./") <> ":" <> System.get_env("PATH")
-    )
-
     from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
 
     children = [
