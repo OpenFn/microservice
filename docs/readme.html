@@ -10,12 +10,11 @@
     <title>OpenFn/microservice — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-c2bf20032d.js"></script>
+    <script src="dist/sidebar_items-b9e5a54e3b.js"></script>
 
       <script src="docs_config.js"></script>
 
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
-
 
   </head>
   <body data-type="extras">
@@ -102,7 +101,21 @@ easily.</p><h2 id="prerequisites" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><p>HTTP <code class="inline">post</code> requests made to
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h2 id="sample-configuration" class="section-heading">
+  <a href="#sample-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Sample configuration
+</h2>
+<p>The <a href="https://github.com/OpenFn/microservice/blob/main/project.yaml.example">sample project configuration file</a> describes the example project setup to help you get acquainted with the structure of the jobs, language packs and triggers.</p><p>By default microservice is configured with 4 sample jobs:</p><ol><li><code class="inline">job-1</code> shows a run log and it is triggered when a matching message arrives to the inbox (<code class="inline">trigger-2</code>).</li><li><code class="inline">job-cron</code> is a timed job scheduled to run every minute and is linked to the <code class="inline">every-minute</code> cron trigger.</li><li><code class="inline">job-2</code> and <code class="inline">job-3</code> are not set up with any job expression but are linked to <code class="inline">trigger-3</code>.</li></ol><p>All of the jobs are configured with the language pack <code class="inline">openfn/language-common</code>.</p><p>In the default sample configuration a new message posted to <code class="inline">localhost:4000/inbox</code> that matches <code class="inline">trigger-2</code> (i.e. the message contains <code class="inline">“number”:2</code>) is greeted with an asynchronous acknowledgement receipt (<code class="inline">HTTP 202</code> <code class="inline">Data accepted and processing has begun</code>) and will trigger <code class="inline">job-1</code> to run.</p><p>You can try this out with the following snippet:</p><pre><code class="nohighlight makeup elixir"><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="nc">X</span><span class="w"> </span><span class="nc">POST</span><span class="w"> </span><span class="o">-</span><span class="nc">H</span><span class="w"> </span><span class="s">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">
+ </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="sc">&#39;{
+  &quot;number&quot;:2,
+  &quot;surveyId&quot;: 37479
+}&#39;</span><span class="w"> </span><span class="err">\</span><span class="w">
+ </span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4000</span><span class="o">/</span><span class="n">inbox</span></code></pre><p>Posting a message not matching any of the triggers (e.g. <code class="inline">“number”:3</code>) equally prompts an acknowledgement but doesn’t trigger any jobs.</p><p>Example message post for this non-match scenario:</p><pre><code class="nohighlight makeup elixir"><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="nc">X</span><span class="w"> </span><span class="nc">POST</span><span class="w"> </span><span class="o">-</span><span class="nc">H</span><span class="w"> </span><span class="s">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">
+ </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="sc">&#39;{
+  &quot;number&quot;:3,
+  &quot;surveyId&quot;: 37479
+}&#39;</span><span class="w"> </span><span class="err">\</span><span class="w">
+ </span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4000</span><span class="o">/</span><span class="n">inbox</span></code></pre><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
 <code class="inline">Receiver |&gt; Dispatcher</code>, according to the <code class="inline">credential</code>, <code class="inline">expression</code>, and
 <code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><p>Time-based jobs will be run by <code class="inline">Repeater |&gt; Dispatcher</code> according to the
@@ -198,7 +211,6 @@ open-source users can submit pull requests to post their jobs to the
   </div>
 </section>
 </div>
-
 
   </body>
 </html>

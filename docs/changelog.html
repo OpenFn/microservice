@@ -10,12 +10,11 @@
     <title>Changelog — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-c2bf20032d.js"></script>
+    <script src="dist/sidebar_items-b9e5a54e3b.js"></script>
 
       <script src="docs_config.js"></script>
 
     <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
-
 
   </head>
   <body data-type="extras">
@@ -77,11 +76,7 @@ microservice
     <div id="content" class="content-inner">
 
 <h1>Changelog</h1><p>All notable changes to this project will be documented in this file.</p><p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
-and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p><h2 id="unreleased" class="section-heading">
-  <a href="#unreleased" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  [Unreleased]
-</h2>
-<h2 id="0-3-0-2021-02-26" class="section-heading">
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p><h2 id="0-3-0-2021-02-26" class="section-heading">
   <a href="#0-3-0-2021-02-26" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   [0.3.0] - 2021-02-26
 </h2>
@@ -89,19 +84,15 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
   <a href="#added" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Added
 </h3>
-<ul><li>New visual identity by <a href="https://github.com/tylerfortune8">@tylerfortune8</a>.</li><li>Version navigation.</li><li>Links to latest released version in previous versions.</li><li>&quot;Why keep a changelog?&quot; section.</li><li>&quot;Who needs a changelog?&quot; section.</li><li>&quot;How do I make a changelog?&quot; section.</li><li>&quot;Frequently Asked Questions&quot; section.</li><li>New &quot;Guiding Principles&quot; sub-section to &quot;How do I make a changelog?&quot;.</li><li>Simplified and Traditional Chinese translations from <a href="https://github.com/tianshuo">@tianshuo</a>.</li><li>German translation from <a href="https://github.com/mpbzh">@mpbzh</a> &amp; <a href="https://github.com/Art4">@Art4</a>.</li></ul><h3 id="changed" class="section-heading">
+<ul><li>Lots</li></ul><h3 id="changed" class="section-heading">
   <a href="#changed" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Changed
 </h3>
-<ul><li>Start using &quot;changelog&quot; over &quot;change log&quot; since it's the common usage.</li><li>Start versioning based on the current English version at 0.3.0 to help
-translation authors keep things up-to-date.</li><li>Rewrite &quot;What makes unicorns cry?&quot; section.</li><li>Rewrite &quot;Ignoring Deprecations&quot; sub-section to clarify the ideal
-scenario.</li><li>Improve &quot;Commit log diffs&quot; sub-section to further argument against
-them.</li><li>Merge &quot;Why can’t people just use a git log diff?&quot; with &quot;Commit log
-diffs&quot;</li><li>Fix typos in Simplified Chinese and Traditional Chinese translations.</li><li>Fix typos in Brazilian Portuguese translation.</li><li>Fix typos in Turkish translation.</li><li>Fix typos in Czech translation.</li><li>Fix typos in Swedish translation.</li><li>Improve phrasing in French translation.</li><li>Fix phrasing and spelling in German translation.</li></ul><h3 id="removed" class="section-heading">
+<ul><li>Projects are now configured via <code class="inline">YAML</code>, rather than <code class="inline">.env</code> files for greater flexbility. See updated README.</li></ul><h3 id="removed" class="section-heading">
   <a href="#removed" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Removed
 </h3>
-<ul><li>Section about &quot;changelog&quot; vs &quot;CHANGELOG&quot;.</li></ul><h2 id="0-2-1-2020-12-04" class="section-heading">
+<ul><li>Removed <code class="inline">Microservice.Repeater</code>, cron is now handled by <a href="https://github.com/openfn/engine">OpenFn/engine</a></li></ul><h2 id="0-2-1-2020-12-04" class="section-heading">
   <a href="#0-2-1-2020-12-04" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   [0.2.1] - 2020-12-04
 </h2>
@@ -109,7 +100,7 @@ diffs&quot;</li><li>Fix typos in Simplified Chinese and Traditional Chinese tran
   <a href="#added-1" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Added
 </h3>
-<ul><li>RU translation from <a href="https://github.com/aishek">@aishek</a>.</li><li>pt-BR translation from <a href="https://github.com/tallesl">@tallesl</a>.</li><li>es-ES translation from <a href="https://github.com/ZeliosAriex">@ZeliosAriex</a>.</li></ul>
+<ul><li>An <code class="inline">env</code> based prototype that would run an OpenFn job via cron or trigger an OpenFn job via web request.</li></ul>
       <footer class="footer">
         <p>
           <span class="line">
@@ -145,7 +136,6 @@ diffs&quot;</li><li>Fix typos in Simplified Chinese and Traditional Chinese tran
   </div>
 </section>
 </div>
-
 
   </body>
 </html>
