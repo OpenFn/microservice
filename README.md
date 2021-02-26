@@ -40,12 +40,17 @@ easily.
 - Create a `.env` file with `cp .env.example .env`
 - Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
-By default microservice is configured with 4 sample jobs:
-1. job-1 shows a run log and it is triggered when a matching message arrives to the inbox (trigger-2).
-2. job-cron is a timed job scheduled to run every minute and is linked to the ‘every-minute’ cron trigger.
-3. job-2 and job-3 are not set up with any job expression but are linked to trigger-3.
 
-All of the jobs are configured with the language pack 'openfn/language-common'.
+## Sample configuration
+
+The [sample project configuration file](https://github.com/OpenFn/microservice/blob/main/project.yaml.example) describes the example project setup to help you get acquainted with the structure of the jobs, language packs and triggers.
+
+By default microservice is configured with 4 sample jobs:
+1. `job-1` shows a run log and it is triggered when a matching message arrives to the inbox (`trigger-2`).
+2. `job-cron` is a timed job scheduled to run every minute and is linked to the `every-minute` cron trigger.
+3. `job-2` and `job-3` are not set up with any job expression but are linked to `trigger-3`.
+
+All of the jobs are configured with the language pack `openfn/language-common`.
 
 In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt and will launch job-1.
 
