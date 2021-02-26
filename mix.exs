@@ -19,6 +19,13 @@ defmodule Microservice.MixProject do
         logo: "assets/logo.png",
         extras: ["README.md", "CHANGELOG.md"],
         output: "docs"
+      ],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
       ]
     ]
   end
@@ -59,6 +66,7 @@ defmodule Microservice.MixProject do
       {:temp, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
+      {:excoveralls, "~> 0.11.2", only: [:test]}
       # {:phoenix_ecto, "~> 4.1"},
       # {:postgrex, ">= 0.0.0"},
     ]
