@@ -2,6 +2,8 @@ defmodule Microservice.EndToEndTest do
   use ExUnit.Case, async: false
   use MicroserviceWeb.ConnCase
 
+  alias OpenFn.{Message, Job, Run}
+
   import Microservice.TestUtil
 
   setup do
@@ -88,5 +90,16 @@ defmodule Microservice.EndToEndTest do
 
     catch_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"})
     assert catch_state["message"] == "handled it."
+  end
+
+  test "credentials are added to a jobs inititial state", %{} do
+    [%Run{job: %Job{} = job} = run] =
+      Microservice.Engine.handle_message(%Message{body: %{"b" => 2}})
+
+    assert job.credential == "my-secret-credential"
+    :timer.sleep(2000)
+
+    final_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-2"})
+    assert %{"configuration" => %{"username" => "user@example.com"}} = final_state
   end
 end

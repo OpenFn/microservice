@@ -9,6 +9,7 @@ jobs:
     trigger: trigger-2
   job-2:
     expression: none
+    credential: my-secret-credential
     language_pack: '@openfn/language-common'
     trigger: trigger-3
   cron-style-job:
@@ -54,3 +55,8 @@ triggers:
     criteria: '{"premonition": "failure"}'
   after-failure:
     failure: bad-job
+
+credentials:
+  my-secret-credential:
+    username: 'user@example.com'
+    password: 'shhh'
