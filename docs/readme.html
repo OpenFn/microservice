@@ -10,7 +10,7 @@
     <title>OpenFn/microservice — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-b9e5a54e3b.js"></script>
+    <script src="dist/sidebar_items-238c8c254f.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -94,89 +94,48 @@ easily.</p><h2 id="prerequisites" class="section-heading">
   <a href="#prerequisites" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Prerequisites
 </h2>
-<ul><li>Familiarity with OpenFn's open-source integration tools. (See <a href="https://docs.openfn.org">OpenFn/docs</a>, <a href="https://github.com/openFn/engine">OpenFn/engine</a>, <a href="https://openfn.github.io/devtools/">OpenFn/devtools</a>, and <a href="https://github.com/openFn/core">OpenFn/core</a></li></ul><h2 id="docker-usage" class="section-heading">
+<ul><li>Familiarity with OpenFn's open-source integration tools. (See
+<a href="https://docs.openfn.org">OpenFn/docs</a>,
+<a href="https://github.com/openFn/engine">OpenFn/engine</a>,
+<a href="https://openfn.github.io/devtools/">OpenFn/devtools</a>, and
+<a href="https://github.com/openFn/core">OpenFn/core</a></li></ul><h2 id="docker-usage" class="section-heading">
   <a href="#docker-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Docker usage
 </h2>
-<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">cp project.yaml.example project.yaml</code> to set up a basic project</li><li><code class="inline">docker build -t openfn/microservice:v0.3.0 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.3.0</code> to run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
+<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">cp project.yaml.example project.yaml</code> to set up a basic project</li><li><code class="inline">docker build -t openfn/microservice:v0.3.0 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.3.0</code> to
+run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h2 id="sample-configuration" class="section-heading">
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Start your server with
+<code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h2 id="sample-configuration" class="section-heading">
   <a href="#sample-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Sample configuration
 </h2>
-<p>The <a href="https://github.com/OpenFn/microservice/blob/main/project.yaml.example">sample project configuration file</a> describes the example project setup to help you get acquainted with the structure of the jobs, language packs and triggers.</p><p>By default microservice is configured with 4 sample jobs:</p><ol><li><code class="inline">job-1</code> shows a run log and it is triggered when a matching message arrives to the inbox (<code class="inline">trigger-2</code>).</li><li><code class="inline">job-cron</code> is a timed job scheduled to run every minute and is linked to the <code class="inline">every-minute</code> cron trigger.</li><li><code class="inline">job-2</code> and <code class="inline">job-3</code> are not set up with any job expression but are linked to <code class="inline">trigger-3</code>.</li></ol><p>All of the jobs are configured with the language pack <code class="inline">openfn/language-common</code>.</p><p>In the default sample configuration a new message posted to <code class="inline">localhost:4000/inbox</code> that matches <code class="inline">trigger-2</code> (i.e. the message contains <code class="inline">“number”:2</code>) is greeted with an asynchronous acknowledgement receipt (<code class="inline">HTTP 202</code> <code class="inline">Data accepted and processing has begun</code>) and will trigger <code class="inline">job-1</code> to run.</p><p>You can try this out with the following snippet:</p><pre><code class="nohighlight makeup elixir"><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="nc">X</span><span class="w"> </span><span class="nc">POST</span><span class="w"> </span><span class="o">-</span><span class="nc">H</span><span class="w"> </span><span class="s">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">
- </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="sc">&#39;{
+<p>The
+<a href="https://github.com/OpenFn/microservice/blob/main/project.yaml.example">sample project configuration file</a>
+describes the example project setup to help you get acquainted with the
+structure of the jobs, language packs and triggers.</p><p>By default microservice is configured with 4 sample jobs:</p><ol><li><code class="inline">job-1</code> is triggered when a matching message arrives to the inbox (see
+<code class="inline">trigger-1</code>).</li><li><code class="inline">recurring-job</code> is a timed job scheduled to run every minute and is linked to
+the <code class="inline">every-minute</code> cron trigger.</li><li><code class="inline">flow-job</code> and <code class="inline">catch-job</code> run after the <code class="inline">success</code> and <code class="inline">failure</code> of job-1,
+respectively.</li></ol><p>All of the jobs are configured with the language pack <code class="inline">openfn/language-common</code>.</p><p>In the default sample configuration a new message posted to
+<code class="inline">localhost:4000/inbox</code> that matches <code class="inline">trigger-1</code> (i.e. the message contains
+<code class="inline">&quot;number&quot;:2</code>) is greeted with an asynchronous acknowledgement receipt
+(<code class="inline">HTTP 202</code> <code class="inline">Data accepted and processing has begun</code>) and will trigger <code class="inline">job-1</code>
+to run.</p><p>You can try this out with the following snippet:</p><pre><code class="sh">curl -X POST -H &quot;Content-Type: application/json&quot; \
+ -d '{
   &quot;number&quot;:2,
   &quot;surveyId&quot;: 37479
-}&#39;</span><span class="w"> </span><span class="err">\</span><span class="w">
- </span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4000</span><span class="o">/</span><span class="n">inbox</span></code></pre><p>Posting a message not matching any of the triggers (e.g. <code class="inline">“number”:3</code>) equally prompts an acknowledgement but doesn’t trigger any jobs.</p><p>Example message post for this non-match scenario:</p><pre><code class="nohighlight makeup elixir"><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="nc">X</span><span class="w"> </span><span class="nc">POST</span><span class="w"> </span><span class="o">-</span><span class="nc">H</span><span class="w"> </span><span class="s">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">
- </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="sc">&#39;{
+}' \
+ http://localhost:4000/inbox</code></pre><p>Posting a message not matching any of the triggers (e.g. <code class="inline">“number”:3</code>) equally
+prompts an acknowledgement but doesn’t trigger any jobs.</p><p>Example message post for this non-match scenario:</p><pre><code class="sh">curl -X POST -H &quot;Content-Type: application/json&quot; \
+ -d '{
   &quot;number&quot;:3,
   &quot;surveyId&quot;: 37479
-}&#39;</span><span class="w"> </span><span class="err">\</span><span class="w">
- </span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4000</span><span class="o">/</span><span class="n">inbox</span></code></pre><p>HTTP <code class="inline">post</code> requests made to
+}' \
+ http://localhost:4000/inbox</code></pre><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
-<code class="inline">Receiver |&gt; Dispatcher</code>, according to the <code class="inline">credential</code>, <code class="inline">expression</code>, and
-<code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><p>Time-based jobs will be run by <code class="inline">Repeater |&gt; Dispatcher</code> according to the
-<code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined in your <code class="inline">.env</code> file.</p><h2 id="development" class="section-heading">
-  <a href="#development" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Development
-</h2>
-<p>This is a rough draft. Note that we're using the BEAM here because we see this
-growing significantly and want to leverage inter-node communication on large
-deployments, among other things. We may also fork and go another direction,
-using nothing but a small Express server (dropping Elixir/Erlang entirely) to
-call OpenFn/core (with a directly Javascript interface, rather than the CLI).
-Ideas, suggestions, questions welcome.</p><h3 id="potential-roadmap-for-this-application" class="section-heading">
-  <a href="#potential-roadmap-for-this-application" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Potential roadmap for this application
-</h3>
-<ul><li>[x] <a href="https://hexdocs.pm/phoenix/1.5.6/Mix.Tasks.Phx.Server.html"><code class="inline">mix phx.server</code></a> receives receipts and sends 201/202</li><li>[x] timer jobs can keep state (via <code class="inline">Repeater</code> and a simple <a href="https://hexdocs.pm/elixir/GenServer.html"><code class="inline">GenServer</code></a>)</li><li>[x] endpoint gets <code class="inline">URL</code> and <code class="inline">PORT</code> from <code class="inline">.env</code></li><li>[x] <code class="inline">Dispatcher</code> picks up config from <code class="inline">.env</code></li><li>[x] <code class="inline">Dispatcher</code> executes it, given preloaded job, cred, adaptor, and core</li><li>[x] write tests for everything</li><li>[x] dashboard for visual performance monitoring</li><li>[ ] pass project artifacts during <code class="inline">docker run</code></li><li>[ ] <code class="inline">tmp</code> files are deleted after job is run</li><li>[x] chain jobs together (replicate OpenFn.org &quot;flow&quot;)</li><li>[ ] bring <code class="inline">core</code> out of package.json</li><li>[ ] <code class="inline">Engine</code> can pipe to stdout</li><li>[ ] notifications module</li><li>[ ] better Logging</li><li>[ ] visual interface for application (Phx LiveView?)</li><li>[ ] message persistence plugin (enables retries)</li></ul><h3 id="dynamic-configuration-required-for-mvp" class="section-heading">
-  <a href="#dynamic-configuration-required-for-mvp" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Dynamic Configuration required for MVP
-</h3>
-<ul><li>See <a href="https://github.com/OpenFn/microservice/blob/master/project">/project</a> for
-project artifacts</li><li>See
-<a href="https://github.com/OpenFn/microservice/blob/master/.env.example">.env.example</a>
-for a possible configuration</li><li>See
-<a href="https://github.com/OpenFn/microservice/blob/master/Dockerfile">Dockerfile</a> to
-build a microservice</li></ul><h3 id="how-to-make-it-shelf-ready" class="section-heading">
-  <a href="#how-to-make-it-shelf-ready" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  How to make it shelf ready
-</h3>
-<ol><li>Build a fully featured documentation site like
-<a href="https://docs.openfn.org">OpenFn/docs</a></li><li>Make fully <code class="inline">Instant OpenHIE</code> compliant (including <code class="inline">kubernetes.yaml</code>)</li><li>Build out <code class="inline">openfn-devtools</code> to include a script that pulls and configures
-<code class="inline">microservice</code> based one the current configuration of jobs and credentials in
-<code class="inline">devtools</code>.</li><li>Click a button on OpenFn to prepare a <code class="inline">microservice.zip</code> which is this repo
-with a new Dockerfile, based on the current job's configuration at OpenFn.org
-(we're not just &quot;shelf ready&quot;, we're <em>providing the shelf</em> with a &quot;free
-forever&quot; project on our website.)</li><li>An open-source jobs library.</li></ol><h3 id="jobs-library" class="section-heading">
-  <a href="#jobs-library" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Jobs Library
-</h3>
-<ol><li>All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which
-<strong>expects</strong> <code class="inline">{adaptor, version, ...helperFunction}</code> and <strong>returns</strong> the
-following—which includes both the jobs in the OpenFn.org database <em>and</em> the
-jobs in <a href="https://www.github.com/openfn/docs/jobs">OpenFn/Docs/jobs</a>:</li></ol><pre><code class="json">[
-  {
-    &quot;expression&quot;: &quot;createTEI({})&quot;,
-    &quot;active&quot;: true,
-    &quot;runsLast90&quot;: 32178,
-    &quot;successRateLast90&quot;: 0.973,
-    &quot;source&quot;: &quot;openfn.org&quot;
-  },
-  {
-    ...job,
-    &quot;source&quot;: &quot;openfn/docs&quot;
-  }
-]</code></pre><ol start="2"><li>That API is consumed by the docs site (open source) <em>AND</em> by openfn.org so
-that it can use used to generate jobs with our free-forever projects.</li><li>In the IDE on OpenFn.org, a user clicks DHIS2, then <code class="inline">createTEI</code> and it
-suggests that you look at the top 10 most <code class="inline">successful/active</code>
-dhis2:your-version expressions, searchable and copy/pastable.</li><li>New jobs are automatically added to the library from OpenFn.org, and
-open-source users can submit pull requests to post their jobs to the
-<code class="inline">OpenFn/docs/</code> repo. (OpenFn/docs is open source also, btw.)</li></ol>
+<code class="inline">Receiver, according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in the project configuration</code>YAML<code class="inline">file. Time-based jobs will be run by</code>Engine<code class="inline">according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in your</code>project.yaml<code class="inline">file. ## Development This is a rough draft. Note that we're using the BEAM here because we see this growing significantly and want to leverage inter-node communication on large deployments, among other things. We may also fork and go another direction, using nothing but a small Express server (dropping Elixir/Erlang entirely) to call OpenFn/core (with a directly Javascript interface, rather than the CLI). Ideas, suggestions, questions welcome. ### Potential roadmap for this application - [x]</code>mix phx.server<code class="inline">receives receipts and sends 201/202 - [x] timer jobs can keep state (via</code>Repeater<code class="inline">and a simple</code>GenServer<code class="inline">) - [x] endpoint gets</code>URL<code class="inline">and</code>PORT<code class="inline">from</code>.env<code class="inline">- [x]</code>Dispatcher<code class="inline">picks up config from</code>.env<code class="inline">- [x]</code>Dispatcher<code class="inline">executes it, given preloaded job, cred, adaptor, and core - [x] write tests for everything - [x] dashboard for visual performance monitoring - [ ] pass project artifacts during</code>docker run<code class="inline">- [ ]</code>tmp<code class="inline">files are deleted after job is run - [x] chain jobs together (replicate OpenFn.org &quot;flow&quot;) - [ ] bring</code>core<code class="inline">out of package.json - [ ]</code>Engine<code class="inline">can pipe to stdout - [ ] notifications module - [ ] better Logging - [ ] visual interface for application (Phx LiveView?) - [ ] message persistence plugin (enables retries) ### Dynamic Configuration required for MVP - See [/project](https://github.com/OpenFn/microservice/blob/master/project) for project artifacts - See [.env.example](https://github.com/OpenFn/microservice/blob/master/.env.example) for a possible configuration - See [Dockerfile](https://github.com/OpenFn/microservice/blob/master/Dockerfile) to build a microservice ### How to make it shelf ready 1. Build a fully featured documentation site like [OpenFn/docs](https://docs.openfn.org) 2. Make fully</code>Instant OpenHIE<code class="inline">compliant (including</code>kubernetes.yaml<code class="inline">) 3. Build out</code>openfn-devtools<code class="inline">to include a script that pulls and configures</code>microservice<code class="inline">based one the current configuration of jobs and credentials in</code>devtools<code class="inline">. 4. Click a button on OpenFn to prepare a</code>microservice.zip<code class="inline">which is this repo with a new Dockerfile, based on the current job's configuration at OpenFn.org (we're not just &quot;shelf ready&quot;, we're _providing the shelf_ with a &quot;free forever&quot; project on our website.) 5. An open-source jobs library. ### Jobs Library 1. All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which **expects**</code>{adaptor, version, ...helperFunction}<code class="inline">and **returns** the following—which includes both the jobs in the OpenFn.org database _and_ the jobs in [OpenFn/Docs/jobs](https://www.github.com/openfn/docs/jobs): ```json [ { &quot;expression&quot;: &quot;createTEI({})&quot;, &quot;active&quot;: true, &quot;runsLast90&quot;: 32178, &quot;successRateLast90&quot;: 0.973, &quot;source&quot;: &quot;openfn.org&quot; }, { ...job, &quot;source&quot;: &quot;openfn/docs&quot; } ] ``` 2. That API is consumed by the docs site (open source) _AND_ by openfn.org so that it can use used to generate jobs with our free-forever projects. 3. In the IDE on OpenFn.org, a user clicks DHIS2, then</code>createTEI<code class="inline">and it suggests that you look at the top 10 most</code>successful/active<code class="inline">dhis2:your-version expressions, searchable and copy/pastable. 4. New jobs are automatically added to the library from OpenFn.org, and open-source users can submit pull requests to post their jobs to the</code>OpenFn/docs/` repo. (OpenFn/docs is open source also, btw.)</p>
       <footer class="footer">
         <p>
           <span class="line">

@@ -92,11 +92,12 @@ defmodule Microservice.EndToEndTest do
     assert catch_state["message"] == "handled it."
   end
 
-  test "credentials are added to a jobs inititial state", %{} do
+  test "credentials are added to a job's inititial state", %{} do
     [%Run{job: %Job{} = job} = run] =
       Microservice.Engine.handle_message(%Message{body: %{"b" => 2}})
 
     assert job.credential == "my-secret-credential"
+
     :timer.sleep(2000)
 
     final_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-2"})

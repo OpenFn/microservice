@@ -20,7 +20,11 @@ easily.
 
 ## Prerequisites
 
-- Familiarity with OpenFn's open-source integration tools. (See [OpenFn/docs](https://docs.openfn.org), [OpenFn/engine](https://github.com/openFn/engine), [OpenFn/devtools](https://openfn.github.io/devtools/), and [OpenFn/core](https://github.com/openFn/core)
+- Familiarity with OpenFn's open-source integration tools. (See
+  [OpenFn/docs](https://docs.openfn.org),
+  [OpenFn/engine](https://github.com/openFn/engine),
+  [OpenFn/devtools](https://openfn.github.io/devtools/), and
+  [OpenFn/core](https://github.com/openFn/core)
 
 ## Docker usage
 
@@ -28,7 +32,8 @@ easily.
 - `cp project.yaml.example project.yaml` to set up a basic project
 - `docker build -t openfn/microservice:v0.3.0 .` to build
 - `cp .env.example .env` to configure
-- `docker run --network host --env-file ./.env openfn/microservice:v0.3.0` to run
+- `docker run --network host --env-file ./.env openfn/microservice:v0.3.0` to
+  run
 
 ## Development up and running guide
 
@@ -38,25 +43,36 @@ easily.
 - Create a new project configuration file `cp project.yaml.example project.yaml`
 - Run the tests with `mix test`
 - Create a `.env` file with `cp .env.example .env`
-- Start your server with `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
-
+- Start your server with
+  `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
 ## Sample configuration
 
-The [sample project configuration file](https://github.com/OpenFn/microservice/blob/main/project.yaml.example) describes the example project setup to help you get acquainted with the structure of the jobs, language packs and triggers.
+The
+[sample project configuration file](https://github.com/OpenFn/microservice/blob/main/project.yaml.example)
+describes the example project setup to help you get acquainted with the
+structure of the jobs, language packs and triggers.
 
 By default microservice is configured with 4 sample jobs:
-1. `job-1` shows a run log and it is triggered when a matching message arrives to the inbox (`trigger-2`).
-2. `job-cron` is a timed job scheduled to run every minute and is linked to the `every-minute` cron trigger.
-3. `job-2` and `job-3` are not set up with any job expression but are linked to `trigger-3`.
+
+1. `job-1` is triggered when a matching message arrives to the inbox (see
+   `trigger-1`).
+2. `recurring-job` is a timed job scheduled to run every minute and is linked to
+   the `every-minute` cron trigger.
+3. `flow-job` and `catch-job` run after the `success` and `failure` of job-1,
+   respectively.
 
 All of the jobs are configured with the language pack `openfn/language-common`.
 
-In the default sample configuration a new message posted to `localhost:4000/inbox` that matches `trigger-2` (i.e. the message contains `“number”:2`) is greeted with an asynchronous acknowledgement receipt (`HTTP 202` `Data accepted and processing has begun`) and will trigger `job-1` to run.
+In the default sample configuration a new message posted to
+`localhost:4000/inbox` that matches `trigger-1` (i.e. the message contains
+`"number":2`) is greeted with an asynchronous acknowledgement receipt
+(`HTTP 202` `Data accepted and processing has begun`) and will trigger `job-1`
+to run.
 
 You can try this out with the following snippet:
 
-```
+```sh
 curl -X POST -H "Content-Type: application/json" \
  -d '{
   "number":2,
@@ -65,10 +81,12 @@ curl -X POST -H "Content-Type: application/json" \
  http://localhost:4000/inbox
 ```
 
-Posting a message not matching any of the triggers (e.g. `“number”:3`) equally prompts an acknowledgement but doesn’t trigger any jobs.
+Posting a message not matching any of the triggers (e.g. `“number”:3`) equally
+prompts an acknowledgement but doesn’t trigger any jobs.
 
 Example message post for this non-match scenario:
-```
+
+```sh
 curl -X POST -H "Content-Type: application/json" \
  -d '{
   "number":3,
@@ -79,12 +97,11 @@ curl -X POST -H "Content-Type: application/json" \
 
 HTTP `post` requests made to
 [`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
-`Receiver |> Dispatcher`, according to the `credential`, `expression`, and
-`adaptor` defined in your `.env` file.
+`Receiver, according to the `credential`, `expression`, and `adaptor`defined in the project configuration `YAML`
+file.
 
-Time-based jobs will be run by `Repeater |> Dispatcher` according to the
-`credential`, `expression`, and `adaptor` defined in your `.env` file.
-
+Time-based jobs will be run by `Engine` according to the `credential`,
+`expression`, and `adaptor` defined in your `project.yaml` file.
 
 ## Development
 
