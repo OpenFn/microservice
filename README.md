@@ -43,6 +43,8 @@ easily.
 - Create a new project configuration file `cp project.yaml.example project.yaml`
 - Run the tests with `mix test`
 - Create a `.env` file with `cp .env.example .env`
+- Install necessary adaptors via
+  `npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style`
 - Start your server with
   `env $(cat .env | grep -v "#" | xargs ) iex -S mix phx.server`
 
