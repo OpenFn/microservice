@@ -27,15 +27,15 @@
 
 ## (3) Containerization of the microservice
 
-- [X] Once developed, this microsevice will be containerized using a technology
+- [x] Once developed, this microsevice will be containerized using a technology
       like Docker, such that it could be quickly and easily deployed, alongside many
       others like it, on virtually any server.
 
 ## (4) Deployment & administrative features
 
-- [X] The containerized microservice could be deployed to servers, ideally
+- [x] The containerized microservice could be deployed to servers, ideally
       cloud-hosted, which provide users with as much out-of-the-box monitoring,
       logging, administration, and introspective abilities as possible.
-- [ ] Developers may choose to deploy with jobs, credentials, and triggers
+- [x] Developers may choose to deploy with jobs, credentials, and triggers
       built-in to the container, or may choose to pass them in as environment
       variables.
