@@ -2,11 +2,15 @@ FROM bitwalker/alpine-elixir-phoenix:latest
 
 # Set exposed ports
 EXPOSE 4000
-ENV PORT=4000 MIX_ENV=dev
+ENV PORT=4000
+
+# Set the working directory for the application
+RUN adduser -h /home/microservice -D microservice
+WORKDIR /home/microservice
 
 # Cache elixir deps
 ADD mix.exs mix.lock ./
-ADD assets/ assets/
+ADD assets/ ./assets/
 
 RUN mix do setup, deps.compile
 
@@ -19,10 +23,8 @@ RUN cd assets/ && \
     cd - && \
     mix do compile, phx.digest
 
-USER default
-
-COPY project.yaml ./project.yaml
 RUN mkdir tmp
+RUN chown -R microservice: /home/microservice
 
-# CMD ["env", "$(cat .env | grep -v \"#\" | xargs )", "mix", "phx.server"]
+USER microservice
 CMD ["mix", "phx.server"]

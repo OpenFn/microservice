@@ -27,8 +27,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :microservice, Microservice.Engine, project_config: "file://project.yaml"
+config :microservice, Microservice.Engine,
+  # TODO: allow dynamic configuration of project path. (this is currently set during docker build.)
+  # project_config: "file://" <> System.get_env("PROJECT_PATH") <> "/project.yaml"
+  project_config: "file://project/project.yaml"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-
 import_config "#{Mix.env()}.exs"

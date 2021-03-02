@@ -10,7 +10,7 @@
     <title>OpenFn/microservice — microservice v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-238c8c254f.js"></script>
+    <script src="dist/sidebar_items-dc5dac06da.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -94,22 +94,27 @@ easily.</p><h2 id="prerequisites" class="section-heading">
   <a href="#prerequisites" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Prerequisites
 </h2>
-<ul><li>Familiarity with OpenFn's open-source integration tools. (See
-<a href="https://docs.openfn.org">OpenFn/docs</a>,
-<a href="https://github.com/openFn/engine">OpenFn/engine</a>,
-<a href="https://openfn.github.io/devtools/">OpenFn/devtools</a>, and
-<a href="https://github.com/openFn/core">OpenFn/core</a></li></ul><h2 id="docker-usage" class="section-heading">
-  <a href="#docker-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Docker usage
+<p>Familiarity with other elements of OpenFn's open source integration toolkit is
+helpful:</p><ul><li><a href="https://docs.openfn.org">OpenFn/docs</a></li><li><a href="https://github.com/openFn/core">OpenFn/core</a></li><li><a href="https://github.com/openFn/engine">OpenFn/engine</a></li><li><a href="https://openfn.github.io/devtools/">OpenFn/devtools</a></li></ul><h2 id="docker-run" class="section-heading">
+  <a href="#docker-run" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Docker run
 </h2>
-<ul><li><code class="inline">git clone git@github.com:OpenFn/microservice.git &amp;&amp; cd microservice</code> to clone</li><li><code class="inline">cp project.yaml.example project.yaml</code> to set up a basic project</li><li><code class="inline">docker build -t openfn/microservice:v0.3.0 .</code> to build</li><li><code class="inline">cp .env.example .env</code> to configure</li><li><code class="inline">docker run --network host --env-file ./.env openfn/microservice:v0.3.0</code> to
-run</li></ul><h2 id="development-up-and-running-guide" class="section-heading">
+<p>Assuming you've got an <code class="inline">.env</code> and a project directory with a <code class="inline">project.yaml</code>
+spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/project \
+  --env-file ./&lt;path-to-your-env-file&gt; \
+  --network host \
+  openfn/microservice:v0.3.0</code></pre><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Create a new project configuration file <code class="inline">cp project.yaml.example project.yaml</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Install necessary adaptors via
-<code class="inline">npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style</code></li><li>Start your server with
-<code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h2 id="sample-configuration" class="section-heading">
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Make a <code class="inline">project</code> directory to hold your project artifacts with <code class="inline">mkdir project</code></li><li>Create a new project specification with
+<code class="inline">cp project.yaml.example ./project/project.yaml</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Install necessary adaptors via
+<code class="inline">npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style</code></li><li>Start your microservice server with
+<code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h3 id="up-and-running-inside-docker" class="section-heading">
+  <a href="#up-and-running-inside-docker" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Up and running inside Docker
+</h3>
+<ul><li>Build a docker image with <code class="inline">docker build -t openfn/microservice:v0.3.0 .</code></li><li>Run with the <a href="#Docker-run">docker run command</a></li></ul><h2 id="sample-configuration" class="section-heading">
   <a href="#sample-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Sample configuration
 </h2>
@@ -136,7 +141,7 @@ prompts an acknowledgement but doesn’t trigger any jobs.</p><p>Example message
 }' \
  http://localhost:4000/inbox</code></pre><p>HTTP <code class="inline">post</code> requests made to
 <a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
-<code class="inline">Receiver, according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in the project configuration</code>YAML<code class="inline">file. Time-based jobs will be run by</code>Engine<code class="inline">according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in your</code>project.yaml<code class="inline">file. ## Development This is a rough draft. Note that we're using the BEAM here because we see this growing significantly and want to leverage inter-node communication on large deployments, among other things. We may also fork and go another direction, using nothing but a small Express server (dropping Elixir/Erlang entirely) to call OpenFn/core (with a directly Javascript interface, rather than the CLI). Ideas, suggestions, questions welcome. ### Potential roadmap for this application - [x]</code>mix phx.server<code class="inline">receives receipts and sends 201/202 - [x] timer jobs can keep state (via</code>Repeater<code class="inline">and a simple</code>GenServer<code class="inline">) - [x] endpoint gets</code>URL<code class="inline">and</code>PORT<code class="inline">from</code>.env<code class="inline">- [x]</code>Dispatcher<code class="inline">picks up config from</code>.env<code class="inline">- [x]</code>Dispatcher<code class="inline">executes it, given preloaded job, cred, adaptor, and core - [x] write tests for everything - [x] dashboard for visual performance monitoring - [ ] pass project artifacts during</code>docker run<code class="inline">- [ ]</code>tmp<code class="inline">files are deleted after job is run - [x] chain jobs together (replicate OpenFn.org &quot;flow&quot;) - [ ] bring</code>core<code class="inline">out of package.json - [ ]</code>Engine<code class="inline">can pipe to stdout - [ ] notifications module - [ ] better Logging - [ ] visual interface for application (Phx LiveView?) - [ ] message persistence plugin (enables retries) ### Dynamic Configuration required for MVP - See [/project](https://github.com/OpenFn/microservice/blob/master/project) for project artifacts - See [.env.example](https://github.com/OpenFn/microservice/blob/master/.env.example) for a possible configuration - See [Dockerfile](https://github.com/OpenFn/microservice/blob/master/Dockerfile) to build a microservice ### How to make it shelf ready 1. Build a fully featured documentation site like [OpenFn/docs](https://docs.openfn.org) 2. Make fully</code>Instant OpenHIE<code class="inline">compliant (including</code>kubernetes.yaml<code class="inline">) 3. Build out</code>openfn-devtools<code class="inline">to include a script that pulls and configures</code>microservice<code class="inline">based one the current configuration of jobs and credentials in</code>devtools<code class="inline">. 4. Click a button on OpenFn to prepare a</code>microservice.zip<code class="inline">which is this repo with a new Dockerfile, based on the current job's configuration at OpenFn.org (we're not just &quot;shelf ready&quot;, we're _providing the shelf_ with a &quot;free forever&quot; project on our website.) 5. An open-source jobs library. ### Jobs Library 1. All jobs that &quot;opt-in&quot; on OpenFn.org are exposed with an open API, which **expects**</code>{adaptor, version, ...helperFunction}<code class="inline">and **returns** the following—which includes both the jobs in the OpenFn.org database _and_ the jobs in [OpenFn/Docs/jobs](https://www.github.com/openfn/docs/jobs): ```json [ { &quot;expression&quot;: &quot;createTEI({})&quot;, &quot;active&quot;: true, &quot;runsLast90&quot;: 32178, &quot;successRateLast90&quot;: 0.973, &quot;source&quot;: &quot;openfn.org&quot; }, { ...job, &quot;source&quot;: &quot;openfn/docs&quot; } ] ``` 2. That API is consumed by the docs site (open source) _AND_ by openfn.org so that it can use used to generate jobs with our free-forever projects. 3. In the IDE on OpenFn.org, a user clicks DHIS2, then</code>createTEI<code class="inline">and it suggests that you look at the top 10 most</code>successful/active<code class="inline">dhis2:your-version expressions, searchable and copy/pastable. 4. New jobs are automatically added to the library from OpenFn.org, and open-source users can submit pull requests to post their jobs to the</code>OpenFn/docs/` repo. (OpenFn/docs is open source also, btw.)</p>
+<code class="inline">Receiver, according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in the project configuration</code>YAML<code class="inline">file. Time-based jobs will be run by</code>Engine<code class="inline">according to the</code>credential<code class="inline">,</code>expression<code class="inline">, and</code>adaptor<code class="inline">defined in your</code>project.yaml` file.</p>
       <footer class="footer">
         <p>
           <span class="line">

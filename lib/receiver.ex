@@ -1,7 +1,7 @@
 defmodule MicroserviceWeb.Receiver do
   use MicroserviceWeb, :controller
   require Logger
-  alias OpenFn.{Message, Job, Config}
+  alias OpenFn.Message
 
   @spec receive(Plug.Conn.t(), any) :: Plug.Conn.t()
   def receive(conn, _other) do
