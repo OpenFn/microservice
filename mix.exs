@@ -5,7 +5,7 @@ defmodule Microservice.MixProject do
     [
       app: :microservice,
       version: "0.3.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -51,26 +51,23 @@ defmodule Microservice.MixProject do
     [
       {:ecto_sql, "~> 3.4"},
       {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
-      {:floki, ">= 0.27.0", only: :test},
+      {:excoveralls, "~> 0.11.2", only: [:test]},
+      {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.11"},
-      {:openfn_engine, git: "https://github.com/OpenFn/engine.git", ref: "f97a46663c1a8ccda7009bcf5f329e5050f5d9fa"},
-      # {:openfn_engine, git: "https://github.com/OpenFn/engine.git", branch: "main"},
-      # {:openfn_engine, path: "../engine"},
       {:jason, "~> 1.0"},
+      {:junit_formatter, "~> 3.0", only: [:test]},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
+      {:openfn_engine, git: "https://github.com/OpenFn/engine.git", branch: "main"},
+      # {:openfn_engine, path: "../engine"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_dashboard, "~> 0.3 or ~> 0.2.9"},
+      {:phoenix_live_dashboard, "~> 0.4"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.14.6"},
+      {:phoenix_live_view, "~> 0.15.4"},
       {:phoenix, "~> 1.5.6"},
       {:plug_cowboy, "~> 2.0"},
-      {:temp, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:excoveralls, "~> 0.11.2", only: [:test]},
-      {:junit_formatter, "~> 3.0", only: [:test]}
-      # {:phoenix_ecto, "~> 4.1"},
-      # {:postgrex, ">= 0.0.0"},
+      {:temp, "~> 0.4"}
     ]
   end
 

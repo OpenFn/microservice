@@ -100,15 +100,16 @@ helpful:</p><ul><li><a href="https://docs.openfn.org">OpenFn/docs</a></li><li><a
   Docker run
 </h2>
 <p>Assuming you've got an <code class="inline">.env</code> and a project directory with a <code class="inline">project.yaml</code>
-spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/project \
+spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/&lt;path-to-your-project-folder&gt; \
   --env-file ./&lt;path-to-your-env-file&gt; \
   --network host \
   openfn/microservice:v0.3.0</code></pre><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
-<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Make a <code class="inline">project</code> directory to hold your project artifacts with <code class="inline">mkdir project</code></li><li>Create a new project specification with
-<code class="inline">cp project.yaml.example ./project/project.yaml</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Install necessary adaptors via
+<ul><li>Clone this repo with <code class="inline">git clone git@github.com:OpenFn/microservice.git</code></li><li>Enter the directory with <code class="inline">cd microservice</code></li><li>Install dependencies with <code class="inline">mix setup</code></li><li>Run the tests with <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>Make a project directory to hold your project artifacts with
+<code class="inline">mkdir sample-project</code></li><li>Create a new project specification with
+<code class="inline">cp project.yaml.example ./sample-project/project.yaml</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Install necessary adaptors via
 <code class="inline">npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style</code></li><li>Start your microservice server with
 <code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h3 id="up-and-running-inside-docker" class="section-heading">
   <a href="#up-and-running-inside-docker" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>

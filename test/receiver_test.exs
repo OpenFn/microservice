@@ -51,7 +51,7 @@ defmodule Microservice.ReceiverTest do
   test "posting valid JSON to /inbox returns a 202 in async mode", %{conn: conn, json: json} do
     Application.put_env(:microservice, :endpoint_style, "async", persistent: false)
 
-    Application.put_env(:microservice, :project_config, fixture(:test_project, :yaml),
+    Application.put_env(:microservice, :project_config, fixture(:project, :yaml),
       persistent: false
     )
 

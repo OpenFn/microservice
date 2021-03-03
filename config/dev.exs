@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :microservice, :environment, :dev
+
 # Configure your database
 # config :microservice, Microservice.Repo,
 #   username: "postgres",

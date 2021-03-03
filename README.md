@@ -34,7 +34,7 @@ Assuming you've got an `.env` and a project directory with a `project.yaml`
 spec:
 
 ```sh
-docker run -v <path-to-your-project-folder>:/home/microservice/project \
+docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-project-folder> \
   --env-file ./<path-to-your-env-file> \
   --network host \
   openfn/microservice:v0.3.0
@@ -46,9 +46,10 @@ docker run -v <path-to-your-project-folder>:/home/microservice/project \
 - Enter the directory with `cd microservice`
 - Install dependencies with `mix setup`
 - Run the tests with `mix test`
-- Make a `project` directory to hold your project artifacts with `mkdir project`
+- Make a project directory to hold your project artifacts with
+  `mkdir sample-project`
 - Create a new project specification with
-  `cp project.yaml.example ./project/project.yaml`
+  `cp project.yaml.example ./sample-project/project.yaml`
 - Create a `.env` file with `cp .env.example .env`
 - Install necessary adaptors via
   `npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style`

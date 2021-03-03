@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :microservice, :environment, :test
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -19,7 +21,7 @@ config :microservice, MicroserviceWeb.Endpoint,
   server: false
 
 config :microservice, Microservice.Engine,
-  project_config: "file://test/fixtures/test_project.yaml",
+  project_config: "file://test/fixtures/project.yaml",
   job_state_basedir: "/tmp/microservice-test"
 
 # Print only warnings and errors during test

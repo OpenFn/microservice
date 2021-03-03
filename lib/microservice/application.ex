@@ -8,6 +8,12 @@ defmodule Microservice.Application do
   def start(_type, _args) do
     from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
 
+    unless Application.get_env(:microservice, :environment) == :test do
+      Application.put_env(:microservice, Microservice.Engine,
+        project_config: "file://" <> System.get_env("PROJECT_DIR") <> "/project.yaml"
+      )
+    end
+
     children = [
       # Microservice.Repo,
       MicroserviceWeb.Telemetry,

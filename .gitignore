@@ -38,5 +38,6 @@ npm-debug.log
 .env
 .elixir_ls
 
-project.yaml
 /priv/openfn
+
+/sample-project/
