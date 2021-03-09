@@ -35,7 +35,7 @@ spec:
 
 ```sh
 docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-project-folder> \
-  --env-file ./<path-to-your-env-file> \
+  --env-file <path-to-your-env-file> \
   --network host \
   openfn/microservice:v0.3.0
 ```
