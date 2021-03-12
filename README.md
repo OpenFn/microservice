@@ -121,7 +121,7 @@ file.
 Time-based jobs will be run by `Engine` according to the `credential`,
 `expression`, and `adaptor` defined in your `project.yaml` file.
 
-### Setup from your existing project on the OpenFn platform
+### Setup from your existing OpenFn platform project
 
 If you have a project configured on OpenFn, you have two ways for exporting your config on the project settings page and running your project in microservice. 
 
