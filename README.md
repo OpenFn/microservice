@@ -61,12 +61,14 @@ docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-pro
 - Build a docker image with `docker build -t openfn/microservice:v0.3.0 .`
 - Run with the [docker run command](#Docker-run)
 
-## Sample configuration
+## Project configuration
+
+You can configure the jobs, triggers, credentials and language packs used in your microservice in the `project.yaml` config file.
 
 The
 [sample project configuration file](https://github.com/OpenFn/microservice/blob/main/project.yaml.example)
-describes the example project setup to help you get acquainted with the
-structure of the jobs, language packs and triggers.
+describes an example project setup to help you get acquainted with this
+structure and get you up and running.
 
 By default microservice is configured with 4 sample jobs:
 
