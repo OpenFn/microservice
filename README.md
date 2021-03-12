@@ -125,9 +125,9 @@ Time-based jobs will be run by `Engine` according to the `credential`,
 
 If you have a project configured on OpenFn, you have two ways for exporting your config on the project settings page and running your project in microservice. 
 
-1. If you export as `project.yaml`, you'll get a email with a link to your encrypted settings in `yaml` format and plug it into your environment as set up using the Development Up and Running Guide above.
+1. If you export as `project.yaml`, you'll get a email with a link to your encrypted settings in `yaml` format that you can into your environment as set up using the Development Up and Running Guide above.
 
-2. If you export as `microservice.zip`, you'll get your project folder ready to run with docker, containing
+2. If you export as `microservice.zip`, you'll get your project folder ready to run with `docker`, containing
 * your `project.yaml`
 * `.env` file with the default environment variables for docker
 * a `Readme` file
