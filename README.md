@@ -64,11 +64,12 @@ docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-pro
 ## Project configuration
 
 You can configure the jobs, triggers, credentials and language packs used in your microservice in the `project.yaml` config file.
+### First setup using the sample config
 
 The
 [sample project configuration file](https://github.com/OpenFn/microservice/blob/main/project.yaml.example)
 describes an example project setup to help you get acquainted with this
-structure and get you up and running.
+structure.
 
 By default microservice is configured with 4 sample jobs:
 
@@ -114,8 +115,22 @@ curl -X POST -H "Content-Type: application/json" \
 
 HTTP `post` requests made to
 [`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
-`Receiver, according to the `credential`, `expression`, and `adaptor`defined in the project configuration `YAML`
+`Receiver`, according to the `credential`, `expression`, and `adaptor` defined in the project configuration `YAML`
 file.
 
 Time-based jobs will be run by `Engine` according to the `credential`,
 `expression`, and `adaptor` defined in your `project.yaml` file.
+
+### Setup from your existing project on the OpenFn platform
+
+If you have a project configured on OpenFn, you have two ways for exporting your config on the project settings page and running your project in microservice. 
+
+1. If you export as `project.yaml`, you'll get a email with a link to your encrypted settings in `yaml` format and plug it into your environment as set up using the Development Up and Running Guide above.
+
+2. If you export as `microservice.zip`, you'll get your project folder ready to run with docker, containing
+* your `project.yaml`
+* `.env` file with the default environment variables for docker
+* a `Readme` file
+
+`cd` into the folder and run it with `docker run`.
+If you don't have the docker image, it will be auto-pulled from `hub.docker.com`.
