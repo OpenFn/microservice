@@ -37,7 +37,7 @@ spec:
 docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-project-folder> \
   --env-file <path-to-your-env-file> \
   --network host \
-  openfn/microservice:v0.3.0
+  openfn/microservice:v0.3.1
 ```
 
 ## Development up and running guide
@@ -63,7 +63,9 @@ docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-pro
 
 ## Project configuration
 
-You can configure the jobs, triggers, credentials and language packs used in your microservice in the `project.yaml` config file.
+You can configure the jobs, triggers, credentials and language packs used in
+your microservice in the `project.yaml` config file.
+
 ### First setup using the sample config
 
 The
@@ -115,22 +117,27 @@ curl -X POST -H "Content-Type: application/json" \
 
 HTTP `post` requests made to
 [`localhost:4000/inbox`](http://localhost:4000/inbox) will be processed by the
-`Receiver`, according to the `credential`, `expression`, and `adaptor` defined in the project configuration `YAML`
-file.
+`Receiver`, according to the `credential`, `expression`, and `adaptor` defined
+in the project configuration `YAML` file.
 
 Time-based jobs will be run by `Engine` according to the `credential`,
 `expression`, and `adaptor` defined in your `project.yaml` file.
 
 ### Setup from your existing OpenFn platform project
 
-If you have a project configured on OpenFn, you have two ways for exporting your config on the project settings page and running your project in microservice. 
+If you have a project configured on OpenFn, you have two ways for exporting your
+config on the project settings page and running your project in microservice.
 
-1. If you export as `project.yaml`, you'll get a email with a link to your encrypted settings in `yaml` format that you can into your environment as set up using the Development Up and Running Guide above.
+1. If you export as `project.yaml`, you'll get a email with a link to your
+   encrypted settings in `yaml` format that you can into your environment as set
+   up using the Development Up and Running Guide above.
 
-2. If you export as `microservice.zip`, you'll get your project folder ready to run with `docker`, containing
-* your `project.yaml`
-* `.env` file with the default environment variables for docker
-* a `Readme` file
+2. If you export as `microservice.zip`, you'll get your project folder ready to
+   run with `docker`, containing
 
-`cd` into the folder and run it with `docker run`.
-If you don't have the docker image, it will be auto-pulled from `hub.docker.com`.
+- your `project.yaml`
+- `.env` file with the default environment variables for docker
+- a `Readme` file
+
+`cd` into the folder and run it with `docker run`. If you don't have the docker
+image, it will be auto-pulled from `hub.docker.com`.
