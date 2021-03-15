@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.23.0">
-    <meta name="project" content="microservice v0.3.1">
+    <meta name="project" content="microservice v0.3.2">
 
-    <title>OpenFn/microservice — microservice v0.3.1</title>
+    <title>OpenFn/microservice — microservice v0.3.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-6138fbd520.js"></script>
+    <script src="dist/sidebar_items-a4c93dd3b0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -51,7 +51,7 @@
 microservice
       </a>
       <strong class="sidebar-projectVersion">
-        v0.3.1
+        v0.3.2
       </strong>
     </div>
 
@@ -103,7 +103,7 @@ helpful:</p><ul><li><a href="https://docs.openfn.org">OpenFn/docs</a></li><li><a
 spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/&lt;path-to-your-project-folder&gt; \
   --env-file &lt;path-to-your-env-file&gt; \
   --network host \
-  openfn/microservice:v0.3.1</code></pre><h2 id="development-up-and-running-guide" class="section-heading">
+  openfn/microservice:v0.3.2</code></pre><h2 id="development-up-and-running-guide" class="section-heading">
   <a href="#development-up-and-running-guide" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Development up and running guide
 </h2>
@@ -115,7 +115,7 @@ spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;
   <a href="#up-and-running-inside-docker" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Up and running inside Docker
 </h3>
-<ul><li>Build a docker image with <code class="inline">docker build -t openfn/microservice:v0.3.0 .</code></li><li>Run with the <a href="#Docker-run">docker run command</a></li></ul><h2 id="project-configuration" class="section-heading">
+<ul><li>Build a docker image with <code class="inline">docker build -t openfn/microservice:v0.3.2 .</code></li><li>Run with the <a href="#Docker-run">docker run command</a></li></ul><h2 id="project-configuration" class="section-heading">
   <a href="#project-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Project configuration
 </h2>
@@ -154,10 +154,13 @@ in the project configuration <code class="inline">YAML</code> file.</p><p>Time-b
   Setup from your existing OpenFn platform project
 </h3>
 <p>If you have a project configured on OpenFn, you have two ways for exporting your
-config on the Project Settings page and running your project in microservice.</p><ol><li><p>If you export as <code class="inline">project.yaml</code>, you can download your settings in <code class="inline">yaml</code> format from your platform project Download page or from a link in the auto-generated email sent to your address. You can plug this file into your environment as set
-up using the <a href="#Development-up-and-running-guide">Development Up and Running Guide</a>.</p></li><li><p>If you export as <code class="inline">microservice.zip</code>, you'll get your microservice folder ready to
-run with <code class="inline">docker</code>, containing</p></li></ol><ul><li>a <code class="inline">docker-compose.yaml</code> config file</li><li> a project folder containing <code class="inline">project.yaml</code></li><li><code class="inline">.env</code> file with the default environment variables for docker</li><li>a <code class="inline">Readme</code> file</li></ul><p><code class="inline">cd</code> into the folder and run the project with <code class="inline">docker-compose up</code>. If you don't have the docker
-image, it will be auto-pulled from <code class="inline">hub.docker.com</code>.</p><p><img src="https://github.com/OpenFn/microservice/blob/main/docs/assets/microservice_zip_export.gif" alt=""></img></p>
+config on the Project Settings page and running your project in microservice.</p><ol><li><p>If you export as <code class="inline">project.yaml</code>, you can download your settings in <code class="inline">yaml</code>
+format from your platform project Download page or from a link in the
+auto-generated email sent to your address. You can plug this file into your
+environment as set up using the
+<a href="#Development-up-and-running-guide">Development Up and Running Guide</a>.</p></li><li><p>If you export as <code class="inline">microservice.zip</code>, you'll get your microservice folder
+ready to run with <code class="inline">docker</code>, containing</p></li></ol><ul><li>a <code class="inline">docker-compose.yaml</code> config file</li><li>a project folder containing <code class="inline">project.yaml</code></li><li><code class="inline">.env</code> file with the default environment variables for docker</li><li>a <code class="inline">Readme</code> file</li></ul><p><code class="inline">cd</code> into the folder and run the project with <code class="inline">docker-compose up</code>. If you don't
+have the docker image, it will be auto-pulled from <code class="inline">hub.docker.com</code>.</p><p><img src="https://github.com/OpenFn/microservice/blob/main/docs/assets/microservice_zip_export.gif" alt=""></img></p>
       <footer class="footer">
         <p>
           <span class="line">

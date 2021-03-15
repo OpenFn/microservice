@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.23.0">
     <meta name="project" content="microservice v0.3.2">
 
-    <title>MicroserviceWeb.Telemetry — microservice v0.3.2</title>
+    <title>OpenFn.RunDispatcher.GenericHandler — microservice v0.3.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
     <script src="dist/sidebar_items-a4c93dd3b0.js"></script>
@@ -77,9 +77,9 @@ microservice
     <div id="content" class="content-inner">
 
       <h1>
-MicroserviceWeb.Telemetry <small class="app-vsn">(microservice v0.3.2)</small>
+OpenFn.RunDispatcher.GenericHandler <small class="app-vsn">(microservice v0.3.2)</small>
 
-          <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/telemetry.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L5" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -103,23 +103,34 @@ MicroserviceWeb.Telemetry <small class="app-vsn">(microservice v0.3.2)</small>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#child_spec/1">child_spec(init_arg)</a>
+    <a href="#on_finish/1">on_finish(context)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_finish/1"><code class="inline">OpenFn.Run.Handler.on_finish/1</code></a>.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#metrics/0">metrics()</a>
+    <a href="#on_log_line/2">on_log_line(line, context)</a>
 
   </div>
+
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_log_line/2"><code class="inline">OpenFn.Run.Handler.on_log_line/2</code></a>.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#start_link/1">start_link(arg)</a>
+    <a href="#on_start/1">on_start(context)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_start/1"><code class="inline">OpenFn.Run.Handler.on_start/1</code></a>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#stop/1">stop(state)</a>
 
   </div>
 
@@ -139,16 +150,16 @@ MicroserviceWeb.Telemetry <small class="app-vsn">(microservice v0.3.2)</small>
 Functions
           </h1>
           <div class="functions-list">
-<section class="detail" id="child_spec/1">
+<section class="detail" id="on_finish/1">
 
   <div class="detail-header">
-    <a href="#child_spec/1" class="detail-link" title="Link to this function">
+    <a href="#on_finish/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">child_spec(init_arg)</h1>
+    <h1 class="signature">on_finish(context)</h1>
 
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/telemetry.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L6" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -158,19 +169,19 @@ Functions
 
   <section class="docstring">
 
-<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_finish/1"><code class="inline">OpenFn.Run.Handler.on_finish/1</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="metrics/0">
+<section class="detail" id="on_log_line/2">
 
   <div class="detail-header">
-    <a href="#metrics/0" class="detail-link" title="Link to this function">
+    <a href="#on_log_line/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">metrics()</h1>
+    <h1 class="signature">on_log_line(line, context)</h1>
 
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/telemetry.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L9" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -180,19 +191,41 @@ Functions
 
   <section class="docstring">
 
-
+<p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_log_line/2"><code class="inline">OpenFn.Run.Handler.on_log_line/2</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="start_link/1">
+<section class="detail" id="on_start/1">
 
   <div class="detail-header">
-    <a href="#start_link/1" class="detail-link" title="Link to this function">
+    <a href="#on_start/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">start_link(arg)</h1>
+    <h1 class="signature">on_start(context)</h1>
 
-      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice_web/telemetry.ex#L5" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L6" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/openfn_engine/0.2.0/OpenFn.Run.Handler.html#c:on_start/1"><code class="inline">OpenFn.Run.Handler.on_start/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="stop/1">
+
+  <div class="detail-header">
+    <a href="#stop/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">stop(state)</h1>
+
+      <a href="https://github.com/openfn/microservice/blob/master/lib/microservice/engine.ex#L6" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>

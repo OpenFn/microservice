@@ -14,6 +14,7 @@ MicroserviceWeb.Router.html
 MicroserviceWeb.Telemetry.html
 MicroserviceWeb.UserSocket.html
 MicroserviceWeb.html
+OpenFn.RunDispatcher.GenericHandler.html
 api-reference.html
 assets/logo.png
 changelog.html
@@ -23,8 +24,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-ff28229bc2.js
-dist/sidebar_items-6138fbd520.js
+dist/search_items-7d4365fc9f.js
+dist/sidebar_items-a4c93dd3b0.js
 index.html
 readme.html
 search.html
