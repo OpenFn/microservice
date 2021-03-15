@@ -132,10 +132,11 @@ config on the project settings page and running your project in microservice.
    encrypted settings in `yaml` format that you can into your environment as set
    up using the Development Up and Running Guide above.
 
-2. If you export as `microservice.zip`, you'll get your project folder ready to
+2. If you export as `microservice.zip`, you'll get your microservice folder ready to
    run with `docker`, containing
 
-- your `project.yaml`
+- a `docker-compose.yaml` config file
+-  a project folder containing `project.yaml`
 - `.env` file with the default environment variables for docker
 - a `Readme` file
 
