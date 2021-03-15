@@ -14,12 +14,12 @@ defmodule Microservice.Application do
     unless Application.get_env(:microservice, :environment) == :test do
       Application.put_env(:microservice, Microservice.Engine,
         project_config: "file://" <> project_yaml_path,
-        adaptors_path: project_dir
+        adaptors_path: Path.join(project_dir, "node_modules")
       )
-    end
 
-    AdaptorService.adaptors_from_yaml(project_yaml_path)
-    |> AdaptorService.install_adaptors(project_dir)
+      AdaptorService.adaptors_from_yaml(project_yaml_path)
+      |> AdaptorService.install_adaptors(project_dir)
+    end
 
     children = [
       # Microservice.Repo,
