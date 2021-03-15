@@ -129,7 +129,7 @@ If you have a project configured on OpenFn, you have two ways for exporting your
 config on the project settings page and running your project in microservice.
 
 1. If you export as `project.yaml`, you'll get a email with a link to your
-   encrypted settings in `yaml` format that you can into your environment as set
+   encrypted settings in `yaml` format that you can plug into your environment as set
    up using the Development Up and Running Guide above.
 
 2. If you export as `microservice.zip`, you'll get your microservice folder ready to
