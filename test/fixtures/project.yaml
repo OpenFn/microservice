@@ -5,12 +5,12 @@ jobs:
         state.data.number = state.data.number * 2
         return state;
       })
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: trigger-2
   job-2:
     expression: none
     credential: my-secret-credential
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: trigger-3
   cron-style-job:
     expression: >
@@ -18,7 +18,7 @@ jobs:
         console.log("Hi there!")
         return state;
       })
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: trigger-4
   flow-job:
     expression: >
@@ -26,12 +26,12 @@ jobs:
         state.data.b = state.data.b * 3
         return state;
       })
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: after-job-2
   bad-job:
     expression: >
       alterState(state => throw "oops")
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: trigger-x
   catch-job:
     expression: >
@@ -39,7 +39,7 @@ jobs:
         state.message = "handled it."
         return state;
       })
-    language_pack: '@openfn/language-common'
+    adaptor: '@openfn/language-common'
     trigger: after-failure
 
 triggers:

@@ -8,11 +8,18 @@ defmodule Microservice.Application do
   def start(_type, _args) do
     from_system(:endpoint_style, "ENDPOINT_STYLE", "async")
 
+    project_dir = System.get_env("PROJECT_DIR", "./sample-project")
+    project_yaml_path = project_dir <> "/project.yaml"
+
     unless Application.get_env(:microservice, :environment) == :test do
       Application.put_env(:microservice, Microservice.Engine,
-        project_config: "file://" <> System.get_env("PROJECT_DIR") <> "/project.yaml"
+        project_config: "file://" <> project_yaml_path,
+        adaptors_path: project_dir
       )
     end
+
+    AdaptorService.adaptors_from_yaml(project_yaml_path)
+    |> AdaptorService.install_adaptors(project_dir)
 
     children = [
       # Microservice.Repo,
