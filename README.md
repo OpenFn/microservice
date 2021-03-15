@@ -129,7 +129,7 @@ If you have a project configured on OpenFn, you have two ways for exporting your
 config on the Project Settings page and running your project in microservice.
 
 1. If you export as `project.yaml`, you can download your settings in `yaml` format from your platform project Download page or from a link in the auto-generated email sent to your address. You can plug this file into your environment as set
-   up using the Development Up and Running Guide above.
+   up using the [Development Up and Running Guide](# Development-up-and-running-guide).
 
 2. If you export as `microservice.zip`, you'll get your microservice folder ready to
    run with `docker`, containing
