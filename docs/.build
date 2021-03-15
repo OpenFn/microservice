@@ -1,4 +1,5 @@
 404.html
+AdaptorService.html
 Microservice.Engine.html
 Microservice.html
 MicroserviceWeb.Endpoint.html
@@ -22,8 +23,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-2aaf64dd16.js
-dist/sidebar_items-dc5dac06da.js
+dist/search_items-ff28229bc2.js
+dist/sidebar_items-6138fbd520.js
 index.html
 readme.html
 search.html
