@@ -139,5 +139,5 @@ config on the project settings page and running your project in microservice.
 - `.env` file with the default environment variables for docker
 - a `Readme` file
 
-`cd` into the folder and run it with `docker run`. If you don't have the docker
+`cd` into the folder and run the project with `docker-compose up`. If you don't have the docker
 image, it will be auto-pulled from `hub.docker.com`.
