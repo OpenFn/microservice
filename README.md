@@ -12,7 +12,7 @@ _🔥 The documentation for this project can be found at
 ## Docker build
 
 ```sh
-`docker build -t openfn/microservice:v0.3.2 .`
+`docker build -t openfn/microservice:<version> .`
 ```
 
 ## Docker compose or run
@@ -28,7 +28,7 @@ docker-compose up
 docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-project-folder> \
   --env-file <path-to-your-env-file> \
   --network host \
-  openfn/microservice:v0.3.2
+  openfn/microservice:<version>
 ```
 
 ## Development up and running guide
