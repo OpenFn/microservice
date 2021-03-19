@@ -3,11 +3,10 @@
 Supported by [OpenFn](https://www.openfn.org),
 [DIAL](https://digitalimpactalliance.org), and [UNICEF](https://www.unicef.org)
 
-## [Documentation](https://docs.openfn.org/documentation/deploy/microservice)
+## [Documentation](https://docs.openfn.org/documentation/microservice/home)
 
 _🔥 The documentation for this project can be found at
-[docs.openfn.org](https://docs.openfn.org/documentation/deploy/microservice).
-🔥_
+[docs.openfn.org](https://docs.openfn.org/documentation/microservice/home). 🔥_
 
 ## Docker build
 
