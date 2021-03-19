@@ -10,7 +10,7 @@
     <title>OpenFn/microservice — microservice v0.3.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-a4c93dd3b0.js"></script>
+    <script src="dist/sidebar_items-95c065423e.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -76,31 +76,23 @@ microservice
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>OpenFn/microservice <a href="https://circleci.com/gh/OpenFn/microservice"><img src="https://circleci.com/gh/OpenFn/microservice.svg?style=svg" alt="CircleCI"></img></a></h1><p><a href="https://www.openfn.org"><img src="assets/logo.png" alt="openfn"></img></a>
-<a href="https://digitalimpactalliance.org"><img src="https://raw.githubusercontent.com/OpenFn/microservice/master/assets/unicef.png" alt="unicef"></img></a>
-<a href="https://www.unicef.org"><img src="https://raw.githubusercontent.com/OpenFn/microservice/master/assets/dial.png" alt="dial"></img></a></p><h2 id="intent" class="section-heading">
-  <a href="#intent" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Intent
+<h1>OpenFn/microservice <a href="https://circleci.com/gh/OpenFn/microservice"><img src="https://circleci.com/gh/OpenFn/microservice.svg?style=svg" alt="CircleCI"></img></a></h1><p>Supported by <a href="https://www.openfn.org">OpenFn</a>,
+<a href="https://digitalimpactalliance.org">DIAL</a>, and <a href="https://www.unicef.org">UNICEF</a></p><h2 id="documentation" class="section-heading">
+  <a href="#documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="https://docs.openfn.org/documentation/deploy/microservice">Documentation</a>
 </h2>
-<p>OpenFn is used by numerous health and humanitarian organizations around the
-world to scale their programs through real-time interoperability, systems
-integration, and workflow automation. <strong>OpenFn/microservice</strong> makes use of
-OpenFn's open-core technology—namely <strong>OpenFn/core</strong> and the various OpenFn
-<strong>adaptors</strong>—to create standalone microservices which can be deployed on any
-hardware.</p><p>This microservice approach helps to ensure that governments and NGOs are never
-locked-in to OpenFn's SaaS offering, and can port their existing jobs, triggers,
-and credentials from <a href="www.openfn.org">OpenFn.org</a> to their own infrastructure
-easily.</p><h2 id="prerequisites" class="section-heading">
-  <a href="#prerequisites" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Prerequisites
+<p><em>🔥 The documentation for this project can be found at
+<a href="https://docs.openfn.org/documentation/deploy/microservice">docs.openfn.org</a>.
+🔥</em></p><h2 id="docker-build" class="section-heading">
+  <a href="#docker-build" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Docker build
 </h2>
-<p>Familiarity with other elements of OpenFn's open source integration toolkit is
-helpful:</p><ul><li><a href="https://docs.openfn.org">OpenFn/docs</a></li><li><a href="https://github.com/openFn/core">OpenFn/core</a></li><li><a href="https://github.com/openFn/engine">OpenFn/engine</a></li><li><a href="https://openfn.github.io/devtools/">OpenFn/devtools</a></li></ul><h2 id="docker-run" class="section-heading">
-  <a href="#docker-run" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Docker run
+<pre><code class="sh">`docker build -t openfn/microservice:v0.3.2 .`</code></pre><h2 id="docker-compose-or-run" class="section-heading">
+  <a href="#docker-compose-or-run" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Docker compose or run
 </h2>
 <p>Assuming you've got an <code class="inline">.env</code> and a project directory with a <code class="inline">project.yaml</code>
-spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/&lt;path-to-your-project-folder&gt; \
+spec:</p><pre><code class="sh">docker-compose up</code></pre><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;:/home/microservice/&lt;path-to-your-project-folder&gt; \
   --env-file &lt;path-to-your-env-file&gt; \
   --network host \
   openfn/microservice:v0.3.2</code></pre><h2 id="development-up-and-running-guide" class="section-heading">
@@ -111,56 +103,7 @@ spec:</p><pre><code class="sh">docker run -v &lt;path-to-your-project-folder&gt;
 <code class="inline">mkdir sample-project</code></li><li>Create a new project specification with
 <code class="inline">cp project.yaml.example ./sample-project/project.yaml</code></li><li>Create a <code class="inline">.env</code> file with <code class="inline">cp .env.example .env</code></li><li>Install necessary adaptors via
 <code class="inline">npm install @openfn/language-http --prefix priv/openfn/runtime/node_modules --no-save --no-package-lock --global-style</code></li><li>Start your microservice server with
-<code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul><h3 id="up-and-running-inside-docker" class="section-heading">
-  <a href="#up-and-running-inside-docker" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Up and running inside Docker
-</h3>
-<ul><li>Build a docker image with <code class="inline">docker build -t openfn/microservice:v0.3.2 .</code></li><li>Run with the <a href="#Docker-run">docker run command</a></li></ul><h2 id="project-configuration" class="section-heading">
-  <a href="#project-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Project configuration
-</h2>
-<p>You can configure the jobs, triggers, credentials and language packs used in
-your microservice in the <code class="inline">project.yaml</code> config file.</p><h3 id="first-setup-using-the-sample-config" class="section-heading">
-  <a href="#first-setup-using-the-sample-config" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  First setup using the sample config
-</h3>
-<p>The
-<a href="https://github.com/OpenFn/microservice/blob/main/project.yaml.example">sample project configuration file</a>
-describes an example project setup to help you get acquainted with this
-structure.</p><p>By default microservice is configured with 4 sample jobs:</p><ol><li><code class="inline">job-1</code> is triggered when a matching message arrives to the inbox (see
-<code class="inline">trigger-1</code>).</li><li><code class="inline">recurring-job</code> is a timed job scheduled to run every minute and is linked to
-the <code class="inline">every-minute</code> cron trigger.</li><li><code class="inline">flow-job</code> and <code class="inline">catch-job</code> run after the <code class="inline">success</code> and <code class="inline">failure</code> of job-1,
-respectively.</li></ol><p>All of the jobs are configured with the language pack <code class="inline">openfn/language-common</code>.</p><p>In the default sample configuration a new message posted to
-<code class="inline">localhost:4000/inbox</code> that matches <code class="inline">trigger-1</code> (i.e. the message contains
-<code class="inline">&quot;number&quot;:2</code>) is greeted with an asynchronous acknowledgement receipt
-(<code class="inline">HTTP 202</code> <code class="inline">Data accepted and processing has begun</code>) and will trigger <code class="inline">job-1</code>
-to run.</p><p>You can try this out with the following snippet:</p><pre><code class="sh">curl -X POST -H &quot;Content-Type: application/json&quot; \
- -d '{
-  &quot;number&quot;:2,
-  &quot;surveyId&quot;: 37479
-}' \
- http://localhost:4000/inbox</code></pre><p>Posting a message not matching any of the triggers (e.g. <code class="inline">“number”:3</code>) equally
-prompts an acknowledgement but doesn’t trigger any jobs.</p><p>Example message post for this non-match scenario:</p><pre><code class="sh">curl -X POST -H &quot;Content-Type: application/json&quot; \
- -d '{
-  &quot;number&quot;:3,
-  &quot;surveyId&quot;: 37479
-}' \
- http://localhost:4000/inbox</code></pre><p>HTTP <code class="inline">post</code> requests made to
-<a href="http://localhost:4000/inbox"><code class="inline">localhost:4000/inbox</code></a> will be processed by the
-<code class="inline">Receiver</code>, according to the <code class="inline">credential</code>, <code class="inline">expression</code>, and <code class="inline">adaptor</code> defined
-in the project configuration <code class="inline">YAML</code> file.</p><p>Time-based jobs will be run by <code class="inline">Engine</code> according to the <code class="inline">credential</code>,
-<code class="inline">expression</code>, and <code class="inline">adaptor</code> defined in your <code class="inline">project.yaml</code> file.</p><h3 id="setup-from-your-existing-openfn-platform-project" class="section-heading">
-  <a href="#setup-from-your-existing-openfn-platform-project" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Setup from your existing OpenFn platform project
-</h3>
-<p>If you have a project configured on OpenFn, you have two ways for exporting your
-config on the Project Settings page and running your project in microservice.</p><ol><li><p>If you export as <code class="inline">project.yaml</code>, you can download your settings in <code class="inline">yaml</code>
-format from your platform project Download page or from a link in the
-auto-generated email sent to your address. You can plug this file into your
-environment as set up using the
-<a href="#Development-up-and-running-guide">Development Up and Running Guide</a>.</p></li><li><p>If you export as <code class="inline">microservice.zip</code>, you'll get your microservice folder
-ready to run with <code class="inline">docker</code>, containing</p></li></ol><ul><li>a <code class="inline">docker-compose.yaml</code> config file</li><li>a project folder containing <code class="inline">project.yaml</code></li><li><code class="inline">.env</code> file with the default environment variables for docker</li><li>a <code class="inline">Readme</code> file</li></ul><p><code class="inline">cd</code> into the folder and run the project with <code class="inline">docker-compose up</code>. If you don't
-have the docker image, it will be auto-pulled from <code class="inline">hub.docker.com</code>.</p><p><img src="https://github.com/OpenFn/microservice/blob/main/docs/assets/microservice_zip_export.gif" alt=""></img></p>
+<code class="inline">env $(cat .env | grep -v &quot;#&quot; | xargs ) iex -S mix phx.server</code></li></ul>
       <footer class="footer">
         <p>
           <span class="line">
