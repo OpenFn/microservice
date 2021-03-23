@@ -2,7 +2,7 @@ defmodule Microservice.EndToEndTest do
   use ExUnit.Case, async: false
   use MicroserviceWeb.ConnCase
 
-  alias OpenFn.{Message, Job, Run}
+  alias Engine.{Message, Job, Run}
 
   import Microservice.TestUtil
 
@@ -23,7 +23,7 @@ defmodule Microservice.EndToEndTest do
 
   test "posting data that matches a trigger runs the relevant job", %{conn: conn, match: match} do
     File.rm_rf!("/tmp/microservice-test")
-    initial_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-1"})
+    initial_state = Microservice.Engine.get_job_state(%Job{name: "job-1"})
     assert is_nil(initial_state)
 
     response = post(conn, "/inbox/", match)
@@ -32,7 +32,7 @@ defmodule Microservice.EndToEndTest do
 
     :timer.sleep(2000)
 
-    final_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-1"})
+    final_state = Microservice.Engine.get_job_state(%Job{name: "job-1"})
     assert final_state["data"]["number"] == 4
   end
 
@@ -50,9 +50,9 @@ defmodule Microservice.EndToEndTest do
   test "a minutely cron job will be run by quantum every minute", %{} do
     import Crontab.CronExpression
 
-    assert Enum.count(OpenFn.Engine.Scheduler.jobs()) == 1
-    assert OpenFn.Engine.Scheduler.find_job(:"trigger-4").state == :active
-    assert OpenFn.Engine.Scheduler.find_job(:"trigger-4").schedule == ~e[* * * * * *]
+    assert Enum.count(Engine.Scheduler.jobs()) == 1
+    assert Engine.Scheduler.find_job(:"trigger-4").state == :active
+    assert Engine.Scheduler.find_job(:"trigger-4").schedule == ~e[* * * * * *]
   end
 
   test "when a run succeeds, subsequent runs may be triggered", %{
@@ -60,7 +60,7 @@ defmodule Microservice.EndToEndTest do
     flow_match: flow_match
   } do
     File.rm_rf!("/tmp/microservice-test")
-    assert Microservice.Engine.get_job_state(%OpenFn.Job{name: "flow-job"}) |> is_nil
+    assert Microservice.Engine.get_job_state(%Job{name: "flow-job"}) |> is_nil
 
     response = post(conn, "/inbox/", flow_match)
     assert response.status == 202
@@ -70,7 +70,7 @@ defmodule Microservice.EndToEndTest do
     :timer.sleep(2000)
     # Then "flow-job" is run.
 
-    after_success_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "flow-job"})
+    after_success_state = Microservice.Engine.get_job_state(%Job{name: "flow-job"})
     assert after_success_state["data"]["b"] == 6
   end
 
@@ -79,7 +79,7 @@ defmodule Microservice.EndToEndTest do
     fail_match: fail_match
   } do
     File.rm_rf!("/tmp/microservice-test")
-    assert Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"}) |> is_nil
+    assert Microservice.Engine.get_job_state(%Job{name: "catch-job"}) |> is_nil
     response = post(conn, "/inbox/", fail_match)
     assert response.status == 202
     assert %{"data" => ["bad-job"]} = response.resp_body |> Jason.decode!()
@@ -88,19 +88,19 @@ defmodule Microservice.EndToEndTest do
     :timer.sleep(2000)
     # Then "catch-job" is run.
 
-    catch_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "catch-job"})
+    catch_state = Microservice.Engine.get_job_state(%Job{name: "catch-job"})
     assert catch_state["message"] == "handled it."
   end
 
   test "credentials are added to a job's inititial state", %{} do
-    [%Run{job: %Job{} = job} = run] =
+    [%Run{job: %Job{} = job}] =
       Microservice.Engine.handle_message(%Message{body: %{"b" => 2}})
 
     assert job.credential == "my-secret-credential"
 
     :timer.sleep(2000)
 
-    final_state = Microservice.Engine.get_job_state(%OpenFn.Job{name: "job-2"})
+    final_state = Microservice.Engine.get_job_state(%Job{name: "job-2"})
     assert %{"configuration" => %{"username" => "user@example.com"}} = final_state
   end
 end
