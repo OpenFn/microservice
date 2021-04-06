@@ -3,10 +3,10 @@ defmodule Microservice.Engine do
 end
 
 defmodule OpenFn.RunDispatcher.GenericHandler do
-  use OpenFn.Run.Handler
+  use Engine.Run.Handler
   require Logger
 
-  def on_log_line(line, _context) do
-    Logger.debug("#{inspect(line)}")
+  def on_log_emit(str, _context) do
+    Logger.debug("#{inspect(str)}")
   end
 end
