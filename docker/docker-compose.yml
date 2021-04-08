@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  openfn:
+    image: openfn/microservice:v0.3.2
+    container_name: openfn_microservice
+    environment:
+      HOST_URL: localhost
+      PORT: 4000
+      ENDPOINT_STYLE: async
