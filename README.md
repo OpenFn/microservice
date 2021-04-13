@@ -1,7 +1,7 @@
 # OpenFn/microservice [![CircleCI](https://circleci.com/gh/OpenFn/microservice.svg?style=svg)](https://circleci.com/gh/OpenFn/microservice)
 
 Supported by [OpenFn](https://www.openfn.org),
-[DIAL](https://digitalimpactalliance.org), and [UNICEF](https://www.unicef.org)
+[DIAL](https://digitalimpactalliance.org), [UNICEF](https://www.unicef.org), and with UK aid from the British people.
 
 ## [Documentation](https://docs.openfn.org/documentation/microservice/home)
 
