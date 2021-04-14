@@ -13,7 +13,7 @@ defmodule MicroserviceWeb.Endpoint do
   def init(_type, config) do
     config =
       config
-      |> Kernel.put_in([:http, :port], System.get_env("PORT", "4000"))
+      |> Kernel.put_in([:http, :port], System.get_env("PORT", "4001"))
       # |> Kernel.put_in([:url, :host], System.get_env("HOST_URL", "localhost"))
 
     {:ok, config}

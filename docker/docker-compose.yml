@@ -6,5 +6,5 @@ services:
     container_name: openfn_microservice
     environment:
       HOST_URL: localhost
-      PORT: 4000
+      PORT: 4001
       ENDPOINT_STYLE: async

@@ -79,7 +79,7 @@ defmodule Microservice.ReceiverTest do
 
   @tag :skip
   test "post to valid inbox with INVALID json sends 404", %{conn: conn, bad_json: bad_json} do
-    _url = "http://localhost:4000/inbox/"
+    _url = "http://localhost:4001/inbox/"
 
     response = post(conn, "/inbox/", bad_json)
 
