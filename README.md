@@ -30,6 +30,15 @@ docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-pro
   openfn/microservice:<version>
 ```
 
+## OpenHIE
+
+First ensure you have cloned this repository, then from
+the [`instant`](https://github.com/openhie/instant) folder run the following command:
+
+```
+yarn docker:instant init openfnMicroservice --custom-package="<path to this folder>"
+```
+
 ## Development up and running guide
 
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
