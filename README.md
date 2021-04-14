@@ -1,7 +1,8 @@
 # OpenFn/microservice [![CircleCI](https://circleci.com/gh/OpenFn/microservice.svg?style=svg)](https://circleci.com/gh/OpenFn/microservice)
 
 Supported by [OpenFn](https://www.openfn.org),
-[DIAL](https://digitalimpactalliance.org), [UNICEF](https://www.unicef.org), and with UK aid from the British people.
+[DIAL](https://digitalimpactalliance.org), [UNICEF](https://www.unicef.org), and
+with UK aid from the British people.
 
 ## [Documentation](https://docs.openfn.org/documentation/microservice/home)
 
@@ -30,14 +31,17 @@ docker run -v <path-to-your-project-folder>:/home/microservice/<path-to-your-pro
   openfn/microservice:<version>
 ```
 
-## OpenHIE
+## Instant OpenHIE
 
-First ensure you have cloned this repository, then from
-the [`instant`](https://github.com/openhie/instant) folder run the following command:
+First ensure you have cloned this repository, then from the
+[`instant`](https://github.com/openhie/instant) folder (the folder where you'd
+typically run your "Instant OpenHIE commands") run the following command:
 
 ```
 yarn docker:instant init openfnMicroservice --custom-package="<path to this folder>"
 ```
+
+Test the deployment by posting messages to port `4001`.
 
 ## Development up and running guide
 
