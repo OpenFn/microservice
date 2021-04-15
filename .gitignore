@@ -42,3 +42,4 @@ docker/example/volume/node_modules
 /priv/openfn
 
 /sample-project/
+/project/

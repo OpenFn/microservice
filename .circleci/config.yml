@@ -2,8 +2,7 @@
 # Check https://circleci.com/docs/2.0/language-elixir/ for more details
 version: 2
 jobs:
-  build:
-    parallelism: 1
+  tests:
     docker:
       - image: circleci/elixir:1.11.3-node
         environment:
@@ -21,3 +20,34 @@ jobs:
 
       - store_test_results:
           path: ./tmp
+  build:
+    docker:
+      - image: circleci/elixir:1.11.3-node
+
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          version: 20.10.2
+          # docker_layer_caching: true
+
+      - run: docker build -t openfn-microservice .
+      - run: | 
+          docker run -d --rm \
+            --name openfn-microservice-test \
+            -p 4000:4000 \
+            -e HOST_URL=localhost \
+            -e PORT=4000 \
+            -e ENDPOINT_STYLE=sync \
+            -e PROJECT_DIR=project \
+            -v $PWD/docker/example/volume:/opt/app/project \
+            openfn-microservice
+
+      - run: |
+          n=0
+          until [ "$n" -ge 5 ] \
+          do \
+            curl -I localhost:4000 2>/dev/null | grep 200 && break \
+            n=$((n+1)) \
+            sleep 5 \
+          done
