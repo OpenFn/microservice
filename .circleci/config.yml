@@ -45,9 +45,12 @@ jobs:
 
       - run: |
           n=0
-          until [ "$n" -ge 5 ] \
-          do \
-            curl -I localhost:4000 2>/dev/null | grep 200 && break \
-            n=$((n+1)) \
-            sleep 5 \
+          echo -n "Testing localhost:4000."
+          until [ "$n" -ge 5 ]
+          do
+            curl -I localhost:4000 2>/dev/null | grep 200 && break 
+            echo -n "."
+            n=$((n+1))
+            sleep 5
           done
+          echo "Test failed" && false
