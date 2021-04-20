@@ -34,13 +34,13 @@ jobs:
       - run: docker build -t openfn-microservice .
       - run: | 
           docker run --rm \
-            -p 4000:4000 \
             -e HOST_URL=localhost \
             -e PORT=4000 \
             -e ENDPOINT_STYLE=sync \
+            -e MIX_ENV=prod \
             -e PROJECT_DIR=/opt/app/project \
+            -e SECRET_KEY_BASE=72\/yhPGEs8\/dfRio2Xw0HDjVT+tE587rc+hf4i6dNIIUbtXGU5vG2t3qSHvLikFQ \
             -v $PWD/docker/example/volume:/opt/app/project \
             openfn-microservice \
             sh -c '(mix phx.server)& curl --retry 10 --retry-delay 5 --retry-all-errors http://localhost:4000 && exit 0 || exit $?'
-
 
