@@ -1,8 +1,8 @@
 # Elixir CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-elixir/ for more details
-version: 2
+version: 2.1
 jobs:
-  tests:
+  mix_tests:
     docker:
       - image: circleci/elixir:1.11.3-node
         environment:
@@ -20,7 +20,7 @@ jobs:
 
       - store_test_results:
           path: ./tmp
-  build:
+  docker_test:
     machine:
       image: ubuntu-2004:202101-01
 
@@ -40,3 +40,9 @@ jobs:
             openfn-microservice \
             sh -c '(mix phx.server)& curl --retry 15 --retry-delay 10 --retry-all-errors http://localhost:4000 && exit 0 || exit $?'
 
+# Orchestrate our job run sequence
+workflows:
+  tests:
+    jobs:
+      - mix_tests
+      - docker_test
