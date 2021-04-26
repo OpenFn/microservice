@@ -27,10 +27,10 @@ defmodule AdaptorService do
     Logger.info("install_adaptor/1 called with #{inspect(adaptors)} and #{inspect(dir)}")
 
     adaptor_list =
-      ["@openfn/core@github:openfn/core#allow_npm_style" | adaptors]
+      ["@openfn/core@1.4.0" | adaptors]
       |> Enum.join(" ")
 
-    System.cmd(
+    {_, exit_code} = System.cmd(
       "/usr/bin/env",
       [
         "sh",
@@ -40,6 +40,11 @@ defmodule AdaptorService do
       stderr_to_stdout: true,
       into: IO.stream(:stdio, :line)
     )
+
+    case exit_code do
+      0 -> :ok
+      _ -> raise "Failed to install language packs."
+    end
   end
 
   # def is_installed?(adaptor) do

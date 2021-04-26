@@ -23,6 +23,9 @@ ENV PORT=4001
 ENV HEX_HTTP_CONCURRENCY=2
 ENV HEX_HTTP_TIMEOUT=120
 
+RUN mkdir /opt/app
+WORKDIR /opt/app
+
 # Cache elixir deps
 ADD mix.exs mix.lock ./
 RUN mix local.hex --force && \
