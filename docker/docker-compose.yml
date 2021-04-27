@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   openfn:
-    image: openfn/microservice:v0.3.2
+    image: openfn/microservice:v0.3.3
     container_name: openfn_microservice
     environment:
       HOST_URL: localhost

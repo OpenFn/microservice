@@ -57,7 +57,7 @@ spec:
                         - openfn-microservice
                 topologyKey: 'kubernetes.io/hostname'
       containers:
-        - image: openfn/microservice:v0.3.2
+        - image: openfn/microservice:v0.3.3
           name: openfn-microservice
           resources:
             requests:

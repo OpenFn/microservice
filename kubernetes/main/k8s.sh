@@ -7,7 +7,7 @@ if [ "$1" == "init" ]; then
     kubectl apply -f $currentDir/manifest.yaml --wait
 
     # Copy the example project.yaml to the created PVC
-    IMAGE=openfn/microservice:v0.3.2
+    IMAGE=openfn/microservice:v0.3.3
     VOL_MOUNTS='[{"mountPath": "/opt/app/project", "name": "openfn-microservice-data"}]'
     VOLS='[{"name": "openfn-microservice-data", "persistentVolumeClaim": {"claimName": "openfn-microservice-data"}}]'
     SUFFIX=$(date +%s | shasum | base64 | fold -w 10 | head -1 | tr '[:upper:]' '[:lower:]')
