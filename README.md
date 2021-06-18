@@ -45,6 +45,25 @@ Test the deployment by posting messages to port `4001`.
 
 ## Development up and running guide
 
+### Installing pre-requisites
+
+- It's recommended to use [`nvm`](https://github.com/nvm-sh/nvm) to install
+  NodeJs. At the time of writing, the `platform-app` instance on US servers and
+  the dockerized `microservice` instance are running on NodeJs `v12.20.2`.
+- It's highly recommended to use [`asdf`](https://github.com/asdf-vm/asdf) for
+  managing your Erlang and Elixir versions. After installing `asdf`, install
+  Erlang and Elixir.
+- `asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git`
+- `asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git`
+- At the time of writing, we're using `Erlang/OTP 23 [erts-11.1.8]` and
+  `Elixir 1.11.3 (compiled with Erlang/OTP 23)`
+- Also at the time of writing, we're assuming that logs are ingested by a host
+  service so we don't depend on a database!
+- Once NodeJs, Erlang and Elixir are installed, proceed to the application
+  build/setup section below.
+
+### Application build/setup
+
 - Clone this repo with `git clone git@github.com:OpenFn/microservice.git`
 - Enter the directory with `cd microservice`
 - Install dependencies with `mix setup`
