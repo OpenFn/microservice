@@ -26,6 +26,7 @@ defmodule MicroserviceWeb.Router do
     pipe_through(:api)
 
     post("/", Receiver, :receive)
+    post("/configure", ProjectController, :update)
   end
 
   # Other scopes may use custom stacks.
