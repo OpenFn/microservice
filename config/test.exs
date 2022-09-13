@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :microservice, :environment, :test
 
@@ -21,7 +21,7 @@ config :microservice, MicroserviceWeb.Endpoint,
   server: false
 
 config :microservice, Microservice.Engine,
-  adaptors_path: "priv/openfn/runtime/node_modules",
+  adaptors_path: "priv/openfn/",
   project_config: "file://test/fixtures/project.yaml",
   job_state_basedir: "/tmp/microservice-test"
 

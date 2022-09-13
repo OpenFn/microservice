@@ -14,7 +14,7 @@ defmodule Microservice.Application do
     unless Application.get_env(:microservice, :environment) == :test do
       Application.put_env(:microservice, Microservice.Engine,
         project_config: "file://" <> project_yaml_path,
-        adaptors_path: Path.join(project_dir, "node_modules")
+        adaptors_path: "priv/openfn"
       )
 
       AdaptorService.adaptors_from_yaml(project_yaml_path)

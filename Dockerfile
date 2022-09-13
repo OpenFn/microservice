@@ -1,20 +1,27 @@
-FROM hexpm/elixir:1.11.3-erlang-23.2.7.2-alpine-3.13.3
+FROM node:16.15.1-alpine AS node
+
+FROM hexpm/elixir:1.13.4-erlang-24.2.1-alpine-3.16.0
 
 RUN \
-    mkdir -p /opt/app && \
-    chmod -R 777 /opt/app && \
-    apk update && \
-    apk --no-cache --update add \
-    make \
-    g++ \
-    wget \
-    curl \
-    git \
-    inotify-tools \
-    nodejs \
-    nodejs-npm && \
-    update-ca-certificates --fresh && \
-    rm -rf /var/cache/apk/*
+  mkdir -p /opt/app && \
+  chmod -R 777 /opt/app && \
+  apk update && \
+  apk --no-cache --update add \
+  make \
+  g++ \
+  wget \
+  curl \
+  git \
+  python3 \
+  inotify-tools && \
+  update-ca-certificates --fresh && \
+  rm -rf /var/cache/apk/*
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/share /usr/local/share
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 # Set exposed ports
 EXPOSE 4001
@@ -43,5 +50,3 @@ RUN (cd assets/ && npm run deploy)
 RUN mix do compile, phx.digest
 
 RUN mkdir -p tmp
-
-CMD ["mix", "phx.server"]
