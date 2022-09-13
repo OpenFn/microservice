@@ -56,7 +56,7 @@ defmodule Microservice.MixProject do
       {:jason, "~> 1.0"},
       {:junit_formatter, "~> 3.0", only: [:test]},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
-      {:engine, git: "https://github.com/OpenFn/engine.git", ref: "cd93a53987d73f57239d16749ada03fa2b0bb238"},
+      {:engine, github: "OpenFn/engine", tag: "v0.7.3"},
       # {:engine, path: "../engine"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_dashboard, "~> 0.4"},
