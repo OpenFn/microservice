@@ -50,7 +50,7 @@ defmodule Microservice.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.11.2", only: [:test]},
+      {:excoveralls, "~> 0.14.4", only: [:test]},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
