@@ -1,4 +1,6 @@
-# OpenFn/microservice [![CircleCI](https://circleci.com/gh/OpenFn/microservice.svg?style=svg)](https://circleci.com/gh/OpenFn/microservice)
+# _⚠️ Replaced by [OpenFn/lightning](https://github.com/OpenFn/lightning)_
+
+# OpenFn/microservice (deprecated)
 
 Supported by [OpenFn](https://www.openfn.org),
 [DIAL](https://digitalimpactalliance.org), [UNICEF](https://www.unicef.org), and
